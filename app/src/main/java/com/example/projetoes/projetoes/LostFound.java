@@ -13,7 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class NavigationMenu extends AppCompatActivity
+public class LostFound extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
@@ -80,17 +80,15 @@ public class NavigationMenu extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_feed) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_lost) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_found) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_profile) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_preferences) {
 
         }
 
