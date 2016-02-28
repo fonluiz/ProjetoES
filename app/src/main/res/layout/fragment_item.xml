@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Este xml foi criado para consertar o erro que dava ao criar
+    o list fragment do feed de objetos na tela principal. Aqui deveria
+    estar o conteudo xml a ser descrito no feed, no caso, um objeto
+    perdido/encontrado.-->
+
+</LinearLayout>
