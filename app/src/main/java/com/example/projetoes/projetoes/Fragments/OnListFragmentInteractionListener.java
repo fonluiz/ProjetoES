@@ -1,6 +1,6 @@
 package com.example.projetoes.projetoes.Fragments;
 
-import com.example.projetoes.projetoes.dummy.DummyContent;
+import com.example.projetoes.projetoes.Fragments.dummy.DummyContent;
 
 /**
  * Created by Samir Silva e Luiz Alberto on 27/02/16.

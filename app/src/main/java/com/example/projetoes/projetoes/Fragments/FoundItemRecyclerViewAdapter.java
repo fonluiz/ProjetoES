@@ -5,9 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import com.example.projetoes.projetoes.Fragments.ItemFragment.OnListFragmentInteractionListener;
-import com.example.projetoes.projetoes.Fragments.dummy.DummyContent.DummyItem;
+
 import com.example.projetoes.projetoes.R;
+import com.example.projetoes.projetoes.Fragments.dummy.DummyContent.DummyItem;
+
 import java.util.List;
 
 /**
@@ -15,19 +16,19 @@ import java.util.List;
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class FoundItensAdapter extends RecyclerView.Adapter<FoundItensAdapter.ViewHolder> {
+public class FoundItemRecyclerViewAdapter extends RecyclerView.Adapter<FoundItemRecyclerViewAdapter.ViewHolder> {
 
     private final List<DummyItem> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public FoundItensAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public FoundItemRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
+       View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_item, parent, false);
         return new ViewHolder(view);
     }
