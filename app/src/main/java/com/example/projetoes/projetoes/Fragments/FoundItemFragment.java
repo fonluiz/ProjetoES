@@ -20,8 +20,10 @@ import com.example.projetoes.projetoes.Fragments.dummy.DummyContent.DummyItem;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class FoundItemFragment extends Fragment {
+public class FoundItemFragment extends Fragment  implements OnListFragmentInteractionListener{
 
+
+    public final static String TAG = "FOUND_ITEM_FRAGMENT";
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
@@ -52,12 +54,13 @@ public class FoundItemFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_founditem_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_founditem, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -91,18 +94,10 @@ public class FoundItemFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+    //TODO: Este metodo precisa ser implementado. Coloquei aqui so pra nao dar erro.
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+
     }
+
 }

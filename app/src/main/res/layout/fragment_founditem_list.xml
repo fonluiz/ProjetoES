@@ -10,4 +10,7 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".Fragments.FoundItemFragment"
-    tools:listitem="@layout/fragment_founditem" />
+    tools:listitem="@layout/fragment_founditem">
+
+
+</android.support.v7.widget.RecyclerView>

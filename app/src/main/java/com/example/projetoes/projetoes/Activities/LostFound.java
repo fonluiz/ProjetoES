@@ -3,6 +3,7 @@ package com.example.projetoes.projetoes.Activities;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,14 +13,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.example.projetoes.projetoes.Fragments.FoundItemFragment;
+import com.example.projetoes.projetoes.Fragments.OnListFragmentInteractionListener;
+import com.example.projetoes.projetoes.Fragments.dummy.DummyContent;
 import com.example.projetoes.projetoes.R;
 
 public class LostFound extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnListFragmentInteractionListener {
+
+    private FoundItemFragment foundItemFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        foundItemFragment = new FoundItemFragment();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_menu);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -42,6 +52,9 @@ public class LostFound extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        this.getSupportFragmentManager().beginTransaction()
+                .add(R.id.container_layout, foundItemFragment).commit();
     }
 
     @Override
@@ -97,5 +110,11 @@ public class LostFound extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    //TODO: Este metodo precisa ser implementado. Coloquei aqui so pra nao dar erro.
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+
     }
 }
