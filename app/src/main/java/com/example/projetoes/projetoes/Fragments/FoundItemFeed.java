@@ -12,18 +12,18 @@ import android.view.ViewGroup;
 
 import com.example.projetoes.projetoes.R;
 import com.example.projetoes.projetoes.Fragments.dummy.DummyContent;
-import com.example.projetoes.projetoes.Fragments.dummy.DummyContent.DummyItem;
 
 /**
  * A fragment representing a list of Items.
- * <p/>
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
+ *
+ * Um fragmento para mostrar uma lista com todos os objetos encontrados.
  */
-public class FoundItemFragment extends Fragment  implements OnListFragmentInteractionListener{
+public class FoundItemFeed extends Fragment  implements OnListFragmentInteractionListener{
 
 
-    public final static String TAG = "FOUND_ITEM_FRAGMENT";
+    public final static String TAG = "FOUND_ITEM_FEED";
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
@@ -34,13 +34,13 @@ public class FoundItemFragment extends Fragment  implements OnListFragmentIntera
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public FoundItemFragment() {
+    public FoundItemFeed() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static FoundItemFragment newInstance(int columnCount) {
-        FoundItemFragment fragment = new FoundItemFragment();
+    public static FoundItemFeed newInstance(int columnCount) {
+        FoundItemFeed fragment = new FoundItemFeed();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);

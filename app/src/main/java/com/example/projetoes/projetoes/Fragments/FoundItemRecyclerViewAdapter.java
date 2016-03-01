@@ -15,6 +15,8 @@ import java.util.List;
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
+ *
+ * Este é o adapter para fornecer os itens que serão colocados na lista do feed de objetos.
  */
 public class FoundItemRecyclerViewAdapter extends RecyclerView.Adapter<FoundItemRecyclerViewAdapter.ViewHolder> {
 
@@ -61,20 +63,12 @@ public class FoundItemRecyclerViewAdapter extends RecyclerView.Adapter<FoundItem
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
         public DummyItem mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.id);
-            mContentView = (TextView) view.findViewById(R.id.content);
         }
 
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
-        }
     }
 }
