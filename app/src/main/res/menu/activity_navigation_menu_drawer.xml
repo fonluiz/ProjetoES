@@ -4,15 +4,15 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_feed"
-            android:icon="@drawable/ic_menu_feed"
+            android:icon="@mipmap/ic_menu_feed"
             android:title="Feed de objetos" />
         <item
             android:id="@+id/nav_lost"
-            android:icon="@drawable/ic_menu_lost"
+            android:icon="@mipmap/ic_menu_lost"
             android:title="Perdi algo" />
         <item
             android:id="@+id/nav_found"
-            android:icon="@drawable/ic_menu_found"
+            android:icon="@mipmap/ic_menu_found"
             android:title="Achei algo" />
     </group>
 
