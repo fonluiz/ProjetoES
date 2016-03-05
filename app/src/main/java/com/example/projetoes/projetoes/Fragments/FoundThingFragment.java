@@ -1,6 +1,7 @@
 package com.example.projetoes.projetoes.Fragments;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,12 +15,12 @@ import com.example.projetoes.projetoes.R;
  * Activities that contain this fragment must implement the
  * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link LostThingFragment#newInstance} factory method to
+ * Use the {@link FoundThingFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LostThingFragment extends Fragment implements OnFragmentInteractionListener {
+public class FoundThingFragment extends Fragment implements OnFragmentInteractionListener{
 
-    public final static String TAG = "LOST_THING_FRAGMENT";
+    public final static String TAG = "FOUND_THING_FRAGMENT";
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -31,7 +32,7 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
 
     private OnFragmentInteractionListener mListener;
 
-    public LostThingFragment() {
+    public FoundThingFragment() {
         // Required empty public constructor
     }
 
@@ -41,11 +42,11 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment LostThingFragment.
+     * @return A new instance of fragment FoundThingFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static LostThingFragment newInstance(String param1, String param2) {
-        LostThingFragment fragment = new LostThingFragment();
+    public static FoundThingFragment newInstance(String param1, String param2) {
+        FoundThingFragment fragment = new FoundThingFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -66,19 +67,13 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_lost_thing, container, false);
+        return inflater.inflate(R.layout.fragment_found_thing, container, false);
     }
+
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
-        try {
-            mListener = (OnFragmentInteractionListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString()
-                    + " must implement OnHeadlineSelectedListener");
-        }
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
@@ -92,7 +87,6 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
         super.onDetach();
         mListener = null;
     }
-
 
 
 }

@@ -17,6 +17,6 @@ import android.net.Uri;
  * >Communicating with Other Fragments</a> for more information.
  *
  */
-public interface OnLostThingSelectedListener {
+public interface OnFragmentInteractionListener {
 
 }

@@ -5,7 +5,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,23 +16,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.projetoes.projetoes.Fragments.FoundItemFeed;
+import com.example.projetoes.projetoes.Fragments.FoundThingFragment;
 import com.example.projetoes.projetoes.Fragments.LostThingFragment;
 import com.example.projetoes.projetoes.Fragments.OnListFragmentInteractionListener;
-import com.example.projetoes.projetoes.Fragments.OnLostThingSelectedListener;
+import com.example.projetoes.projetoes.Fragments.OnFragmentInteractionListener;
 import com.example.projetoes.projetoes.Fragments.dummy.DummyContent;
 import com.example.projetoes.projetoes.R;
 
 public class LostFound extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnListFragmentInteractionListener, OnLostThingSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnListFragmentInteractionListener, OnFragmentInteractionListener {
 
     private FoundItemFeed foundItemFeed;
     private LostThingFragment lostThingFragment;
+    private FoundThingFragment foundThingFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         foundItemFeed = new FoundItemFeed();
         lostThingFragment = new LostThingFragment();
+        foundThingFragment = new FoundThingFragment();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_menu);
@@ -120,6 +122,9 @@ public class LostFound extends AppCompatActivity
             nextFragTag = LostThingFragment.TAG;
 
         } else if (id == R.id.nav_found) {
+
+            nextFrag = foundThingFragment;
+            nextFragTag = FoundThingFragment.TAG;
 
         } else if (id == R.id.nav_profile) {
 
