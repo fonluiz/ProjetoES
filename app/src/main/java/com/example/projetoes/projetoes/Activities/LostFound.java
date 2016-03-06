@@ -18,6 +18,8 @@ import android.view.MenuItem;
 import com.example.projetoes.projetoes.Fragments.FoundItemFeed;
 import com.example.projetoes.projetoes.Fragments.FoundThingFragment;
 import com.example.projetoes.projetoes.Fragments.LostThingFragment;
+import com.example.projetoes.projetoes.Fragments.ProfileFragment;
+
 import com.example.projetoes.projetoes.Fragments.OnListFragmentInteractionListener;
 import com.example.projetoes.projetoes.Fragments.OnFragmentInteractionListener;
 import com.example.projetoes.projetoes.Fragments.dummy.DummyContent;
@@ -29,6 +31,7 @@ public class LostFound extends AppCompatActivity
     private FoundItemFeed foundItemFeed;
     private LostThingFragment lostThingFragment;
     private FoundThingFragment foundThingFragment;
+    private ProfileFragment profileFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,7 @@ public class LostFound extends AppCompatActivity
         foundItemFeed = new FoundItemFeed();
         lostThingFragment = new LostThingFragment();
         foundThingFragment = new FoundThingFragment();
+        profileFragment = new ProfileFragment();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_menu);
@@ -127,8 +131,8 @@ public class LostFound extends AppCompatActivity
             nextFragTag = FoundThingFragment.TAG;
 
         } else if (id == R.id.nav_profile) {
-
-        } else if (id == R.id.nav_preferences) {
+            nextFrag = profileFragment;
+            nextFragTag = ProfileFragment.TAG;
 
         }
 
