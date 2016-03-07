@@ -12,18 +12,18 @@ import android.view.ViewGroup;
 
 import com.example.projetoes.projetoes.R;
 import com.example.projetoes.projetoes.Fragments.dummy.DummyContent;
+import com.example.projetoes.projetoes.Fragments.dummy.DummyContent.DummyItem;
+
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
+ * <p/>
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
- *
- * Um fragmento para mostrar uma lista com todos os objetos encontrados.
  */
-public class FoundItemFeed extends Fragment  implements OnListFragmentInteractionListener{
+public class LostItemFeed extends Fragment implements OnListFragmentInteractionListener{
 
-
-    public final static String TAG = "FOUND_ITEM_FEED";
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
@@ -34,13 +34,13 @@ public class FoundItemFeed extends Fragment  implements OnListFragmentInteractio
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public FoundItemFeed() {
+    public LostItemFeed() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static FoundItemFeed newInstance(int columnCount) {
-        FoundItemFeed fragment = new FoundItemFeed();
+    public static LostItemFeed newInstance(int columnCount) {
+        LostItemFeed fragment = new LostItemFeed();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -54,13 +54,12 @@ public class FoundItemFeed extends Fragment  implements OnListFragmentInteractio
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_founditem, container, false);
+        View view = inflater.inflate(R.layout.fragment_lostitem_list, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -71,7 +70,7 @@ public class FoundItemFeed extends Fragment  implements OnListFragmentInteractio
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new FeedRecyclerViewAdapter(DummyContent.ITEMS, null)); //Aqui deveria ser o listener ao invés de null
+            recyclerView.setAdapter(new FeedRecyclerViewAdapter(DummyContent.ITEMS, null));
         }
         return view;
     }
@@ -94,10 +93,8 @@ public class FoundItemFeed extends Fragment  implements OnListFragmentInteractio
         mListener = null;
     }
 
-    //TODO: Este metodo precisa ser implementado. Coloquei aqui so pra nao dar erro.
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+    public void onListFragmentInteraction(DummyItem item) {
 
     }
-
 }
