@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.projetoes.projetoes.R;
 import com.example.projetoes.projetoes.Fragments.dummy.DummyContent.DummyItem;
@@ -18,12 +17,12 @@ import java.util.List;
  *
  * Este é o adapter para fornecer os itens que serão colocados na lista do feed de objetos.
  */
-public class FoundItemRecyclerViewAdapter extends RecyclerView.Adapter<FoundItemRecyclerViewAdapter.ViewHolder> {
+public class FeedRecyclerViewAdapter extends RecyclerView.Adapter<FeedRecyclerViewAdapter.ViewHolder> {
 
     private final List<DummyItem> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public FoundItemRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public FeedRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }

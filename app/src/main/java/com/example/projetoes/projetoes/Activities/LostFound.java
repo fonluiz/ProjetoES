@@ -1,10 +1,13 @@
 package com.example.projetoes.projetoes.Activities;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.PagerTabStrip;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.projetoes.projetoes.Fragments.FeedSwipeAdapter;
 import com.example.projetoes.projetoes.Fragments.FoundItemFeed;
 import com.example.projetoes.projetoes.Fragments.FoundThingFragment;
 import com.example.projetoes.projetoes.Fragments.LostThingFragment;
@@ -33,6 +37,11 @@ public class LostFound extends AppCompatActivity
     private FoundThingFragment foundThingFragment;
     private ProfileFragment profileFragment;
 
+    private FeedSwipeAdapter mAdapter;
+    private ViewPager mPager;
+    private PagerTabStrip mTabStrip;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -46,14 +55,9 @@ public class LostFound extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        mAdapter = new FeedSwipeAdapter(getSupportFragmentManager());
+        mPager = (ViewPager)findViewById(R.id.feed_pager);
+        mPager.setAdapter(mAdapter);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -109,6 +113,7 @@ public class LostFound extends AppCompatActivity
         String nextFragTag = null;
         String  prevFragTag;
 
+        mPager.setVisibility(View.GONE);
 
         FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(
                 getSupportFragmentManager().getBackStackEntryCount() - 1);
@@ -119,6 +124,7 @@ public class LostFound extends AppCompatActivity
 
             nextFrag = foundItemFeed;
             nextFragTag = FoundItemFeed.TAG;
+            mPager.setVisibility(View.VISIBLE);
 
         } else if (id == R.id.nav_lost) {
 
