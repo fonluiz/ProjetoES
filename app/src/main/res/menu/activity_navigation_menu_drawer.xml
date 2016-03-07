@@ -14,15 +14,15 @@
             android:id="@+id/nav_found"
             android:icon="@mipmap/ic_menu_found"
             android:title="Achei algo" />
+
     </group>
 
-    <item android:title="Configurações">
-        <menu>
+    <group android:checkableBehavior="single">
+
             <item
                 android:id="@+id/nav_profile"
                 android:icon="@drawable/ic_menu_profile"
                 android:title="Meu perfil" />
-        </menu>
-    </item>
+    </group>
 
 </menu>
