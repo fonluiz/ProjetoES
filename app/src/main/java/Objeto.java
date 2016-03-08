@@ -9,4 +9,8 @@ public class Objeto {
     private Categoria categoria;
     private Date dataPublicacao;
     private float recompensa;
+    private String lugar;
+    private String foto;
+    private Status status;
+
 }
