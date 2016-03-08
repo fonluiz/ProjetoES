@@ -24,6 +24,7 @@ import java.util.List;
  */
 public class LostItemFeed extends Fragment implements OnListFragmentInteractionListener{
 
+    public final static String TAG = "LOST_ITEM_FEED";
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
@@ -59,7 +60,7 @@ public class LostItemFeed extends Fragment implements OnListFragmentInteractionL
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_lostitem_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_lostitem, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {

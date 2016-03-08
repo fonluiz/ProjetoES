@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.PagerTabStrip;
@@ -18,9 +19,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.projetoes.projetoes.Fragments.FeedFragment;
 import com.example.projetoes.projetoes.Fragments.FeedSwipeAdapter;
 import com.example.projetoes.projetoes.Fragments.FoundItemFeed;
 import com.example.projetoes.projetoes.Fragments.FoundThingFragment;
+import com.example.projetoes.projetoes.Fragments.LostItemFeed;
 import com.example.projetoes.projetoes.Fragments.LostThingFragment;
 import com.example.projetoes.projetoes.Fragments.ProfileFragment;
 
@@ -33,19 +36,18 @@ public class LostFound extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnListFragmentInteractionListener, OnFragmentInteractionListener {
 
     private FoundItemFeed foundItemFeed;
+    private LostItemFeed lostItemFeed;
+    private FeedFragment feedFragment;
     private LostThingFragment lostThingFragment;
     private FoundThingFragment foundThingFragment;
     private ProfileFragment profileFragment;
-
-    private FeedSwipeAdapter mAdapter;
-    private ViewPager mPager;
-    private PagerTabStrip mTabStrip;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         foundItemFeed = new FoundItemFeed();
+        lostItemFeed = new LostItemFeed();
+        feedFragment = new FeedFragment();
         lostThingFragment = new LostThingFragment();
         foundThingFragment = new FoundThingFragment();
         profileFragment = new ProfileFragment();
@@ -54,10 +56,6 @@ public class LostFound extends AppCompatActivity
         setContentView(R.layout.activity_navigation_menu);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        mAdapter = new FeedSwipeAdapter(getSupportFragmentManager());
-        mPager = (ViewPager)findViewById(R.id.feed_pager);
-        mPager.setAdapter(mAdapter);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -69,7 +67,7 @@ public class LostFound extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         this.getSupportFragmentManager().beginTransaction().replace(R.id.container_layout,
-                foundItemFeed, FoundItemFeed.TAG).addToBackStack(FoundItemFeed.TAG).commit();
+                feedFragment, FeedFragment.TAG).addToBackStack(FeedFragment.TAG).commit();
     }
 
     @Override
@@ -113,18 +111,14 @@ public class LostFound extends AppCompatActivity
         String nextFragTag = null;
         String  prevFragTag;
 
-        mPager.setVisibility(View.GONE);
-
         FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(
                 getSupportFragmentManager().getBackStackEntryCount() - 1);
         prevFragTag = backEntry.getName();
 
-
         if (id == R.id.nav_feed) {
 
-            nextFrag = foundItemFeed;
-            nextFragTag = FoundItemFeed.TAG;
-            mPager.setVisibility(View.VISIBLE);
+            nextFrag = feedFragment;
+            nextFragTag = FeedFragment.TAG;
 
         } else if (id == R.id.nav_lost) {
 
@@ -142,7 +136,9 @@ public class LostFound extends AppCompatActivity
 
         }
 
-        if (nextFrag!= null) {
+        if (nextFrag instanceof FoundItemFeed) {
+
+        } else if (nextFrag!= null) {
             if (nextFragTag.equals(prevFragTag)) {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container_layout, nextFrag, nextFragTag).commit();

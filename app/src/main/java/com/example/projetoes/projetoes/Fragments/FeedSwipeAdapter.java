@@ -34,15 +34,9 @@ public class FeedSwipeAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-
         return NUM_ITEMS;
-
     }
 
-    @Override
-    public boolean isViewFromObject(View view, Object object) {
-        return false;
-    }
 
     /**
      * This method returns the title of the tab according to the position.
@@ -58,12 +52,6 @@ public class FeedSwipeAdapter extends FragmentPagerAdapter {
                 return "Perdidos";
         }
         return null;
-    }
-
-    @Override
-    public Object instantiateItem(ViewGroup container, int position) {
-        return super.instantiateItem(container, position);
-
     }
 
 }
