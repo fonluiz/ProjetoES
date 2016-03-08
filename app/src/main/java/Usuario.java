@@ -1,10 +1,10 @@
 import java.util.Set;
-
+import java.util.UUID;
 /**
  * Created by Tuca on 07/03/2016.
  */
 public class Usuario {
-    private String id;
+    private UUID id;
     private String nome;
     private String email;
     private String senha;
@@ -38,14 +38,6 @@ public class Usuario {
 
     public void setFlags(Set<String> flags) {
         this.flags = flags;
-    }
-
-    public void setAchados(Set<Objeto> achados) {
-        this.achados = achados;
-    }
-
-    public void setPerdidos(Set<Objeto> perdidos) {
-        this.perdidos = perdidos;
     }
 
     public String getNome() {
@@ -84,14 +76,14 @@ public class Usuario {
     public void criarObjeto(){
     }
     void addAchados(Objeto objeto){
-        dao.salvar(objeto);
+        this.achados.add(objeto);
     }
     void addPerdidos(Objeto objeto){
-        dao.salvar();
+        this.perdidos.add(objeto);
     }
 
-    String generateId(){ //gerar o Id único
-
+    UUID generateId(){ //gerar o Id único
+        return UUID.randomUUID();
     }
 
     public Usuario(String nome, String email, String senha, String contato) {
