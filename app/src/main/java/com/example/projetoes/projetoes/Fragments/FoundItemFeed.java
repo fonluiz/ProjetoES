@@ -14,20 +14,13 @@ import com.example.projetoes.projetoes.R;
 import com.example.projetoes.projetoes.Fragments.dummy.DummyContent;
 
 /**
- * A fragment representing a list of Items.
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
- * interface.
- *
- * Um fragmento para mostrar uma lista com todos os objetos encontrados.
+ * Um Fragment para mostrar uma lista com todos os objetos encontrados.
  */
 public class FoundItemFeed extends Fragment  implements OnListFragmentInteractionListener{
 
 
     public final static String TAG = "FOUND_ITEM_FEED";
-    // TODO: Customize parameter argument names
-    private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
-    private int mColumnCount = 1;
+
     private OnListFragmentInteractionListener mListener;
 
     /**
@@ -39,10 +32,9 @@ public class FoundItemFeed extends Fragment  implements OnListFragmentInteractio
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static FoundItemFeed newInstance(int columnCount) {
+    public static FoundItemFeed newInstance() {
         FoundItemFeed fragment = new FoundItemFeed();
         Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
         return fragment;
     }
@@ -50,11 +42,6 @@ public class FoundItemFeed extends Fragment  implements OnListFragmentInteractio
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-        }
-
     }
 
     @Override
@@ -66,11 +53,6 @@ public class FoundItemFeed extends Fragment  implements OnListFragmentInteractio
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
             recyclerView.setAdapter(new FeedRecyclerViewAdapter(DummyContent.ITEMS, null)); //Aqui deveria ser o listener ao invés de null
         }
         return view;

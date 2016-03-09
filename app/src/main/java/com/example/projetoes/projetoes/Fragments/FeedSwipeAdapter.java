@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 
 
 /**
- * Created by luiz on 06/03/16.
+ * Classe que serve como Adapter da ViewPager do FeedFragment.
+ * Este Adapter é o reponsável por fazera troca entre lista de objetos encontrados
+ * e lista de objetos perdidos no feed inicial.
  */
 public class FeedSwipeAdapter extends FragmentPagerAdapter {
 
@@ -20,7 +22,7 @@ public class FeedSwipeAdapter extends FragmentPagerAdapter {
     }
 
     /**
-     * Return fragment with respect to Position .
+     * Retorna o Fragment da respectiva posição
      */
     @Override
     public Fragment getItem(int position)
@@ -32,6 +34,9 @@ public class FeedSwipeAdapter extends FragmentPagerAdapter {
         return null;
     }
 
+    /**
+     * Retorna o número de Fragments que serão mostrados na ViewPager
+     */
     @Override
     public int getCount() {
         return NUM_ITEMS;
@@ -39,7 +44,7 @@ public class FeedSwipeAdapter extends FragmentPagerAdapter {
 
 
     /**
-     * This method returns the title of the tab according to the position.
+     * Este método retorna o título da tab de acordo com a posição.
      */
 
     @Override
@@ -47,9 +52,9 @@ public class FeedSwipeAdapter extends FragmentPagerAdapter {
 
         switch (position){
             case 0 :
-                return "Achados";
+                return "Itens achados";
             case 1 :
-                return "Perdidos";
+                return "Itens perdidos";
         }
         return null;
     }

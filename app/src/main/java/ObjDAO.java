@@ -8,6 +8,6 @@ interface ObjDAO {
     void salvar(Object obj);
     void remover(Object obj);
     List<Object> listaTodos();
-    Object buscar(String id):
+    Object buscar(String id);
     List<Object> buscar(List<String> palavras_chave);
 }

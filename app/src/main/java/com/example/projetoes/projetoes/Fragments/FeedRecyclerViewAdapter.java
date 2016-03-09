@@ -35,7 +35,7 @@ public class FeedRecyclerViewAdapter extends RecyclerView.Adapter<FeedRecyclerVi
     }
 
     /* Este método foi comentado porque é necessário ter os objetos implementados para
-    * passar como parametro para setText(). Enquanto isso não foi feito, eu, luiz comentei
+    * passar como parametro para setText(). Enquanto isso não foi feito, eu, comentei
     * pra que o código rodasse.*/
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {

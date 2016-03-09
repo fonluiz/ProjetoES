@@ -10,13 +10,8 @@ import android.view.ViewGroup;
 import com.example.projetoes.projetoes.R;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link LostThingFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+* Fragment da tela para divulgar um objeto perdido.
+*/
 public class LostThingFragment extends Fragment implements OnFragmentInteractionListener {
 
     public final static String TAG = "LOST_THING_FRAGMENT";

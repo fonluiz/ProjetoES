@@ -89,8 +89,8 @@ public class Usuario {
     public Usuario(String nome, String email, String senha, String contato) {
         setNome(nome);
         setEmail(email);
-        setSenha();
-        setContato();
+        setSenha(senha);
+        setContato(contato);
         this.id = generateId();
     }
 }

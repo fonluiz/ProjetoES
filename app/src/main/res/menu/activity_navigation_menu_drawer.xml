@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/main_menu"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_feed"
             android:icon="@mipmap/ic_menu_feed"
-            android:title="Feed de objetos" />
+            android:title="@string/navigation_feed" />
         <item
             android:id="@+id/nav_lost"
             android:icon="@mipmap/ic_menu_lost"
-            android:title="Perdi algo" />
+            android:title="@string/navigation_lost_object" />
         <item
             android:id="@+id/nav_found"
             android:icon="@mipmap/ic_menu_found"
-            android:title="Achei algo" />
+            android:title="@string/navigation_lost_object" />
 
     </group>
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/settings_menu"
+        android:checkableBehavior="single">
 
-            <item
-                android:id="@+id/nav_profile"
-                android:icon="@drawable/ic_menu_profile"
-                android:title="Meu perfil" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_menu_profile"
+            android:title="@string/navigation_profile" />
     </group>
 
 </menu>

@@ -51,7 +51,7 @@ public class Objeto {
         this.status = status;
     }
 
-    public String getId(){
+    public UUID getId(){
         return id;
     }
     public String getTitulo() {
@@ -92,14 +92,13 @@ public class Objeto {
     }
 
     @Override
-    public Boolean equals(Objeto outro_obj) {
-        if (this.getId() == outro_obj.getId()){
-            return true;
-        }
-        else{
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Objeto))
             return false;
-        }
-    }
 
+        Objeto outro = (Objeto) obj;
+
+        return this.getId() == outro.getId();
+    }
 
 }

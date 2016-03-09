@@ -17,10 +17,7 @@ import com.example.projetoes.projetoes.Fragments.dummy.DummyContent.DummyItem;
 import java.util.List;
 
 /**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
- * interface.
+ * Um Fragment para mostrar uma lista com todos os objetos perdidos.
  */
 public class LostItemFeed extends Fragment implements OnListFragmentInteractionListener{
 
