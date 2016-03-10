@@ -7,14 +7,46 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:orientation="vertical"
+        >
 
-        <android.support.v7.widget.AppCompatSpinner
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Selecione uma categoria"
+            />
+        <Spinner
             android:id="@+id/category_spinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown">
+        </Spinner>
 
-        </android.support.v7.widget.AppCompatSpinner>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Local onde perdeu"
+            android:paddingTop="16dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Quanto mais específico melhor"
+            android:textSize="10sp"
+            android:textColor="@color/primaryColorLighter"/>
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/edit_text"
+            android:focusableInTouchMode="false" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Data em que perdeu"
+            android:paddingTop="16dp" />
 
     </LinearLayout>
 
