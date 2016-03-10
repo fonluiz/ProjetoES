@@ -12,4 +12,18 @@
     <string name="found_feed_tab">Itens achados</string>
     <string name="lost_feed_tab">Itens perdidos</string>
 
+    <string-array name="categories_array">
+        <item>Animal</item>
+        <item>Aparelho eletrônico</item>
+        <item>Bolsa</item>
+        <item>Calçado</item>
+        <item>Cartão</item>
+        <item>Chave</item>
+        <item>Documento</item>
+        <item>Livro</item>
+        <item>Óculos</item>
+        <item>Vestimenta</item>
+        <item>Outro</item>
+    </string-array>
+
 </resources>

@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.example.projetoes.projetoes.R;
 
@@ -15,16 +17,10 @@ import com.example.projetoes.projetoes.R;
 public class LostThingFragment extends Fragment implements OnFragmentInteractionListener {
 
     public final static String TAG = "LOST_THING_FRAGMENT";
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private Spinner categorySpinner;
+    private View mView;
 
     public LostThingFragment() {
         // Required empty public constructor
@@ -42,8 +38,6 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
     public static LostThingFragment newInstance(String param1, String param2) {
         LostThingFragment fragment = new LostThingFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,17 +45,16 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_lost_thing, container, false);
+
+        mView = inflater.inflate(R.layout.fragment_lost_thing, container, false);
+        startCategorySpinner();
+
+        return mView;
     }
 
     @Override
@@ -88,6 +81,15 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
         mListener = null;
     }
 
-
+    private void startCategorySpinner() {
+        categorySpinner = (Spinner) mView.findViewById(R.id.category_spinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.categories_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        categorySpinner.setAdapter(adapter);
+    }
 
 }

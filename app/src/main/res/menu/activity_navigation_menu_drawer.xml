@@ -15,7 +15,7 @@
         <item
             android:id="@+id/nav_found"
             android:icon="@mipmap/ic_menu_found"
-            android:title="@string/navigation_lost_object" />
+            android:title="@string/navigation_found_object" />
 
     </group>
 
