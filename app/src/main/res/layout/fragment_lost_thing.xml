@@ -3,19 +3,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.projetoes.projetoes.Fragments.LostThingFragment">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
         android:orientation="vertical"
-        >
+        android:scrollbarAlwaysDrawVerticalTrack="true">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Selecione uma categoria"
-            />
+            android:text="Selecione uma categoria" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Qual o tipo do objeto perdido"
+            android:textSize="10sp"
+            android:textColor="@color/primaryColorLighter"/>
+        />
         <Spinner
             android:id="@+id/category_spinner"
             android:layout_width="match_parent"
@@ -27,7 +36,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Local onde perdeu"
+            android:text="Informe o local onde perdeu"
             android:paddingTop="16dp" />
         <TextView
             android:layout_width="match_parent"
@@ -39,21 +48,45 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/edit_text"
-            android:focusableInTouchMode="false" />
+            android:background="@android:drawable/edit_text" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Data em que perdeu"
+            android:text="Informe a data em que perdeu"
             android:paddingTop="16dp" />
         <DatePicker
             android:id="@+id/lost_date_picker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:calendarViewShown="false"/>
+            android:calendarViewShown="false"
+            android:background="@android:drawable/dialog_holo_light_frame" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Descreva o objeto"
+            android:paddingTop="16dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Utilize palavras que especifiquem o objeto, por exemplo, cor, marca e tamanho."
+            android:textSize="10sp"
+            android:textColor="@color/primaryColorLighter"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/edit_text" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Envie uma foto do objeto"
+            android:paddingTop="16dp" />
+
 
     </LinearLayout>
 
+    </ScrollView>
 
 </FrameLayout>
