@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.Spinner;
 
 import com.example.projetoes.projetoes.R;
@@ -21,6 +22,7 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
     private OnFragmentInteractionListener mListener;
     private Spinner categorySpinner;
     private View mView;
+    private DatePicker datePicker;
 
     public LostThingFragment() {
         // Required empty public constructor
@@ -81,6 +83,9 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
         mListener = null;
     }
 
+    /**
+     * Insere as categorias no spinner de categorias
+     */
     private void startCategorySpinner() {
         categorySpinner = (Spinner) mView.findViewById(R.id.category_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout

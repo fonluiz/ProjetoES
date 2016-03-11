@@ -47,6 +47,11 @@
             android:layout_height="wrap_content"
             android:text="Data em que perdeu"
             android:paddingTop="16dp" />
+        <DatePicker
+            android:id="@+id/lost_date_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:calendarViewShown="false"/>
 
     </LinearLayout>
 
