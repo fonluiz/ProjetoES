@@ -2,6 +2,7 @@ package com.example.projetoes.projetoes.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
     private OnFragmentInteractionListener mListener;
     private Spinner categorySpinner;
     private View mView;
+    private DateSetterFragment dateSetterFragment;
 
     public LostThingFragment() {
         // Required empty public constructor
@@ -30,8 +32,6 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment LostThingFragment.
      */
     // TODO: Rename and change types and number of parameters
@@ -53,6 +53,9 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
 
         mView = inflater.inflate(R.layout.fragment_lost_thing, container, false);
         startCategorySpinner();
+
+        //comentado pois está dando erro
+        //showDatePickerDialog(mView);
 
         return mView;
     }
@@ -81,6 +84,9 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
         mListener = null;
     }
 
+    /**
+     * Povoa o spinner de categorias
+     */
     private void startCategorySpinner() {
         categorySpinner = (Spinner) mView.findViewById(R.id.category_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -90,6 +96,11 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         categorySpinner.setAdapter(adapter);
+    }
+
+    public void showDatePickerDialog(View v) {
+        dateSetterFragment = new DateSetterFragment();
+        dateSetterFragment.show(getChildFragmentManager(), DateSetterFragment.TAG);
     }
 
 }
