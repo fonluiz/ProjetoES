@@ -19,7 +19,7 @@ import com.example.projetoes.projetoes.R;
  */
 public class FeedFragment extends Fragment {
 
-    public final static String TAG = "FEED_FRAGMENT";
+    public final static String TAG = "FRAGMENT_FEED";
 
     private OnFragmentInteractionListener mListener;
 

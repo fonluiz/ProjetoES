@@ -1,5 +1,3 @@
-package com.example.projetoes.projetoes.Models;
-
 import java.util.Date;
 import java.util.UUID;
 
