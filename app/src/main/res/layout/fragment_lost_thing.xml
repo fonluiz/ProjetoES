@@ -83,6 +83,12 @@
             android:layout_height="wrap_content"
             android:text="Envie uma foto do objeto"
             android:paddingTop="16dp" />
+        <ImageButton
+            android:id="@+id/photo_selector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/ic_menu_camera"
+            android:src="@android:drawable/ic_menu_camera"/>
 
 
     </LinearLayout>

@@ -1,6 +1,9 @@
 package com.example.projetoes.projetoes.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.example.projetoes.projetoes.R;
@@ -18,11 +22,13 @@ import com.example.projetoes.projetoes.R;
 public class LostThingFragment extends Fragment implements OnFragmentInteractionListener {
 
     public final static String TAG = "LOST_THING_FRAGMENT";
+    static final int REQUEST_IMAGE_GET = 1;
 
     private OnFragmentInteractionListener mListener;
     private Spinner categorySpinner;
     private View mView;
     private DatePicker datePicker;
+    private ImageButton photoSelector;
 
     public LostThingFragment() {
         // Required empty public constructor
@@ -31,9 +37,6 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment LostThingFragment.
      */
     // TODO: Rename and change types and number of parameters
@@ -55,6 +58,7 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
 
         mView = inflater.inflate(R.layout.fragment_lost_thing, container, false);
         startCategorySpinner();
+        startPhotoSelector();
 
         return mView;
     }
@@ -85,7 +89,7 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
 
     /**
      * Insere as categorias no spinner de categorias
-     */
+    */
     private void startCategorySpinner() {
         categorySpinner = (Spinner) mView.findViewById(R.id.category_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -95,6 +99,46 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         categorySpinner.setAdapter(adapter);
+    }
+
+    /**
+     * Inicia o botão de selecionar imagem e define o listener para ele
+     */
+    private void startPhotoSelector() {
+        photoSelector = (ImageButton) mView.findViewById(R.id.photo_selector);
+        photoSelector.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectImage();
+            }
+        });
+    }
+
+    /**
+     * Abre uma nova tela para o usuário selecionar uma foto de qualquer aplicativo
+     * do dispositivo que possa receber esse tipo de intenção
+     */
+    public void selectImage() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        Bundle extras = new Bundle();
+        extras.putBoolean("EXTRA_ALLOW_MULTIPLE", false);
+        extras.putBoolean("EXTRA_LOCAL_ONLY", true);
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivityForResult(intent, REQUEST_IMAGE_GET, extras);
+        }
+    }
+
+    /**
+     * Uma vez selecionada a foto, este método deve lidar com o arquivo retornado por selectImage
+     */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_GET && resultCode == getActivity().RESULT_OK) {
+            Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+            Uri fullPhotoUri = data.getData();
+            // Do work with photo saved at fullPhotoUri
+        }
     }
 
 }
