@@ -2,19 +2,28 @@ package com.example.projetoes.projetoes.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.example.projetoes.projetoes.R;
+
+import java.text.NumberFormat;
 
 /**
 * Fragment da tela para divulgar um objeto perdido.
@@ -29,6 +38,7 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
     private View mView;
     private DatePicker datePicker;
     private ImageButton photoSelector;
+    private EditText rewardField;
 
     public LostThingFragment() {
         // Required empty public constructor
@@ -59,6 +69,7 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
         mView = inflater.inflate(R.layout.fragment_lost_thing, container, false);
         startCategorySpinner();
         startPhotoSelector();
+        startRewardField();
 
         return mView;
     }
@@ -105,6 +116,11 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
      * Inicia o botão de selecionar imagem e define o listener para ele
      */
     private void startPhotoSelector() {
+        int ImagePosition = categorySpinner.getSelectedItemPosition();
+        Drawable itemImage;
+        switch (ImagePosition) {
+            // continuar aqui
+        }
         photoSelector = (ImageButton) mView.findViewById(R.id.photo_selector);
         photoSelector.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +128,10 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
                 selectImage();
             }
         });
+    }
+
+    private void startRewardField() {
+        rewardField = (EditText) mView.findViewById(R.id.reward_field);
     }
 
     /**
@@ -140,5 +160,4 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
             // Do work with photo saved at fullPhotoUri
         }
     }
-
 }

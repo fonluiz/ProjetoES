@@ -85,10 +85,21 @@
             android:paddingTop="16dp" />
         <ImageButton
             android:id="@+id/photo_selector"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/ic_menu_camera"
+            android:background="@android:drawable/screen_background_dark_transparent"
             android:src="@android:drawable/ic_menu_camera"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Caso deseje, ofereça uma recompensa pelo objeto"
+            android:paddingTop="16dp" />
+        <EditText
+            android:id="@+id/reward_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/edit_text"/>
 
 
     </LinearLayout>
