@@ -12,6 +12,8 @@
     <string name="found_feed_tab">Itens achados</string>
     <string name="lost_feed_tab">Itens perdidos</string>
 
+    <string name="btn_lost_thing">Reportar um objeto perdido</string>
+
     <string-array name="categories_array">
         <item>Animal</item>
         <item>Aparelho eletrônico</item>

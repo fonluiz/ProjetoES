@@ -13,6 +13,8 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -34,11 +36,16 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
     static final int REQUEST_IMAGE_GET = 1;
 
     private OnFragmentInteractionListener mListener;
-    private Spinner categorySpinner;
     private View mView;
+
+    private Spinner categorySpinner;
+    private EditText locationField;
     private DatePicker datePicker;
     private ImageButton photoSelector;
     private EditText rewardField;
+
+    private String category;
+    private String location;
 
     public LostThingFragment() {
         // Required empty public constructor
@@ -60,6 +67,7 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -72,6 +80,11 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
         startRewardField();
 
         return mView;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        getActivity().getMenuInflater().inflate(R.menu.lost_thing_menu, menu);
     }
 
     @Override
@@ -110,6 +123,10 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         categorySpinner.setAdapter(adapter);
+    }
+
+    private void startLocationField() {
+        locationField = (EditText) mView.findViewById(R.id.lost_location_field);
     }
 
     /**
@@ -160,4 +177,13 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
             // Do work with photo saved at fullPhotoUri
         }
     }
+
+    /**
+     * Define os dados a serem inseridos na base de dados
+     */
+    private void onFinishedFillingOut() {
+        category = categorySpinner.getSelectedItem().toString();
+        location = locationField.getText().toString();
+    }
+
 }
