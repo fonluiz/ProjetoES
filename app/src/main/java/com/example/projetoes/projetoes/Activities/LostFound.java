@@ -1,6 +1,7 @@
 package com.example.projetoes.projetoes.Activities;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -158,5 +159,19 @@ public class LostFound extends AppCompatActivity
     @Override
     public void onListFragmentInteraction(DummyContent.DummyItem item) {
 
+    }
+
+    /**
+     * Quando recebe o resultado de uma intenção, envia este resultado para o fragment
+     * onde a intenção foi lançada.
+     *
+     * @param requestCode Código de requisição
+     * @param resultCode Código de resposta
+     * @param data Dados da resultado
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(LostThingFragment.TAG);
+        fragment.onActivityResult(requestCode, resultCode, data);
     }
 }

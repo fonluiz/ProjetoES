@@ -2,16 +2,11 @@ package com.example.projetoes.projetoes.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,7 +20,8 @@ import android.widget.Spinner;
 
 import com.example.projetoes.projetoes.R;
 
-import java.text.NumberFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
 * Fragment da tela para divulgar um objeto perdido.
@@ -40,12 +36,16 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
 
     private Spinner categorySpinner;
     private EditText locationField;
-    private DatePicker datePicker;
+    private DatePicker lossDatePicker;
+    private EditText descriptionField;
     private ImageButton photoSelector;
     private EditText rewardField;
 
     private String category;
     private String location;
+    private GregorianCalendar lossDate;
+    private String description;
+    private Uri objImage;
 
     public LostThingFragment() {
         // Required empty public constructor
@@ -56,11 +56,8 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
      * this fragment using the provided parameters.
      * @return A new instance of fragment LostThingFragment.
      */
-    // TODO: Rename and change types and number of parameters
-    public static LostThingFragment newInstance(String param1, String param2) {
+    public static LostThingFragment newInstance() {
         LostThingFragment fragment = new LostThingFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -75,7 +72,11 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
                              Bundle savedInstanceState) {
 
         mView = inflater.inflate(R.layout.fragment_lost_thing, container, false);
+
         startCategorySpinner();
+        startLocationField();
+        startDatePicker();
+        startDescriptionField();
         startPhotoSelector();
         startRewardField();
 
@@ -125,8 +126,27 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
         categorySpinner.setAdapter(adapter);
     }
 
+    /**
+     * Inicia as definições para o campo de localização
+     */
     private void startLocationField() {
         locationField = (EditText) mView.findViewById(R.id.lost_location_field);
+    }
+
+    /**
+     * Inicia as definições para o seletor de data
+     */
+    private void startDatePicker() {
+        GregorianCalendar calendar = new GregorianCalendar();
+        lossDatePicker = (DatePicker) mView.findViewById(R.id.lost_date_picker);
+        lossDatePicker.setMaxDate(calendar.getTime().getTime());
+    }
+
+    /**
+     * Inicia as definições para o campo de descrição
+     */
+    private void startDescriptionField() {
+        descriptionField = (EditText) mView.findViewById(R.id.lost_description_field);
     }
 
     /**
@@ -147,6 +167,9 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
         });
     }
 
+    /**
+     * Inicia as definições para o campo de recompensa
+     */
     private void startRewardField() {
         rewardField = (EditText) mView.findViewById(R.id.reward_field);
     }
@@ -175,6 +198,7 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
             Uri fullPhotoUri = data.getData();
             // Do work with photo saved at fullPhotoUri
+            objImage = fullPhotoUri;
         }
     }
 
@@ -184,6 +208,10 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
     private void onFinishedFillingOut() {
         category = categorySpinner.getSelectedItem().toString();
         location = locationField.getText().toString();
+        lossDate = new GregorianCalendar(lossDatePicker.getYear(), lossDatePicker.getMonth(),
+                 lossDatePicker.getDayOfMonth());
+        description = descriptionField.getText().toString();
+
     }
 
 }
