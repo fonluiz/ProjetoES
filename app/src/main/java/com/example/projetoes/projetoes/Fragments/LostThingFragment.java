@@ -1,5 +1,6 @@
 package com.example.projetoes.projetoes.Fragments;
 
+import android.support.v4.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,6 +18,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.projetoes.projetoes.R;
 
@@ -36,7 +38,8 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
 
     private Spinner categorySpinner;
     private EditText locationField;
-    private DatePicker lossDatePicker;
+    private TextView dateField;
+    private DialogFragment mDatePickerFragment;
     private EditText descriptionField;
     private ImageButton photoSelector;
     private EditText rewardField;
@@ -137,9 +140,14 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
      * Inicia as definições para o seletor de data
      */
     private void startDatePicker() {
-        GregorianCalendar calendar = new GregorianCalendar();
-        lossDatePicker = (DatePicker) mView.findViewById(R.id.lost_date_picker);
-        lossDatePicker.setMaxDate(calendar.getTime().getTime());
+        dateField = (TextView) mView.findViewById(R.id.date_field);
+        mDatePickerFragment = new DatePickerFragment();
+        dateField.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDatePickerFragment.show(getChildFragmentManager(), DatePickerFragment.TAG);
+            }
+        });
     }
 
     /**
@@ -208,8 +216,6 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
     private void onFinishedFillingOut() {
         category = categorySpinner.getSelectedItem().toString();
         location = locationField.getText().toString();
-        lossDate = new GregorianCalendar(lossDatePicker.getYear(), lossDatePicker.getMonth(),
-                 lossDatePicker.getDayOfMonth());
         description = descriptionField.getText().toString();
 
     }

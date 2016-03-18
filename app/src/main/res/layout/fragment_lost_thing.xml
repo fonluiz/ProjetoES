@@ -45,13 +45,12 @@
                 style="@style/descriptionField"
                 android:text="Data" />
 
-            <DatePicker
-                android:id="@+id/lost_date_picker"
+            <TextView
+                android:id="@+id/date_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:drawable/dialog_holo_light_frame"
-                android:calendarViewShown="false"
-                android:layout_margin="16dp"/>
+                android:layout_margin="16dp"
+                android:text="DATA"/>
 
             <TextView
                 style="@style/descriptionField"
