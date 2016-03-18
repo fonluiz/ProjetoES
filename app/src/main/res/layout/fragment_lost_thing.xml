@@ -12,106 +12,82 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="16dp"
+            android:paddingTop="16dp"
+            android:background="@color/backgroundColor"
             android:scrollbarAlwaysDrawVerticalTrack="true">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Selecione uma categoria" />
+                style="@style/descriptionField"
+                android:text="Categoria"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Qual o tipo do objeto perdido"
-                android:textColor="@color/primaryColorLighter"
-                android:textSize="10sp" />
-            />
 
             <Spinner
                 android:id="@+id/category_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:drawable/btn_dropdown"
-                android:spinnerMode="dropdown"></Spinner>
+                android:spinnerMode="dropdown"
+                android:layout_margin="16dp"/>
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="16dp"
-                android:text="Informe o local onde perdeu" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Quanto mais específico melhor"
-                android:textColor="@color/primaryColorLighter"
-                android:textSize="10sp" />
+                style="@style/descriptionField"
+                android:text="Local" />
             />
 
             <EditText
                 android:id="@+id/lost_location_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:drawable/edit_text" />
+                android:background="@android:drawable/edit_text"
+                android:layout_margin="16dp"/>
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="16dp"
-                android:text="Informe a data em que perdeu" />
+                style="@style/descriptionField"
+                android:text="Data" />
 
             <DatePicker
                 android:id="@+id/lost_date_picker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:drawable/dialog_holo_light_frame"
-                android:calendarViewShown="false" />
+                android:calendarViewShown="false"
+                android:layout_margin="16dp"/>
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="16dp"
-                android:text="Descreva o objeto" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Utilize palavras que especifiquem o objeto, por exemplo, cor, marca e tamanho."
-                android:textColor="@color/primaryColorLighter"
-                android:textSize="10sp" />
+                style="@style/descriptionField"
+                android:text="Descrição"
+                />
 
             <EditText
                 android:id="@+id/lost_description_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:drawable/edit_text"
-                android:maxLength="30" />
+                android:maxLength="30"
+                android:layout_margin="16dp"/>
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="16dp"
-                android:text="Envie uma foto do objeto" />
+                style="@style/descriptionField"
+                android:text="Imagem" />
 
             <ImageButton
                 android:id="@+id/photo_selector"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:drawable/screen_background_dark_transparent"
-                android:src="@android:drawable/ic_menu_camera" />
+                android:src="@android:drawable/ic_menu_camera"
+                android:layout_margin="16dp"/>
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="16dp"
-                android:text="Caso deseje, ofereça uma recompensa pelo objeto" />
+                style="@style/descriptionField"
+                android:text="Recompensa" />
 
             <EditText
                 android:id="@+id/reward_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:drawable/edit_text" />
+                android:background="@android:drawable/edit_text"
+                android:layout_margin="16dp"/>
 
 
         </LinearLayout>

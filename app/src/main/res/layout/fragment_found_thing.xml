@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:text="Qual o tipo do objeto achado?"
                 android:textSize="10sp"
-                android:textColor="@color/primaryColorLighter"/>
+                android:textColor="@color/lightPrimaryColor"/>
             />
             <Spinner
                 android:id="@+id/category_spinner"
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:text="Quanto mais específico melhor"
                 android:textSize="10sp"
-                android:textColor="@color/primaryColorLighter"/>
+                android:textColor="@color/lightPrimaryColor"/>
             />
             <EditText
                 android:layout_width="match_parent"
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:text="Utilize palavras que especifiquem o objeto, por exemplo, cor, marca e tamanho."
                 android:textSize="10sp"
-                android:textColor="@color/primaryColorLighter"/>
+                android:textColor="@color/lightPrimaryColor"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
