@@ -10,29 +10,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.TextView;
 
 import com.example.projetoes.projetoes.R;
 
 import java.util.Calendar;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Fragment que representa um DatePickerDialog, que aparece ao clicar no campo
+ * "data" ao preencher os formulários.
  */
 public class DatePickerFragment extends DialogFragment
         implements android.app.DatePickerDialog.OnDateSetListener{
 
     public final static String TAG = "DATE_PICKER_FRAGMENT";
-    public DatePickerFragment() {
-        // Required empty public constructor
-    }
-
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_date_picker, container, false);
-    }
+    private TextView dateField;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -47,7 +39,9 @@ public class DatePickerFragment extends DialogFragment
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        // Do something with the date chosen by the user
+        dateField = (TextView) getParentFragment().getView().findViewById(R.id.date_field);
+        dateField.setText(day+"/"+month+"/"+year);
+
     }
 
 }
