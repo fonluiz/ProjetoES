@@ -40,8 +40,7 @@ public class DatePickerFragment extends DialogFragment
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
         dateField = (TextView) getParentFragment().getView().findViewById(R.id.date_field);
-        dateField.setText(day+"/"+month+"/"+year);
-
+        dateField.setText(day+"/"+(month+1)+"/"+year);
     }
 
 }

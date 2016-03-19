@@ -8,89 +8,178 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingTop="16dp"
-            android:background="@color/backgroundColor"
-            android:scrollbarAlwaysDrawVerticalTrack="true">
+            android:orientation="vertical">
 
-            <TextView
-                style="@style/descriptionField"
-                android:text="Categoria"/>
-
-
-            <Spinner
-                android:id="@+id/category_spinner"
+            <RelativeLayout
+                android:id="@+id/header"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/btn_dropdown"
-                android:spinnerMode="dropdown"
-                android:layout_margin="16dp"/>
+                android:layout_height="190dp"
+                android:orientation="vertical">
 
-            <TextView
-                style="@style/descriptionField"
-                android:text="Local" />
-            />
+                <ImageView
+                    android:id="@+id/photo_selector"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:background="@color/lightPrimaryColor"
+                    android:src="@android:drawable/ic_menu_camera" />
 
-            <EditText
-                android:id="@+id/lost_location_field"
+                <android.support.design.widget.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="32dp"
+                    android:src="@drawable/ic_menu_camera" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/edit_text"
-                android:layout_margin="16dp"/>
+                android:layout_height="match_parent"
+                android:layout_below="@id/header"
+                android:orientation="vertical"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
 
-            <TextView
-                style="@style/descriptionField"
-                android:text="Data" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp">
 
-            <TextView
-                android:id="@+id/date_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:text="DATA"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:paddingRight="24dp"
+                        android:src="@drawable/ic_title" />
 
-            <TextView
-                style="@style/descriptionField"
-                android:text="Descrição"
-                />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Título" />
 
-            <EditText
-                android:id="@+id/lost_description_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/edit_text"
-                android:maxLength="30"
-                android:layout_margin="16dp"/>
+                </LinearLayout>
 
-            <TextView
-                style="@style/descriptionField"
-                android:text="Imagem" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp">
 
-            <ImageButton
-                android:id="@+id/photo_selector"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/screen_background_dark_transparent"
-                android:src="@android:drawable/ic_menu_camera"
-                android:layout_margin="16dp"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:paddingRight="24dp"
+                        android:src="@drawable/ic_category" />
 
-            <TextView
-                style="@style/descriptionField"
-                android:text="Recompensa" />
+                    <Spinner
+                        android:id="@+id/category_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:spinnerMode="dropdown" />
 
-            <EditText
-                android:id="@+id/reward_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/edit_text"
-                android:layout_margin="16dp"/>
+                </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="52dp"
+                    android:layout_marginRight="4dp"
+                    android:background="@color/secondaryTextColor" />
 
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp">
 
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:paddingRight="24dp"
+                        android:src="@drawable/ic_title" />
+
+                    <EditText
+                        android:id="@+id/lost_description_field"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Descrição"
+                        android:maxLength="30" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:paddingRight="24dp"
+                        android:src="@drawable/ic_location" />
+
+                    <EditText
+                        android:id="@+id/lost_location_field"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Local" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:paddingRight="24dp"
+                        android:src="@drawable/ic_date" />
+
+                    <EditText
+                        android:id="@+id/date_field"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:gravity="right"
+                        android:hint="Selecione a data" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:paddingRight="24dp"
+                        android:src="@drawable/ic_reward" />
+
+                    <EditText
+                        android:id="@+id/reward_field"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Recompensa"
+                        android:inputType="numberDecimal" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </RelativeLayout>
     </ScrollView>
-
 </FrameLayout>

@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -38,10 +39,10 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
 
     private Spinner categorySpinner;
     private EditText locationField;
-    private TextView dateField;
+    private EditText dateField;
     private DialogFragment mDatePickerFragment;
     private EditText descriptionField;
-    private ImageButton photoSelector;
+    private ImageView photoSelector;
     private EditText rewardField;
 
     private String category;
@@ -140,7 +141,7 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
      * Inicia as definições para o seletor de data
      */
     private void startDatePicker() {
-        dateField = (TextView) mView.findViewById(R.id.date_field);
+        dateField = (EditText) mView.findViewById(R.id.date_field);
         mDatePickerFragment = new DatePickerFragment();
         dateField.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,7 +167,7 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
         switch (ImagePosition) {
             // continuar aqui
         }
-        photoSelector = (ImageButton) mView.findViewById(R.id.photo_selector);
+        photoSelector = (ImageView) mView.findViewById(R.id.photo_selector);
         photoSelector.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -207,6 +208,7 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
             Uri fullPhotoUri = data.getData();
             // Do work with photo saved at fullPhotoUri
             objImage = fullPhotoUri;
+            photoSelector.setImageURI(objImage);
         }
     }
 

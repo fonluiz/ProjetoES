@@ -14,6 +14,8 @@
 
     <string name="btn_lost_thing">Reportar um objeto perdido</string>
 
+    <string name="category_spinner_prompt">Categoria</string>
+
     <string-array name="categories_array">
         <item>Animal</item>
         <item>Aparelho eletrônico</item>
