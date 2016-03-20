@@ -23,8 +23,8 @@
                     android:id="@+id/photo_selector"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
-                    android:background="@color/lightPrimaryColor"
-                    android:src="@android:drawable/ic_menu_camera" />
+                    android:background="@color/secondaryTextColor"
+                    android:src="@mipmap/ic_launcher2"/>
 
                 <android.support.design.widget.FloatingActionButton
                     android:layout_width="wrap_content"
@@ -51,31 +51,11 @@
                     android:paddingBottom="8dp">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginRight="24dp"
                         android:layout_gravity="center_vertical"
-                        android:paddingRight="24dp"
-                        android:src="@drawable/ic_title" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Título" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingBottom="8dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:paddingRight="24dp"
-                        android:src="@drawable/ic_category" />
+                        android:src="@mipmap/ic_category" />
 
                     <Spinner
                         android:id="@+id/category_spinner"
@@ -90,6 +70,7 @@
                     android:layout_height="1dp"
                     android:layout_marginLeft="52dp"
                     android:layout_marginRight="4dp"
+                    android:layout_marginBottom="8dp"
                     android:background="@color/secondaryTextColor" />
 
                 <LinearLayout
@@ -103,14 +84,48 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:paddingRight="24dp"
-                        android:src="@drawable/ic_title" />
+                        android:src="@drawable/ic_type" />
 
-                    <EditText
-                        android:id="@+id/lost_description_field"
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_name"
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Tipo
+                            " />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="Descrição"
-                        android:maxLength="30" />
+                        android:layout_gravity="center_vertical"
+                        android:paddingRight="24dp"
+                        android:src="@drawable/ic_description" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/lost_description_field"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Descrição"
+                            android:maxLength="30" />
+                    </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -126,11 +141,17 @@
                         android:paddingRight="24dp"
                         android:src="@drawable/ic_location" />
 
-                    <EditText
-                        android:id="@+id/lost_location_field"
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout3"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Local" />
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/lost_location_field"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Local" />
+                    </android.support.design.widget.TextInputLayout>
 
                 </LinearLayout>
 
@@ -147,35 +168,48 @@
                         android:paddingRight="24dp"
                         android:src="@drawable/ic_date" />
 
-                    <EditText
-                        android:id="@+id/date_field"
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout4"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:focusable="false"
-                        android:gravity="right"
-                        android:hint="Selecione a data" />
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/date_field"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:gravity="right"
+                            android:hint="Data" />
+                    </android.support.design.widget.TextInputLayout>
 
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/reward_field_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingBottom="8dp">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_gravity="center_vertical"
-                        android:paddingRight="24dp"
-                        android:src="@drawable/ic_reward" />
+                        android:layout_marginRight="24dp"
+                        android:src="@mipmap/ic_reward" />
 
-                    <EditText
-                        android:id="@+id/reward_field"
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout5"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Recompensa"
-                        android:inputType="numberDecimal" />
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/reward_field"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Recompensa"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
 
                 </LinearLayout>
 

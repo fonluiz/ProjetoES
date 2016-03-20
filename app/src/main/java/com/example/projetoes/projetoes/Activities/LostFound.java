@@ -23,14 +23,15 @@ import android.view.MenuItem;
 import com.example.projetoes.projetoes.Fragments.FeedFragment;
 import com.example.projetoes.projetoes.Fragments.FeedSwipeAdapter;
 import com.example.projetoes.projetoes.Fragments.FoundItemFeed;
-import com.example.projetoes.projetoes.Fragments.FoundThingFragment;
 import com.example.projetoes.projetoes.Fragments.LostItemFeed;
-import com.example.projetoes.projetoes.Fragments.LostThingFragment;
+import com.example.projetoes.projetoes.Fragments.ReportObjectFragment;
 import com.example.projetoes.projetoes.Fragments.ProfileFragment;
 
 import com.example.projetoes.projetoes.Fragments.OnListFragmentInteractionListener;
 import com.example.projetoes.projetoes.Fragments.OnFragmentInteractionListener;
+import com.example.projetoes.projetoes.Fragments.ReportObjectFragment;
 import com.example.projetoes.projetoes.Fragments.dummy.DummyContent;
+import com.example.projetoes.projetoes.Models.Status;
 import com.example.projetoes.projetoes.R;
 
 public class LostFound extends AppCompatActivity
@@ -39,8 +40,8 @@ public class LostFound extends AppCompatActivity
     private FoundItemFeed foundItemFeed;
     private LostItemFeed lostItemFeed;
     private FeedFragment feedFragment;
-    private LostThingFragment lostThingFragment;
-    private FoundThingFragment foundThingFragment;
+    private ReportObjectFragment lostThingFragment;
+    private ReportObjectFragment foundThingFragment;
     private ProfileFragment profileFragment;
 
     @Override
@@ -49,8 +50,8 @@ public class LostFound extends AppCompatActivity
         foundItemFeed = new FoundItemFeed();
         lostItemFeed = new LostItemFeed();
         feedFragment = new FeedFragment();
-        lostThingFragment = new LostThingFragment();
-        foundThingFragment = new FoundThingFragment();
+        lostThingFragment = ReportObjectFragment.newInstance(Status.PERDIDO);
+        foundThingFragment = ReportObjectFragment.newInstance(Status.ENCONTRADO);
         profileFragment = new ProfileFragment();
 
         super.onCreate(savedInstanceState);
@@ -124,12 +125,12 @@ public class LostFound extends AppCompatActivity
         } else if (id == R.id.nav_lost) {
 
             nextFrag = lostThingFragment;
-            nextFragTag = LostThingFragment.TAG;
+            nextFragTag = ReportObjectFragment.TAG;
 
         } else if (id == R.id.nav_found) {
 
             nextFrag = foundThingFragment;
-            nextFragTag = FoundThingFragment.TAG;
+            nextFragTag = ReportObjectFragment.TAG;
 
         } else if (id == R.id.nav_profile) {
             nextFrag = profileFragment;
@@ -171,7 +172,7 @@ public class LostFound extends AppCompatActivity
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag(LostThingFragment.TAG);
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(ReportObjectFragment.TAG);
         fragment.onActivityResult(requestCode, resultCode, data);
     }
 }

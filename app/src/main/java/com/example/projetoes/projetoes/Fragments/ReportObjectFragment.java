@@ -8,34 +8,34 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 
+import com.example.projetoes.projetoes.Models.Status;
 import com.example.projetoes.projetoes.R;
 
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
-* Fragment da tela para divulgar um objeto perdido.
+* Fragment da tela para divulgar um objeto perdido ou encontrado.
 */
-public class LostThingFragment extends Fragment implements OnFragmentInteractionListener {
+public class ReportObjectFragment extends Fragment implements OnFragmentInteractionListener {
 
     public final static String TAG = "LOST_THING_FRAGMENT";
     static final int REQUEST_IMAGE_GET = 1;
 
     private OnFragmentInteractionListener mListener;
     private View mView;
+    private Status mStatus;
 
     private Spinner categorySpinner;
     private EditText locationField;
@@ -51,8 +51,8 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
     private String description;
     private Uri objImage;
 
-    public LostThingFragment() {
-        // Required empty public constructor
+    public ReportObjectFragment() {
+
     }
 
     /**
@@ -60,22 +60,46 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
      * this fragment using the provided parameters.
      * @return A new instance of fragment LostThingFragment.
      */
-    public static LostThingFragment newInstance() {
-        LostThingFragment fragment = new LostThingFragment();
-        return fragment;
+    public static ReportObjectFragment newInstance(Status status) {
+        if (status == Status.DEVOLVIDO) {
+            throw new IllegalArgumentException("Argument " + status.name() + " is not allowed.");
+        } else {
+            ReportObjectFragment fragment = new ReportObjectFragment();
+            Bundle args = new Bundle();
+            args.putString("status", status.name());
+            fragment.setArguments(args);
+            return fragment;
+        }
+    }
+
+    public Status getStatus() {
+        return this.mStatus;
+    }
+
+    /**
+     * Este método define o status do fragment (encontrado ou perdido).
+     * Algumas funcionalidades mudam no fragmente de acordo com o seu status.
+     */
+    public void setStatus() {
+        if (this.getArguments().get("status") == Status.ENCONTRADO.name()) {
+            mStatus = Status.ENCONTRADO;
+        } else {
+            mStatus = Status.PERDIDO;
+        }
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        this.setStatus();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mView = inflater.inflate(R.layout.fragment_lost_thing, container, false);
+        mView = inflater.inflate(R.layout.report_object_fragment, container, false);
 
         startCategorySpinner();
         startLocationField();
@@ -181,6 +205,10 @@ public class LostThingFragment extends Fragment implements OnFragmentInteraction
      */
     private void startRewardField() {
         rewardField = (EditText) mView.findViewById(R.id.reward_field);
+        LinearLayout rewardContainer = (LinearLayout) mView.findViewById(R.id.reward_field_container);
+        if (this.mStatus == Status.ENCONTRADO) {
+            rewardContainer.setVisibility(View.GONE);
+        }
     }
 
     /**
