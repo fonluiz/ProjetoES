@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.projetoes.projetoes.Activities.LostFound;
 import com.example.projetoes.projetoes.R;
 
 /**
@@ -56,6 +57,8 @@ public class FeedFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View feed_view = inflater.inflate(R.layout.fragment_feed, container, false);
+        // Define o título na actionbar
+        ((LostFound) this.getActivity()).getSupportActionBar().setTitle("Perdidos Achados");
 
         foundItemFeed = new FoundItemFeed();
         lostItemFeed = new LostItemFeed();

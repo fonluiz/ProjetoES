@@ -5,10 +5,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.projetoes.projetoes.Activities.LostFound;
 import com.example.projetoes.projetoes.R;
 
 /**
@@ -44,6 +47,8 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_profile, container, false);
+        // Define o título na actionbar
+        ((LostFound) this.getActivity()).getSupportActionBar().setTitle("Meu Perfil");
 
         startImageprofile();
 
@@ -65,6 +70,5 @@ public class ProfileFragment extends Fragment {
      */
     private void startImageprofile() {
         profileImage = (ImageView) mView.findViewById(R.id.image_profile);
-
     }
 }

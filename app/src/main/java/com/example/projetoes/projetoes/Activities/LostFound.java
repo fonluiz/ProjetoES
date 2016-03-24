@@ -1,6 +1,5 @@
 package com.example.projetoes.projetoes.Activities;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -43,6 +43,7 @@ public class LostFound extends AppCompatActivity
     private ReportObjectFragment lostThingFragment;
     private ReportObjectFragment foundThingFragment;
     private ProfileFragment profileFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,6 +134,7 @@ public class LostFound extends AppCompatActivity
             nextFragTag = ReportObjectFragment.TAG;
 
         } else if (id == R.id.nav_profile) {
+
             nextFrag = profileFragment;
             nextFragTag = ProfileFragment.TAG;
 

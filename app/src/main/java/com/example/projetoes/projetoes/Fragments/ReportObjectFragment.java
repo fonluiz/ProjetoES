@@ -1,5 +1,6 @@
 package com.example.projetoes.projetoes.Fragments;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
@@ -20,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import com.example.projetoes.projetoes.Activities.LostFound;
 import com.example.projetoes.projetoes.Models.Status;
 import com.example.projetoes.projetoes.R;
 
@@ -44,6 +46,7 @@ public class ReportObjectFragment extends Fragment implements OnFragmentInteract
     private EditText descriptionField;
     private ImageView photoSelector;
     private EditText rewardField;
+    private FloatingActionButton imageFAB;
 
     private String category;
     private String location;
@@ -90,8 +93,7 @@ public class ReportObjectFragment extends Fragment implements OnFragmentInteract
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+        super.onCreate(savedInstanceState);;
         this.setStatus();
     }
 
@@ -100,6 +102,7 @@ public class ReportObjectFragment extends Fragment implements OnFragmentInteract
                              Bundle savedInstanceState) {
 
         mView = inflater.inflate(R.layout.report_object_fragment, container, false);
+        setActionbarTitle();
 
         startCategorySpinner();
         startLocationField();
@@ -113,33 +116,32 @@ public class ReportObjectFragment extends Fragment implements OnFragmentInteract
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        getActivity().getMenuInflater().inflate(R.menu.lost_thing_menu, menu);
+        // Se for ter um menu na action bar, inflar o layout aqui.
+        // Se não tiver, pode excluir esse método.
+        //getActivity().getMenuInflater().inflate(R.menu.lost_thing_menu, menu);
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
-        try {
-            mListener = (OnFragmentInteractionListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString()
-                    + " must implement OnHeadlineSelectedListener");
-        }
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
+    /**
+     * Define o título que aparecerá na actionbar
+     */
+    private void setActionbarTitle() {
+        if (mStatus.equals(Status.PERDIDO)) {
+            ((LostFound) this.getActivity()).getSupportActionBar().setTitle("Perdi Algo");
+        } else {
+            // Define o título na actionbar
+            ((LostFound) this.getActivity()).getSupportActionBar().setTitle("Achei Algo");
+        }
+    }
     /**
      * Insere as categorias no spinner de categorias
     */
@@ -191,8 +193,9 @@ public class ReportObjectFragment extends Fragment implements OnFragmentInteract
         switch (ImagePosition) {
             // continuar aqui
         }
-        photoSelector = (ImageView) mView.findViewById(R.id.photo_selector);
-        photoSelector.setOnClickListener(new View.OnClickListener() {
+        photoSelector = (ImageView) mView.findViewById(R.id.image_field);
+        imageFAB = (FloatingActionButton) mView.findViewById(R.id.image_selector_fab);
+        imageFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectImage();
@@ -206,7 +209,7 @@ public class ReportObjectFragment extends Fragment implements OnFragmentInteract
     private void startRewardField() {
         rewardField = (EditText) mView.findViewById(R.id.reward_field);
         LinearLayout rewardContainer = (LinearLayout) mView.findViewById(R.id.reward_field_container);
-        if (this.mStatus == Status.ENCONTRADO) {
+        if (this.mStatus.equals(Status.ENCONTRADO)) {
             rewardContainer.setVisibility(View.GONE);
         }
     }
