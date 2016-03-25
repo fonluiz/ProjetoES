@@ -50,6 +50,14 @@
 
                 </LinearLayout>
 
+                <View
+                    android:id="@+id/divider"
+                    android:layout_marginTop="@dimen/dividerMargin"
+                    android:layout_marginBottom="@dimen/dividerMargin"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dividerHeight"
+                    android:background="@color/dividerColor"/>
+
 
             </LinearLayout>
 
