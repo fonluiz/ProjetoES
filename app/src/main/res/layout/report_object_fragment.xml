@@ -16,13 +16,13 @@
             <RelativeLayout
                 android:id="@+id/header"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="204dp"
                 android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/image_field"
                     android:layout_width="match_parent"
-                    android:layout_height="175dp"
+                    android:layout_height="@dimen/nav_header_height"
                     android:background="@color/grayBackground"/>
 
                 <android.support.design.widget.FloatingActionButton
@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="32dp"
+                    android:layout_margin="@dimen/fab_margin"
                     android:src="@drawable/ic_menu_camera" />
 
             </RelativeLayout>

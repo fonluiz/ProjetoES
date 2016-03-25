@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,6 +21,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.projetoes.projetoes.Fragments.EditProfileFragment;
 import com.example.projetoes.projetoes.Fragments.FeedFragment;
 import com.example.projetoes.projetoes.Fragments.FeedSwipeAdapter;
 import com.example.projetoes.projetoes.Fragments.FoundItemFeed;
@@ -35,7 +37,8 @@ import com.example.projetoes.projetoes.Models.Status;
 import com.example.projetoes.projetoes.R;
 
 public class LostFound extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnListFragmentInteractionListener, OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnFragmentInteractionListener,
+        OnListFragmentInteractionListener, ProfileFragment.OnEditProfileFabClickedListener {
 
     private FoundItemFeed foundItemFeed;
     private LostItemFeed lostItemFeed;
@@ -43,6 +46,7 @@ public class LostFound extends AppCompatActivity
     private ReportObjectFragment lostThingFragment;
     private ReportObjectFragment foundThingFragment;
     private ProfileFragment profileFragment;
+    private EditProfileFragment editProfileFragment;
 
 
     @Override
@@ -54,6 +58,7 @@ public class LostFound extends AppCompatActivity
         lostThingFragment = ReportObjectFragment.newInstance(Status.PERDIDO);
         foundThingFragment = ReportObjectFragment.newInstance(Status.ENCONTRADO);
         profileFragment = new ProfileFragment();
+        editProfileFragment = new EditProfileFragment();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_menu);
@@ -158,11 +163,6 @@ public class LostFound extends AppCompatActivity
         return true;
     }
 
-    //TODO: Este metodo precisa ser implementado. Coloquei aqui so pra nao dar erro.
-    @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
-
-    }
 
     /**
      * Quando recebe o resultado de uma intenção, envia este resultado para o fragment
@@ -176,5 +176,19 @@ public class LostFound extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(ReportObjectFragment.TAG);
         fragment.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onFabClicked() {
+        Log.d("TAG", "onFabClicked: $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container_layout, editProfileFragment, EditProfileFragment.TAG)
+                .addToBackStack(EditProfileFragment.TAG).commit();
+    }
+
+    //TODO: Este método precisa ser implentado. Está aqui só para não dar erro de compilação
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+
     }
 }

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.projetoes.projetoes.Activities.LostFound;
 import com.example.projetoes.projetoes.R;
 
 /**
@@ -37,6 +38,8 @@ public class EditProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_edit_profile, container, false);
+        // Define o título na actionbar
+        ((LostFound) this.getActivity()).getSupportActionBar().setTitle("Editar Perfil");
 
         return mView;
     }

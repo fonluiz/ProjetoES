@@ -3,6 +3,7 @@ package com.example.projetoes.projetoes.Fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,8 +22,10 @@ public class ProfileFragment extends Fragment {
 
     public final static String TAG = "PROFILE_FRAGMENT";
     private View mView;
+    OnEditProfileFabClickedListener editProfileCallback;
 
     private ImageView profileImage;
+    private FloatingActionButton editProfileFab;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -51,6 +54,7 @@ public class ProfileFragment extends Fragment {
         ((LostFound) this.getActivity()).getSupportActionBar().setTitle("Meu Perfil");
 
         startImageprofile();
+        startEditProfileFab();
 
         return mView;
     }
@@ -58,6 +62,15 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            editProfileCallback = (OnEditProfileFabClickedListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement OnEditProfileFabClickedListener");
+        }
     }
 
     @Override
@@ -70,5 +83,23 @@ public class ProfileFragment extends Fragment {
      */
     private void startImageprofile() {
         profileImage = (ImageView) mView.findViewById(R.id.image_profile);
+    }
+
+    /**
+     * Inicia as definições para quando o botão de editar perfil for clicado.
+     */
+    private void startEditProfileFab() {
+        editProfileFab = (FloatingActionButton) mView.findViewById(R.id.user_settings_fab);
+        editProfileFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editProfileCallback.onFabClicked();
+            }
+        });
+    }
+
+    // Container Activity must implement this interface
+    public interface OnEditProfileFabClickedListener {
+        public void onFabClicked();
     }
 }
