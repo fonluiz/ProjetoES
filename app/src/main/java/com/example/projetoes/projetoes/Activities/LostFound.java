@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -48,7 +49,6 @@ public class LostFound extends AppCompatActivity
     private ProfileFragment profileFragment;
     private EditProfileFragment editProfileFragment;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -74,7 +74,7 @@ public class LostFound extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        this.getSupportFragmentManager().beginTransaction().replace(R.id.container_layout,
+        getSupportFragmentManager().beginTransaction().replace(R.id.container_layout,
                 feedFragment, FeedFragment.TAG).addToBackStack(FeedFragment.TAG).commit();
     }
 
@@ -117,7 +117,7 @@ public class LostFound extends AppCompatActivity
         int id = item.getItemId();
         Fragment nextFrag = null;
         String nextFragTag = null;
-        String  prevFragTag;
+        String prevFragTag;
 
         FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(
                 getSupportFragmentManager().getBackStackEntryCount() - 1);
@@ -145,15 +145,12 @@ public class LostFound extends AppCompatActivity
 
         }
 
-        if (nextFrag instanceof FoundItemFeed) {
+        if (nextFrag != null) {
 
-        } else if (nextFrag!= null) {
             if (nextFragTag.equals(prevFragTag)) {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container_layout, nextFrag, nextFragTag).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_layout, nextFrag, nextFragTag).commit();
             } else {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container_layout, nextFrag, nextFragTag)
+               getSupportFragmentManager().beginTransaction().replace(R.id.container_layout, nextFrag, nextFragTag)
                         .addToBackStack(nextFragTag).commit();
             }
         }
@@ -169,8 +166,8 @@ public class LostFound extends AppCompatActivity
      * onde a intenção foi lançada.
      *
      * @param requestCode Código de requisição
-     * @param resultCode Código de resposta
-     * @param data Dados da resultado
+     * @param resultCode  Código de resposta
+     * @param data        Dados da resultado
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -180,9 +177,10 @@ public class LostFound extends AppCompatActivity
 
     @Override
     public void onFabClicked() {
-        Log.d("TAG", "onFabClicked: $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container_layout, editProfileFragment, EditProfileFragment.TAG)
+        FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction();
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        transaction.setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        transaction.replace(R.id.container_layout, editProfileFragment, EditProfileFragment.TAG)
                 .addToBackStack(EditProfileFragment.TAG).commit();
     }
 
