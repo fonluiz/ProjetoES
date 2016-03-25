@@ -10,46 +10,44 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/image_profile"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/nav_header_height"
+                android:background="@color/grayBackground"
+                android:src="@mipmap/ic_image_profile" />
 
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_below="@id/image_profile"
+                android:layout_margin="@dimen/default_margin"
                 android:orientation="vertical">
 
-                <RelativeLayout
-                    android:id="@+id/header"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/image_profile"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/grayBackground"
-                        android:src="@mipmap/ic_image_profile"
-                        android:baselineAlignBottom="true"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Usuário"
+                        android:textColor="@color/primaryColor"
+                        android:textSize="@dimen/subheading" />
 
-                </RelativeLayout>
+                    <TextView
+                        android:id="@+id/username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Username"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/title"
+                        android:textStyle="bold" />
 
-                <LinearLayout
-                    android:id="@+id/reward_field_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingBottom="8dp">
-                 <TextView
-                     android:id="@+id/username"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:background="@color/grayBackground"
-                     android:textAlignment="center"
-                     android:textSize="25dp"
-                     android:textColor="@color/darkPrimaryColor"
-                     android:text="Username"/>
                 </LinearLayout>
 
 
@@ -58,15 +56,16 @@
 
         </RelativeLayout>
 
+
     </ScrollView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/user_settings_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:clickable="true"
-        android:src="@drawable/ic_menu_manage"
-        android:layout_gravity="bottom|end"/>
+        android:src="@mipmap/ic_edit_profile" />
 
 </FrameLayout>
