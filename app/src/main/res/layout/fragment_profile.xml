@@ -10,7 +10,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/default_margin">
 
             <ImageView
                 android:id="@+id/image_profile"
@@ -24,184 +25,107 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/image_profile"
-                android:layout_margin="@dimen/default_margin"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/personal_info_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    style="@style/profile_layouts">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Usuário"
-                        android:textColor="@color/primaryColor"
-                        android:textSize="@dimen/subheading" />
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/username"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Username"
-                        android:textAlignment="center"
-                        android:textSize="@dimen/title"
-                        android:textStyle="bold" />
-                </LinearLayout>
+                        <TextView
+                            style="@style/profile_info_type"
+                            android:text="Usuário" />
 
-                <View
-                    android:id="@+id/divider"
-                    android:layout_marginTop="@dimen/dividerMargin"
-                    android:layout_marginBottom="@dimen/dividerMargin"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dividerHeight"
-                    android:background="@color/dividerColor"/>
+
+                        <TextView
+                            android:id="@+id/username"
+                            style="@style/profile_information"
+                            android:text="Username" />
+                    </LinearLayout>
 
                 </LinearLayout>
+
+                <View style="@style/divider_style" />
 
                 <LinearLayout
                     android:id="@+id/address_info_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="@dimen/default_margin">
+                    style="@style/profile_layouts">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="2"
-                        android:layout_marginBottom="@dimen/margin_inside">
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="1">
+                        android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Cidade"
-                            android:textColor="@color/primaryColor"
-                            android:textSize="@dimen/subheading" />
+                            style="@style/profile_info_type"
+                            android:text="Cidade" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Campina Grande"
-                            android:textAlignment="center"
-                            android:textSize="@dimen/title"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Bairro"
-                                android:textColor="@color/primaryColor"
-                                android:textSize="@dimen/subheading" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Bairro onde moro"
-                                android:textAlignment="center"
-                                android:textSize="@dimen/title"
-                                android:textStyle="bold" />
-                        </LinearLayout>
+                            style="@style/profile_information"
+                            android:text="Campina Grande" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="8dp">
+                        android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Logradouro"
-                            android:textColor="@color/primaryColor"
-                            android:textSize="@dimen/subheading" />
+                            style="@style/profile_info_type"
+                            android:text="Bairro" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Rua onde moro"
-                            android:textAlignment="center"
-                            android:textSize="@dimen/title"
-                            android:textStyle="bold" />
+                            style="@style/profile_information"
+                            android:text="Meu bairro" />
                     </LinearLayout>
 
-                    <View
-                        android:layout_marginTop="@dimen/dividerMargin"
-                        android:layout_marginBottom="@dimen/dividerMargin"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dividerHeight"
-                        android:background="@color/dividerColor"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/profile_info_type"
+                            android:text="Logradouro" />
+
+                        <TextView
+                            style="@style/profile_information"
+                            android:text="Meu endereço" />
+                    </LinearLayout>
+
 
                 </LinearLayout>
 
+                <View style="@style/divider_style" />
+
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="@dimen/default_margin">
+                    android:id="@+id/contact_info_layout"
+                    style="@style/profile_layouts">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Telefone"
-                        android:textColor="@color/primaryColor"
-                        android:textSize="@dimen/subheading" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:weightSum="2">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:text="Telefone 1"
-                            android:textSize="@dimen/title"
-                            android:textStyle="bold" />
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:text="Telefone 2"
-                            android:textSize="@dimen/title"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
+                        style="@style/profile_info_type"
+                        android:text="Telefone" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Email"
-                        android:layout_marginTop="@dimen/margin_inside"
-                        android:textColor="@color/primaryColor"
-                        android:textSize="@dimen/subheading" />
+                        style="@style/profile_information"
+                        android:text="Telefone 1" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="email@example.com"
-                        android:textSize="@dimen/title"
-                        android:textStyle="bold" />
+                        style="@style/profile_information"
+                        android:text="Telefone 2" />
 
+                    <TextView
+                        style="@style/profile_info_type"
+                        android:text="Email" />
+
+                    <TextView
+                        style="@style/profile_information"
+                        android:text="email@example.com" />
 
 
                 </LinearLayout>
@@ -213,12 +137,13 @@
 
     </ScrollView>
 
-  <android.support.design.widget.FloatingActionButton
-      android:id="@+id/user_settings_fab"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:src="@mipmap/ic_edit_profile"
-      android:layout_gravity="end|bottom"
-      android:layout_margin="@dimen/fab_margin"/>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/user_settings_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginBottom="@dimen/margin_inside"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:src="@mipmap/ic_edit_profile" />
 
 </FrameLayout>

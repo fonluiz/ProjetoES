@@ -17,14 +17,34 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="descriptionField">
+    <style name="profile_info_type">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/primaryColor</item>
+        <item name="android:textSize">@dimen/subheading</item>
+        <item name="android:layout_marginTop">@dimen/margin_inside</item>
+    </style>
+
+    <style name="profile_information">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/title</item>
+    </style>
+
+    <style name="profile_layouts">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">24dp</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:background">@color/accentColor</item>
-        <item name="android:textColor">@color/textAndIconsColor</item>
-        <item name="android:elevation">5dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_marginRight">@dimen/default_margin</item>
+        <item name="android:layout_marginLeft">@dimen/default_margin</item>
+    </style>
+
+    <style name="divider_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dividerHeight</item>
+        <item name="android:background">@color/dividerColor</item>
+        <item name="android:layout_marginTop">@dimen/dividerMargin</item>
+        <item name="android:layout_marginBottom">@dimen/dividerMargin</item>
     </style>
 
 
