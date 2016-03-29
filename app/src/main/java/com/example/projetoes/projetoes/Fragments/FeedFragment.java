@@ -24,9 +24,6 @@ public class FeedFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    private FoundItemFeed foundItemFeed;
-    private LostItemFeed lostItemFeed;
-
     private FeedSwipeAdapter mAdapter;
     private ViewPager mPager;
 
@@ -59,9 +56,6 @@ public class FeedFragment extends Fragment {
         View feed_view = inflater.inflate(R.layout.fragment_feed, container, false);
         // Define o título na actionbar
         ((LostFound) this.getActivity()).getSupportActionBar().setTitle("Perdidos Achados");
-
-        foundItemFeed = new FoundItemFeed();
-        lostItemFeed = new LostItemFeed();
 
         mAdapter = new FeedSwipeAdapter(getChildFragmentManager());
         mPager = (ViewPager) feed_view.findViewById(R.id.feed_pager);

@@ -9,6 +9,7 @@
     <dimen name="text_margin">16dp</dimen>
 
     <dimen name="default_margin">16dp</dimen>
+    <dimen name="margin_inside">8dp</dimen>
 
     <!--Text dimensions-->
     <dimen name="display1">34sp</dimen>

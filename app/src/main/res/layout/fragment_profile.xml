@@ -28,6 +28,12 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/personal_info_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -47,7 +53,6 @@
                         android:textAlignment="center"
                         android:textSize="@dimen/title"
                         android:textStyle="bold" />
-
                 </LinearLayout>
 
                 <View
@@ -58,7 +63,148 @@
                     android:layout_height="@dimen/dividerHeight"
                     android:background="@color/dividerColor"/>
 
+                </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/address_info_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/default_margin">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2"
+                        android:layout_marginBottom="@dimen/margin_inside">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cidade"
+                            android:textColor="@color/primaryColor"
+                            android:textSize="@dimen/subheading" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Campina Grande"
+                            android:textAlignment="center"
+                            android:textSize="@dimen/title"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Bairro"
+                                android:textColor="@color/primaryColor"
+                                android:textSize="@dimen/subheading" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Bairro onde moro"
+                                android:textAlignment="center"
+                                android:textSize="@dimen/title"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Logradouro"
+                            android:textColor="@color/primaryColor"
+                            android:textSize="@dimen/subheading" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rua onde moro"
+                            android:textAlignment="center"
+                            android:textSize="@dimen/title"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_marginTop="@dimen/dividerMargin"
+                        android:layout_marginBottom="@dimen/dividerMargin"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dividerHeight"
+                        android:background="@color/dividerColor"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/default_margin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Telefone"
+                        android:textColor="@color/primaryColor"
+                        android:textSize="@dimen/subheading" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="2">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="Telefone 1"
+                            android:textSize="@dimen/title"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="Telefone 2"
+                            android:textSize="@dimen/title"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Email"
+                        android:layout_marginTop="@dimen/margin_inside"
+                        android:textColor="@color/primaryColor"
+                        android:textSize="@dimen/subheading" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="email@example.com"
+                        android:textSize="@dimen/title"
+                        android:textStyle="bold" />
+
+
+
+                </LinearLayout>
             </LinearLayout>
 
 
