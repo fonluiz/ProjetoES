@@ -2,17 +2,9 @@ package com.example.projetoes.projetoes.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.PagerTabStrip;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -24,22 +16,16 @@ import android.view.MenuItem;
 
 import com.example.projetoes.projetoes.Fragments.EditProfileFragment;
 import com.example.projetoes.projetoes.Fragments.FeedFragment;
-import com.example.projetoes.projetoes.Fragments.FeedSwipeAdapter;
 import com.example.projetoes.projetoes.Fragments.FoundItemFeed;
 import com.example.projetoes.projetoes.Fragments.LostItemFeed;
 import com.example.projetoes.projetoes.Fragments.ReportObjectFragment;
 import com.example.projetoes.projetoes.Fragments.ProfileFragment;
 
-import com.example.projetoes.projetoes.Fragments.OnListFragmentInteractionListener;
-import com.example.projetoes.projetoes.Fragments.OnFragmentInteractionListener;
-import com.example.projetoes.projetoes.Fragments.ReportObjectFragment;
-import com.example.projetoes.projetoes.Fragments.dummy.DummyContent;
 import com.example.projetoes.projetoes.Models.Status;
 import com.example.projetoes.projetoes.R;
 
 public class LostFound extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnFragmentInteractionListener,
-        OnListFragmentInteractionListener, ProfileFragment.OnEditProfileFabClickedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ProfileFragment.OnEditProfileFabClickedListener {
 
     private FoundItemFeed foundItemFeed;
     private LostItemFeed lostItemFeed;
@@ -183,10 +169,5 @@ public class LostFound extends AppCompatActivity
         transaction.replace(R.id.container_layout, editProfileFragment, EditProfileFragment.TAG)
                 .addToBackStack(EditProfileFragment.TAG).commit();
     }
-
-    //TODO: Este método precisa ser implentado. Está aqui só para não dar erro de compilação
-    @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
-
-    }
+    
 }

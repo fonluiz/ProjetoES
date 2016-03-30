@@ -30,12 +30,11 @@ import java.util.GregorianCalendar;
 /**
 * Fragment da tela para divulgar um objeto perdido ou encontrado.
 */
-public class ReportObjectFragment extends Fragment implements OnFragmentInteractionListener {
+public class ReportObjectFragment extends Fragment {
 
     public final static String TAG = "LOST_THING_FRAGMENT";
     static final int REQUEST_IMAGE_GET = 1;
 
-    private OnFragmentInteractionListener mListener;
     private View mView;
     private Status mStatus;
 

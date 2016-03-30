@@ -11,17 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.projetoes.projetoes.R;
-import com.example.projetoes.projetoes.Fragments.dummy.DummyContent;
 
 /**
  * Um Fragment para mostrar uma lista com todos os objetos encontrados.
  */
-public class FoundItemFeed extends Fragment  implements OnListFragmentInteractionListener{
+public class FoundItemFeed extends Fragment {
 
 
     public final static String TAG = "FOUND_ITEM_FEED";
-
-    private OnListFragmentInteractionListener mListener;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -53,7 +50,6 @@ public class FoundItemFeed extends Fragment  implements OnListFragmentInteractio
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setAdapter(new FeedRecyclerViewAdapter(DummyContent.ITEMS, null)); //Aqui deveria ser o listener ao invés de null
         }
         return view;
     }
@@ -62,24 +58,11 @@ public class FoundItemFeed extends Fragment  implements OnListFragmentInteractio
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
-        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
-    }
-
-    //TODO: Este metodo precisa ser implementado. Coloquei aqui so pra nao dar erro.
-    @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
-
     }
 
 }
