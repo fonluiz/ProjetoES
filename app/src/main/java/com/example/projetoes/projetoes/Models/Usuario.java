@@ -80,7 +80,7 @@ public class Usuario {
         Objeto obj = new Objeto(titulo,descricao,categoria,lugar,foto,status);
         if (status == Status.ENCONTRADO){
             addAchados(obj);
-        }elseif (status == Status.PERDIDO){
+        }else if (status == Status.PERDIDO){
             addPerdidos(obj);
         }
     }
