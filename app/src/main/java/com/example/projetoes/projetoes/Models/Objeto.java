@@ -108,7 +108,7 @@ public class Objeto {
         setLugar(lugar);
         setFoto(foto);
         setStatus(status);
-        this.id = UUID generateId();
+        this.id = (UUID) generateId();
         this.dataPublicacao = new Date();
     }
 
