@@ -5,6 +5,7 @@ import java.util.UUID;
 
 /**
  * Created by Tuca on 07/03/2016.
+ * Classe de persistência, objeto que pode ser perdido ou achado pelo usuário
  */
 public class Objeto {
     private UUID id;
@@ -17,6 +18,9 @@ public class Objeto {
     private String foto;
     private Status status;
 
+    /**
+     * getters e setters
+     */
     public void setId(UUID id){
         this.id = id;
     }
@@ -60,7 +64,6 @@ public class Objeto {
 
         return titulo;
     }
-
     public String getDescricao() {
         return descricao;
     }
@@ -88,7 +91,30 @@ public class Objeto {
     public Status getStatus() {
         return status;
     }
+    /*
+    Construtor vazio do Objeto
+     */
+    public Objeto(){
 
+    }
+    /*
+    Construtor do objeto com os parâmetros que não podem ser nulos
+     */
+    public Objeto( String titulo, String descricao,
+            Categoria categoria,String lugar, String foto,Status status){
+        setTitulo(titulo);
+        setDescricao(descricao);
+        setCategoria(categoria);
+        setLugar(lugar);
+        setFoto(foto);
+        setStatus(status);
+        this.id = UUID generateId();
+        this.dataPublicacao = new Date();
+    }
+
+    /*
+    Função que gera um id qualquer
+     */
     UUID generateId(){ //gerar o Id único
         return UUID.randomUUID();
     }

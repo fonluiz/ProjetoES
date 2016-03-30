@@ -12,10 +12,10 @@ public class Usuario {
     private String senha;
     private String contato;
     private String foto;
-    private Set<String> flags;    //Acho que faz mais sentido que seja um set de strings ao invés de uma string apenas, mas fica aberto a discussão
+    private int flags;
     private Set<Objeto> achados;
     private Set<Objeto> perdidos;
-    private ObjDAO dao;
+
 
 
     public void setNome(String nome) {
@@ -38,7 +38,7 @@ public class Usuario {
         this.foto = foto;
     }
 
-    public void setFlags(Set<String> flags) {
+    public void setFlags(int flags) {
         this.flags = flags;
     }
 
@@ -63,7 +63,7 @@ public class Usuario {
         return foto;
     }
 
-    public Set<String> getFlags() {
+    public int getFlags() {
         return flags;
     }
 
@@ -75,7 +75,14 @@ public class Usuario {
         return perdidos;
     }
 
-    public void criarObjeto(){
+    public void criarObjeto(String titulo, String descricao,
+                            Categoria categoria,String lugar, String foto,Status status){
+        Objeto obj = new Objeto(titulo,descricao,categoria,lugar,foto,status);
+        if (status == Status.ENCONTRADO){
+            addAchados(obj);
+        }elseif (status == Status.PERDIDO){
+            addPerdidos(obj);
+        }
     }
     void addAchados(Objeto objeto){
         this.achados.add(objeto);
