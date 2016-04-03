@@ -76,6 +76,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+        editProfileCallback = null;
     }
 
     /**
@@ -100,6 +101,6 @@ public class ProfileFragment extends Fragment {
 
     // Container Activity must implement this interface
     public interface OnEditProfileFabClickedListener {
-        public void onFabClicked();
+        void onFabClicked();
     }
 }

@@ -16,6 +16,10 @@
 
     <string name="category_spinner_prompt">Categoria</string>
 
+    <!--títulos dos fragments-->
+
+    <string name="editProfileTitle">Editar Perfil</string>
+
     <string-array name="categories_array">
         <item>Animal</item>
         <item>Aparelho eletrônico</item>
@@ -30,7 +34,6 @@
         <item>Outro</item>
     </string-array>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

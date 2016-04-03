@@ -1,5 +1,7 @@
 package com.example.projetoes.projetoes.Fragments;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.content.Context;
@@ -217,6 +219,7 @@ public class ReportObjectFragment extends Fragment {
      * Abre uma nova tela para o usuário selecionar uma foto de qualquer aplicativo
      * do dispositivo que possa receber esse tipo de intenção
      */
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void selectImage() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
@@ -233,6 +236,7 @@ public class ReportObjectFragment extends Fragment {
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Não está entrando nesse if pq o request code que vem da activity vem diferente
         if (requestCode == REQUEST_IMAGE_GET && resultCode == getActivity().RESULT_OK) {
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
             Uri fullPhotoUri = data.getData();

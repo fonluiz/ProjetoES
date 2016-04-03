@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -27,8 +28,6 @@ import com.example.projetoes.projetoes.R;
 public class LostFound extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ProfileFragment.OnEditProfileFabClickedListener {
 
-    private FoundItemFeed foundItemFeed;
-    private LostItemFeed lostItemFeed;
     private FeedFragment feedFragment;
     private ReportObjectFragment lostThingFragment;
     private ReportObjectFragment foundThingFragment;
@@ -38,8 +37,6 @@ public class LostFound extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        foundItemFeed = new FoundItemFeed();
-        lostItemFeed = new LostItemFeed();
         feedFragment = new FeedFragment();
         lostThingFragment = ReportObjectFragment.newInstance(Status.PERDIDO);
         foundThingFragment = ReportObjectFragment.newInstance(Status.ENCONTRADO);
@@ -157,7 +154,10 @@ public class LostFound extends AppCompatActivity
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag(ReportObjectFragment.TAG);
+        FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(
+                getSupportFragmentManager().getBackStackEntryCount() - 1);
+        String prevFragTag = backEntry.getName();
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(prevFragTag);
         fragment.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -169,5 +169,5 @@ public class LostFound extends AppCompatActivity
         transaction.replace(R.id.container_layout, editProfileFragment, EditProfileFragment.TAG)
                 .addToBackStack(EditProfileFragment.TAG).commit();
     }
-    
+
 }

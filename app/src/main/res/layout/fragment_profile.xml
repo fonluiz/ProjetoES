@@ -15,9 +15,7 @@
 
             <ImageView
                 android:id="@+id/image_profile"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/nav_header_height"
-                android:background="@color/grayBackground"
+                style="@style/imageHeader"
                 android:src="@mipmap/ic_image_profile" />
 
             <LinearLayout
@@ -76,6 +74,7 @@
 
                         <TextView
                             style="@style/profile_info_type"
+                            android:layout_marginTop="@dimen/margin_inside"
                             android:text="Bairro" />
 
                         <TextView
@@ -91,7 +90,8 @@
 
                         <TextView
                             style="@style/profile_info_type"
-                            android:text="Logradouro" />
+                            android:layout_marginTop="@dimen/margin_inside"
+                            android:text="Rua" />
 
                         <TextView
                             style="@style/profile_information"
@@ -121,6 +121,7 @@
 
                     <TextView
                         style="@style/profile_info_type"
+                        android:layout_marginTop="@dimen/margin_inside"
                         android:text="Email" />
 
                     <TextView

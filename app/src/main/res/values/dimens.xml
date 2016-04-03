@@ -21,6 +21,5 @@
     <dimen name="button">14sp</dimen>
 
     <!--Other dimensions-->
-    <dimen name="dividerMargin">8dp</dimen>
     <dimen name="dividerHeight">1dip</dimen>
 </resources>
