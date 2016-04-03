@@ -145,7 +145,6 @@ public class EditProfileFragment extends Fragment {
      * Inicia as definições da ActionBar para esse fragment
      */
     private void modifyActioonBar() {
-        Log.d(TAG, "modifyActioonBar: &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
         android.support.v7.app.ActionBar mActionbar = ((LostFound) this.getActivity()).getSupportActionBar();
         mActionbar.setTitle(R.string.editProfileTitle);
         ((LostFound) getActivity()).setDrawerState(false);
