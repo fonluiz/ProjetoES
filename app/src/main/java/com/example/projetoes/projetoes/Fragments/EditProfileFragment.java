@@ -2,6 +2,7 @@ package com.example.projetoes.projetoes.Fragments;
 
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -10,11 +11,15 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -32,6 +37,12 @@ public class EditProfileFragment extends Fragment {
     private View mView;
     private ImageView photoSelector;
     private Uri objImage;
+    private EditText username_field;
+    private EditText bairro_field;
+    private EditText street_field;
+    private EditText phone1_field;
+    private EditText phone2_field;
+    private EditText email_field;
 
     public EditProfileFragment() {
         // Required empty public constructor
@@ -46,6 +57,7 @@ public class EditProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -56,10 +68,36 @@ public class EditProfileFragment extends Fragment {
 
         modifyActioonBar();
         startPhotoSelector();
+        startFields();
 
         return mView;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        inflater.inflate(R.menu.save_profile_information, menu);
+    }
+
+
+    @Override
+    public void onResume() {
+        modifyActioonBar();
+        super.onResume();
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.save_profile_info) {
+            persistInformations();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     /**
      * Inicia o botão de selecionar imagem e define o listener para ele
@@ -99,7 +137,6 @@ public class EditProfileFragment extends Fragment {
             Uri fullPhotoUri = data.getData();
             // Do work with photo saved at fullPhotoUri
             objImage = fullPhotoUri;
-            Log.d(TAG, "onActivityResult:########### " + objImage);
             photoSelector.setImageBitmap(thumbnail);
         }
     }
@@ -108,8 +145,23 @@ public class EditProfileFragment extends Fragment {
      * Inicia as definições da ActionBar para esse fragment
      */
     private void modifyActioonBar() {
+        Log.d(TAG, "modifyActioonBar: &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
         android.support.v7.app.ActionBar mActionbar = ((LostFound) this.getActivity()).getSupportActionBar();
         mActionbar.setTitle(R.string.editProfileTitle);
+        ((LostFound) getActivity()).setDrawerState(false);
+        mActionbar.setDisplayHomeAsUpEnabled(true);
     }
 
+    private void startFields() {
+        username_field = (EditText) mView.findViewById(R.id.username_field);
+        bairro_field = (EditText) mView.findViewById(R.id.bairro_field);
+        street_field = (EditText) mView.findViewById(R.id.street_field);
+        phone1_field = (EditText) mView.findViewById(R.id.phone1_field);
+        phone2_field = (EditText) mView.findViewById(R.id.phone2_field);
+        email_field = (EditText) mView.findViewById(R.id.email_field);
+    }
+
+    private void persistInformations() {
+        //TODO: salva as informações no banco de dados
+    }
 }

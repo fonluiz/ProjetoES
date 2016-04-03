@@ -11,14 +11,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.projetoes.projetoes.Fragments.EditProfileFragment;
 import com.example.projetoes.projetoes.Fragments.FeedFragment;
-import com.example.projetoes.projetoes.Fragments.FoundItemFeed;
-import com.example.projetoes.projetoes.Fragments.LostItemFeed;
 import com.example.projetoes.projetoes.Fragments.ReportObjectFragment;
 import com.example.projetoes.projetoes.Fragments.ProfileFragment;
 
@@ -34,6 +32,9 @@ public class LostFound extends AppCompatActivity
     private ProfileFragment profileFragment;
     private EditProfileFragment editProfileFragment;
 
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mDrawerToggle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -48,11 +49,11 @@ public class LostFound extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -63,9 +64,10 @@ public class LostFound extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        setDrawerState(true);
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
@@ -170,4 +172,27 @@ public class LostFound extends AppCompatActivity
                 .addToBackStack(EditProfileFragment.TAG).commit();
     }
 
+    /**
+     * Quando entrar na tela de editar perfil, esse método desabilita o menu.
+     * @param isEnabled
+     */
+    public void setDrawerState(boolean isEnabled) {
+
+        if ( isEnabled) {
+            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+            mDrawerToggle.setDrawerIndicatorEnabled(true);
+            mDrawerToggle.syncState();
+
+        } else {
+            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            mDrawerToggle.setDrawerIndicatorEnabled(false);
+            mDrawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onBackPressed();
+                }
+            });
+            mDrawerToggle.syncState();
+        }
+    }
 }

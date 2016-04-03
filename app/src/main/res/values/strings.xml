@@ -19,6 +19,7 @@
     <!--títulos dos fragments-->
 
     <string name="editProfileTitle">Editar Perfil</string>
+    <string name="edit_profile_save_btn">Salvar</string>
 
     <string-array name="categories_array">
         <item>Animal</item>
