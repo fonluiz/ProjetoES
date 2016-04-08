@@ -241,7 +241,6 @@ public class LostFound extends AppCompatActivity
         }
         return listAux;
     }
-<<<<<<< HEAD
 
     @Override
     public void onCardClicked(Status status) {
@@ -256,7 +255,8 @@ public class LostFound extends AppCompatActivity
             transaction.replace(R.id.container_layout, expFoundItem, CardExpanded.TAG)
                     .addToBackStack(CardExpanded.TAG).commit();
         }
-=======
+    }
+
     public List<Card> getCardLostList(int quantidade){
         String[] titulos = {"cachorro de raça", "Chaveiro contendo 7 chaves", "Caneta Stylus especial", "Documento de fulando de tal", "Bolsa de couro", "Celular modelo Glaxy"};
         String[] bairros = {"Centro", "Catole","UFCG","Prata", "Bodocongo", "Prata"};
@@ -269,6 +269,5 @@ public class LostFound extends AppCompatActivity
             listAux.add(c);
         }
         return listAux;
->>>>>>> 54e4ddbdd02a6d64de422dc9538bd82acc9cf4be
     }
 }
