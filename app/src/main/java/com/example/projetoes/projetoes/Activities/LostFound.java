@@ -229,7 +229,7 @@ public class LostFound extends AppCompatActivity
         }
     }
 
-    public List<Card> getCardList(int quantidade){
+    public List<Card> getCardFoundList(int quantidade){
         String[] titulos = {"Celular modelo Glaxy", "Caneta Stylus especial", "Chaveiro contendo 7 chaves", "Bolsa de couro", "Documento de fulando de tal", "cachorro de raça"};
         String[] bairros = {"Centro", "Catole","UFCG","Prata", "Bodocongo", "Prata"};
         int[] fotos = {R.drawable.celular, R.drawable.caneta,R.drawable.chaves,R.drawable.bolsa,R.drawable.documento,R.drawable.cachorro};
@@ -241,6 +241,7 @@ public class LostFound extends AppCompatActivity
         }
         return listAux;
     }
+<<<<<<< HEAD
 
     @Override
     public void onCardClicked(Status status) {
@@ -255,5 +256,19 @@ public class LostFound extends AppCompatActivity
             transaction.replace(R.id.container_layout, expFoundItem, CardExpanded.TAG)
                     .addToBackStack(CardExpanded.TAG).commit();
         }
+=======
+    public List<Card> getCardLostList(int quantidade){
+        String[] titulos = {"cachorro de raça", "Chaveiro contendo 7 chaves", "Caneta Stylus especial", "Documento de fulando de tal", "Bolsa de couro", "Celular modelo Glaxy"};
+        String[] bairros = {"Centro", "Catole","UFCG","Prata", "Bodocongo", "Prata"};
+        int[] fotos = {R.drawable.cachorro,R.drawable.chaves ,R.drawable.caneta,R.drawable.documento,R.drawable.bolsa,R.drawable.celular};
+        String[] recompensas = {"20R$", "40R$","10R$","30R$", "50R$", "15R$"};
+        List<Card> listAux = new ArrayList<>();
+
+        for (int i = 0; i<quantidade; i++){
+            Card c = new Card(titulos[i % titulos.length],bairros[i % bairros.length], fotos[i%fotos.length], recompensas[i%recompensas.length]);
+            listAux.add(c);
+        }
+        return listAux;
+>>>>>>> 54e4ddbdd02a6d64de422dc9538bd82acc9cf4be
     }
 }
