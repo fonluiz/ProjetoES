@@ -12,8 +12,10 @@ import android.widget.Toast;
 
 import com.example.projetoes.projetoes.Activities.LostFound;
 import com.example.projetoes.projetoes.Adapters.FoundFeedCardAdapter;
+import com.example.projetoes.projetoes.Interfaces.OnCardClickedListener;
 import com.example.projetoes.projetoes.Interfaces.RecycleViewOnClickListener;
 import com.example.projetoes.projetoes.Models.Card;
+import com.example.projetoes.projetoes.Models.Status;
 import com.example.projetoes.projetoes.R;
 
 import java.util.List;
@@ -21,13 +23,16 @@ import java.util.List;
 /**
  * Um Fragment para mostrar uma lista com todos os objetos encontrados.
  */
-public class FoundItemFeed extends Fragment implements RecycleViewOnClickListener{
+public class FoundItemFeed extends Fragment implements RecycleViewOnClickListener, OnCardClickedListener{
 
 
     public final static String TAG = "FOUND_ITEM_FEED";
+    public final static Status status = Status.ENCONTRADO;
     private RecyclerView mRecycleView;
     private List<Card> mList;
     private View mview;
+
+    private OnCardClickedListener expandCardCallBack;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -98,17 +103,31 @@ public class FoundItemFeed extends Fragment implements RecycleViewOnClickListene
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            expandCardCallBack = (OnCardClickedListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement onCardClickedListener");
+        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
+        expandCardCallBack = null;
     }
 
 
     @Override
     public void onClickListener(View view, int position) {
-        Toast.makeText(getActivity(), "Position "+position, Toast.LENGTH_SHORT).show();
+        onCardClicked(status);
     }
 
+    @Override
+    public void onCardClicked(Status status) {
+        expandCardCallBack.onCardClicked(status);
+    }
 }

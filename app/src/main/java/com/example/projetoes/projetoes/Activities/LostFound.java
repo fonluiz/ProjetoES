@@ -15,12 +15,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.projetoes.projetoes.Fragments.CardExpanded;
 import com.example.projetoes.projetoes.Fragments.EditProfileFragment;
 import com.example.projetoes.projetoes.Fragments.FeedFragment;
 import com.example.projetoes.projetoes.Fragments.FoundItemFeed;
 import com.example.projetoes.projetoes.Fragments.ReportObjectFragment;
 import com.example.projetoes.projetoes.Fragments.ProfileFragment;
 
+import com.example.projetoes.projetoes.Interfaces.OnCardClickedListener;
 import com.example.projetoes.projetoes.Models.Card;
 import com.example.projetoes.projetoes.Models.Status;
 import com.example.projetoes.projetoes.R;
@@ -29,13 +31,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LostFound extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ProfileFragment.OnEditProfileFabClickedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ProfileFragment.OnEditProfileFabClickedListener, OnCardClickedListener {
 
     private FeedFragment feedFragment;
     private ReportObjectFragment lostThingFragment;
     private ReportObjectFragment foundThingFragment;
     private ProfileFragment profileFragment;
     private EditProfileFragment editProfileFragment;
+    private CardExpanded expFoundItem;
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -49,6 +52,7 @@ public class LostFound extends AppCompatActivity
         foundThingFragment = ReportObjectFragment.newInstance(Status.ENCONTRADO);
         profileFragment = new ProfileFragment();
         editProfileFragment = new EditProfileFragment();
+        expFoundItem = new CardExpanded();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_menu);
@@ -218,5 +222,14 @@ public class LostFound extends AppCompatActivity
             listAux.add(c);
         }
         return listAux;
+    }
+
+    @Override
+    public void onCardClicked(Status status) {
+        FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction();
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        transaction.setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        transaction.replace(R.id.container_layout, expFoundItem, CardExpanded.TAG)
+                .addToBackStack(CardExpanded.TAG).commit();
     }
 }
