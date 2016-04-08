@@ -21,7 +21,7 @@
 
                 <ImageView
                     android:id="@+id/image_field"
-                    style="@style/imageHeader"/>
+                    style="@style/imageHeader" />
 
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/image_selector_fab"
@@ -92,7 +92,8 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Tipo" />
+                            android:hint="Tipo"
+                            android:inputType="textCapWords" />
                     </android.support.design.widget.TextInputLayout>
 
                 </LinearLayout>
@@ -121,6 +122,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Descrição"
+                            android:inputType="textCapSentences"
                             android:maxLength="30" />
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
@@ -147,7 +149,8 @@
                             android:id="@+id/lost_location_field"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Local" />
+                            android:hint="Local"
+                            android:inputType="textCapWords" />
                     </android.support.design.widget.TextInputLayout>
 
                 </LinearLayout>
@@ -209,6 +212,20 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/publish_btn"
+                        style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_inside"
+                        android:background="@android:drawable/btn_default"
+                        android:text="PUBLICAR" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

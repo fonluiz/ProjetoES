@@ -18,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -30,8 +31,8 @@ import com.example.projetoes.projetoes.R;
 import java.util.GregorianCalendar;
 
 /**
-* Fragment da tela para divulgar um objeto perdido ou encontrado.
-*/
+ * Fragment da tela para divulgar um objeto perdido ou encontrado.
+ */
 public class ReportObjectFragment extends Fragment {
 
     public final static String TAG = "LOST_THING_FRAGMENT";
@@ -48,6 +49,7 @@ public class ReportObjectFragment extends Fragment {
     private ImageView photoSelector;
     private EditText rewardField;
     private FloatingActionButton imageFAB;
+    private Button publishButton;
 
     private String category;
     private String location;
@@ -62,6 +64,7 @@ public class ReportObjectFragment extends Fragment {
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
+     *
      * @return A new instance of fragment LostThingFragment.
      */
     public static ReportObjectFragment newInstance(Status status) {
@@ -94,7 +97,8 @@ public class ReportObjectFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);;
+        super.onCreate(savedInstanceState);
+        ;
         this.setStatus();
     }
 
@@ -111,6 +115,7 @@ public class ReportObjectFragment extends Fragment {
         startDescriptionField();
         startPhotoSelector();
         startRewardField();
+        startPublishButton();
 
         return mView;
     }
@@ -143,9 +148,10 @@ public class ReportObjectFragment extends Fragment {
             ((LostFound) this.getActivity()).getSupportActionBar().setTitle("Achei Algo");
         }
     }
+
     /**
      * Insere as categorias no spinner de categorias
-    */
+     */
     private void startCategorySpinner() {
         categorySpinner = (Spinner) mView.findViewById(R.id.category_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -246,10 +252,21 @@ public class ReportObjectFragment extends Fragment {
         }
     }
 
+    private void startPublishButton() {
+        publishButton = (Button) mView.findViewById(R.id.publish_btn);
+        publishButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: FAZ ALGUMA COISA QUANDO CLICAR NO BOTÃO
+            }
+        });
+    }
+
     /**
      * Define os dados a serem inseridos na base de dados
      */
     private void onFinishedFillingOut() {
+
         category = categorySpinner.getSelectedItem().toString();
         location = locationField.getText().toString();
         description = descriptionField.getText().toString();
