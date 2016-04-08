@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 
 
 /**
- * Classe que serve como Adapter da ViewPager do FeedFragment.
- * Este Adapter é o reponsável por fazera troca entre lista de objetos encontrados
+ * Classe que serve como CardAdapter da ViewPager do FeedFragment.
+ * Este CardAdapter é o reponsável por fazera troca entre lista de objetos encontrados
  * e lista de objetos perdidos no feed inicial.
  */
 public class FeedSwipeAdapter extends FragmentPagerAdapter {

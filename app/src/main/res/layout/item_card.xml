@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/textAndIconsColor"
+    android:paddingTop="5dp"
+    >
+
+    <ImageView
+        android:layout_alignParentLeft="true"
+        android:id="@+id/iv_card"
+        android:layout_width="150dp"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="true"
+        android:layout_height="100dp"
+        android:paddingRight="15dp"
+        android:paddingLeft="10dp"
+        android:src="@null"/>
+
+
+    <TextView
+        android:textColor="@color/primaryTextColor"
+        android:layout_toRightOf="@+id/iv_card"
+        android:id="@+id/tv_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:paddingRight="16dp"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:textColor="@color/primaryColor"
+        android:layout_toRightOf="@+id/iv_card"
+        android:layout_above="@+id/vw_divider"
+        android:id="@+id/tv_bairro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:paddingRight="16dp"
+        android:textSize="12sp"/>
+    <View
+        android:id="@+id/vw_divider"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:background="@color/primaryColor"
+        android:layout_below="@+id/iv_card"
+        android:layout_height="1dp" />
+</RelativeLayout>

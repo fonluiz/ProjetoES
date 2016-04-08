@@ -17,11 +17,16 @@ import android.view.View;
 
 import com.example.projetoes.projetoes.Fragments.EditProfileFragment;
 import com.example.projetoes.projetoes.Fragments.FeedFragment;
+import com.example.projetoes.projetoes.Fragments.FoundItemFeed;
 import com.example.projetoes.projetoes.Fragments.ReportObjectFragment;
 import com.example.projetoes.projetoes.Fragments.ProfileFragment;
 
+import com.example.projetoes.projetoes.Models.Card;
 import com.example.projetoes.projetoes.Models.Status;
 import com.example.projetoes.projetoes.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LostFound extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ProfileFragment.OnEditProfileFabClickedListener {
@@ -37,6 +42,7 @@ public class LostFound extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
 
         feedFragment = new FeedFragment();
         lostThingFragment = ReportObjectFragment.newInstance(Status.PERDIDO);
@@ -60,7 +66,12 @@ public class LostFound extends AppCompatActivity
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container_layout,
                 feedFragment, FeedFragment.TAG).addToBackStack(FeedFragment.TAG).commit();
+
+
+
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -194,5 +205,18 @@ public class LostFound extends AppCompatActivity
             });
             mDrawerToggle.syncState();
         }
+    }
+
+    public List<Card> getCardList(int quantidade){
+        String[] titulos = {"Celular modelo Glaxy", "Caneta Stylus especial", "Chaveiro contendo 7 chaves", "Bolsa de couro", "Documento de fulando de tal", "Cachorro de raça"};
+        String[] bairros = {"Centro", "Catole","UFCG","Prata", "Bodocongo", "Prata"};
+        int[] fotos = {R.drawable.celular, R.drawable.caneta,R.drawable.chaves,R.drawable.bolsa,R.drawable.documento,R.drawable.cachorro};
+        List<Card> listAux = new ArrayList<>();
+
+        for (int i = 0; i<quantidade; i++){
+            Card c = new Card(titulos[i % titulos.length],bairros[i % bairros.length], fotos[i%fotos.length]);
+            listAux.add(c);
+        }
+        return listAux;
     }
 }
