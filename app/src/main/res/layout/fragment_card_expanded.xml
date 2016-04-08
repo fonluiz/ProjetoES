@@ -13,16 +13,6 @@
            android:layout_height="match_parent"
            android:orientation="vertical">
 
-           <TextView
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:gravity="center"
-               android:text="Item achado/perdido"
-               android:textSize="@dimen/title"
-               android:padding="4dp"
-               android:elevation="5dp"
-               android:background="@color/lightPrimaryColor"/>
-
            <LinearLayout
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
@@ -33,7 +23,7 @@
                    style="@style/imageHeader" />
 
                <LinearLayout
-                   style="@style/profile_layouts">
+                   style="@style/card_layouts">
 
                    <TextView
                        android:id="@+id/title"
@@ -46,7 +36,7 @@
                <View style="@style/divider_style" />
 
                <LinearLayout
-                   style="@style/profile_layouts">
+                   style="@style/card_layouts">
 
 
                    <TextView
@@ -57,6 +47,8 @@
                    <TextView
                        android:id="@+id/category"
                        style="@style/profile_information"
+                       android:layout_width="match_parent"
+                       android:gravity="right"
                        android:text="categoria"/>
 
 
@@ -65,7 +57,7 @@
                <View style="@style/divider_style" />
 
                <LinearLayout
-                   style="@style/profile_layouts">
+                   style="@style/card_layouts">
 
 
                    <TextView
@@ -76,6 +68,8 @@
                    <TextView
                        android:id="@+id/location"
                        style="@style/profile_information"
+                       android:layout_width="match_parent"
+                       android:gravity="right"
                        android:text="local"/>
 
 
@@ -84,7 +78,7 @@
                <View style="@style/divider_style" />
 
                <LinearLayout
-                   style="@style/profile_layouts">
+                   style="@style/card_layouts">
 
 
                    <TextView
@@ -95,6 +89,8 @@
                    <TextView
                        android:id="@+id/date"
                        style="@style/profile_information"
+                       android:layout_width="match_parent"
+                       android:gravity="right"
                        android:text="data"/>
 
 
@@ -104,7 +100,7 @@
 
                <LinearLayout
                    android:id="@+id/reward_field_container"
-                   style="@style/profile_layouts">
+                   style="@style/card_layouts">
 
 
                    <TextView
@@ -115,6 +111,8 @@
                    <TextView
                        android:id="@+id/reward_field"
                        style="@style/profile_information"
+                       android:layout_width="match_parent"
+                       android:gravity="right"
                        android:text="recompensa"/>
 
                </LinearLayout>
@@ -122,7 +120,8 @@
                <View style="@style/divider_style" />
 
                <LinearLayout
-                   style="@style/profile_layouts">
+                   style="@style/card_layouts"
+                   android:orientation="vertical">
 
 
                    <TextView
@@ -133,6 +132,9 @@
                    <TextView
                        android:id="@+id/description_field"
                        style="@style/profile_information"
+                       android:layout_width="match_parent"
+                       android:paddingRight="@dimen/default_margin"
+                       android:paddingLeft="@dimen/default_margin"
                        android:text="descrição"/>
 
                </LinearLayout>
@@ -146,7 +148,7 @@
                android:gravity="center">
 
                <Button
-                   android:id="@+id/publish_btn"
+                   android:id="@+id/report_btn"
                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"

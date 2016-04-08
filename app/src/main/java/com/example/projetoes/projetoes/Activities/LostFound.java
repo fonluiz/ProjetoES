@@ -39,6 +39,7 @@ public class LostFound extends AppCompatActivity
     private ProfileFragment profileFragment;
     private EditProfileFragment editProfileFragment;
     private CardExpanded expFoundItem;
+    private CardExpanded expLostItem;
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -52,7 +53,9 @@ public class LostFound extends AppCompatActivity
         foundThingFragment = ReportObjectFragment.newInstance(Status.ENCONTRADO);
         profileFragment = new ProfileFragment();
         editProfileFragment = new EditProfileFragment();
-        expFoundItem = new CardExpanded();
+        expFoundItem = new CardExpanded().newInstance(Status.ENCONTRADO);
+        expLostItem = new CardExpanded().newInstance(Status.PERDIDO);
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_menu);
@@ -229,7 +232,12 @@ public class LostFound extends AppCompatActivity
         FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         transaction.setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        transaction.replace(R.id.container_layout, expFoundItem, CardExpanded.TAG)
-                .addToBackStack(CardExpanded.TAG).commit();
+        if (status.equals(Status.PERDIDO)) {
+            transaction.replace(R.id.container_layout, expLostItem, CardExpanded.TAG)
+                    .addToBackStack(CardExpanded.TAG).commit();
+        } else {
+            transaction.replace(R.id.container_layout, expFoundItem, CardExpanded.TAG)
+                    .addToBackStack(CardExpanded.TAG).commit();
+        }
     }
 }

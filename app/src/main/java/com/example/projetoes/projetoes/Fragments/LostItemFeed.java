@@ -13,8 +13,10 @@ import android.view.ViewGroup;
 import com.example.projetoes.projetoes.Activities.LostFound;
 import com.example.projetoes.projetoes.Adapters.FoundFeedCardAdapter;
 import com.example.projetoes.projetoes.Adapters.LostFeedCardAdapter;
+import com.example.projetoes.projetoes.Interfaces.OnCardClickedListener;
 import com.example.projetoes.projetoes.Interfaces.RecycleViewOnClickListener;
 import com.example.projetoes.projetoes.Models.Card;
+import com.example.projetoes.projetoes.Models.Status;
 import com.example.projetoes.projetoes.R;
 
 import java.util.List;
@@ -22,13 +24,16 @@ import java.util.List;
 /**
  * Um Fragment para mostrar uma lista com todos os objetos perdidos.
  */
-public class LostItemFeed extends Fragment implements RecycleViewOnClickListener {
+public class LostItemFeed extends Fragment implements RecycleViewOnClickListener, OnCardClickedListener {
 
     public final static String TAG = "LOST_ITEM_FEED";
+    public final static Status status = Status.PERDIDO;
+
     private RecyclerView mRecycleView;
     private List<Card> mList;
     private View mview;
 
+    private OnCardClickedListener expandCardCallBack;
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -62,6 +67,15 @@ public class LostItemFeed extends Fragment implements RecycleViewOnClickListener
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            expandCardCallBack = (OnCardClickedListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement onCardClickedListener");
+        }
     }
 
     @Override
@@ -106,6 +120,11 @@ public class LostItemFeed extends Fragment implements RecycleViewOnClickListener
 
     @Override
     public void onClickListener(View view, int position) {
+        onCardClicked(status);
+    }
 
+    @Override
+    public void onCardClicked(Status status) {
+        expandCardCallBack.onCardClicked(status);
     }
 }

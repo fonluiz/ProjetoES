@@ -87,7 +87,7 @@ public class ReportObjectFragment extends Fragment {
      * Este método define o status do fragment (encontrado ou perdido).
      * Algumas funcionalidades mudam no fragmente de acordo com o seu status.
      */
-    public void setStatus() {
+    private void setStatus() {
         if (this.getArguments().get("status") == Status.ENCONTRADO.name()) {
             mStatus = Status.ENCONTRADO;
         } else {
