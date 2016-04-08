@@ -72,7 +72,7 @@ public class LostFound extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container_layout,
-                feedFragment, FeedFragment.TAG).addToBackStack(FeedFragment.TAG).commit();
+                feedFragment, FeedFragment.TAG).commit();
 
 
 
@@ -120,11 +120,13 @@ public class LostFound extends AppCompatActivity
         int id = item.getItemId();
         Fragment nextFrag = null;
         String nextFragTag = null;
-        String prevFragTag;
+        String prevFragTag = null;
 
-        FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(
-                getSupportFragmentManager().getBackStackEntryCount() - 1);
-        prevFragTag = backEntry.getName();
+        if (getSupportFragmentManager().getBackStackEntryCount() != 0) {
+            FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(
+                    getSupportFragmentManager().getBackStackEntryCount() - 1);
+            prevFragTag = backEntry.getName();
+        }
 
         if (id == R.id.nav_feed) {
 
@@ -150,6 +152,8 @@ public class LostFound extends AppCompatActivity
 
         if (nextFrag != null) {
 
+           removeLastFragFromBackStack();
+
             if (nextFragTag.equals(prevFragTag)) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.container_layout, nextFrag, nextFragTag).commit();
             } else {
@@ -164,6 +168,16 @@ public class LostFound extends AppCompatActivity
     }
 
 
+    private void removeLastFragFromBackStack() {
+        if (getSupportFragmentManager().getBackStackEntryCount() != 0) {
+            FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(
+                    getSupportFragmentManager().getBackStackEntryCount() - 1);
+            String prevFragTag = backEntry.getName();
+            Fragment fragToRemove = getSupportFragmentManager().findFragmentByTag(prevFragTag);
+            getSupportFragmentManager().beginTransaction().remove(fragToRemove).commit();
+            getSupportFragmentManager().popBackStack();
+        }
+    }
     /**
      * Quando recebe o resultado de uma intenção, envia este resultado para o fragment
      * onde a intenção foi lançada.
@@ -185,7 +199,8 @@ public class LostFound extends AppCompatActivity
     public void onFabClicked() {
         FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        transaction.setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            transaction.setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        removeLastFragFromBackStack();
         transaction.replace(R.id.container_layout, editProfileFragment, EditProfileFragment.TAG)
                 .addToBackStack(EditProfileFragment.TAG).commit();
     }
@@ -232,6 +247,7 @@ public class LostFound extends AppCompatActivity
         FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         transaction.setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        removeLastFragFromBackStack();
         if (status.equals(Status.PERDIDO)) {
             transaction.replace(R.id.container_layout, expLostItem, CardExpanded.TAG)
                     .addToBackStack(CardExpanded.TAG).commit();

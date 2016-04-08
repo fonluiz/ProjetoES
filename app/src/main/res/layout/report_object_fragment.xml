@@ -219,11 +219,14 @@
 
                     <Button
                         android:id="@+id/publish_btn"
-                        style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/margin_inside"
-                        android:background="@android:drawable/btn_default"
+                        android:textColor="@color/textAndIconsColor"
+                        android:textStyle="bold"
+                        android:paddingRight="@dimen/default_margin"
+                        android:paddingLeft="@dimen/default_margin"
+                        android:background="@drawable/button_rounded_shape"
                         android:text="PUBLICAR" />
                 </LinearLayout>
             </LinearLayout>

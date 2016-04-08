@@ -4,166 +4,167 @@
     android:layout_height="match_parent"
     tools:context="com.example.projetoes.projetoes.Fragments.CardExpanded">
 
-   <ScrollView
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-               <ImageView
-                   android:id="@+id/image_profile"
-                   style="@style/imageHeader" />
+                <ImageView
+                    android:id="@+id/image_profile"
+                    style="@style/imageHeader" />
 
-               <LinearLayout
-                   style="@style/card_layouts">
+                <LinearLayout style="@style/card_layouts">
 
-                   <TextView
-                       android:id="@+id/title"
-                       style="@style/profile_information"
-                       android:text="Título" />
-
-
-               </LinearLayout>
-
-               <View style="@style/divider_style" />
-
-               <LinearLayout
-                   style="@style/card_layouts">
+                    <TextView
+                        android:id="@+id/title"
+                        style="@style/profile_information"
+                        android:text="Título" />
 
 
-                   <TextView
-                       style="@style/profile_info_type"
-                       android:text="Categoria" />
+                </LinearLayout>
+
+                <View style="@style/divider_style" />
+
+                <LinearLayout style="@style/card_layouts">
 
 
-                   <TextView
-                       android:id="@+id/category"
-                       style="@style/profile_information"
-                       android:layout_width="match_parent"
-                       android:gravity="right"
-                       android:text="categoria"/>
+                    <TextView
+                        style="@style/profile_info_type"
+                        android:text="Categoria" />
 
 
-               </LinearLayout>
-
-               <View style="@style/divider_style" />
-
-               <LinearLayout
-                   style="@style/card_layouts">
-
-
-                   <TextView
-                       style="@style/profile_info_type"
-                       android:text="Local" />
+                    <TextView
+                        android:id="@+id/category"
+                        style="@style/profile_information"
+                        android:layout_width="match_parent"
+                        android:gravity="right"
+                        android:text="categoria" />
 
 
-                   <TextView
-                       android:id="@+id/location"
-                       style="@style/profile_information"
-                       android:layout_width="match_parent"
-                       android:gravity="right"
-                       android:text="local"/>
+                </LinearLayout>
+
+                <View style="@style/divider_style" />
+
+                <LinearLayout style="@style/card_layouts">
 
 
-               </LinearLayout>
-
-               <View style="@style/divider_style" />
-
-               <LinearLayout
-                   style="@style/card_layouts">
+                    <TextView
+                        style="@style/profile_info_type"
+                        android:text="Local" />
 
 
-                   <TextView
-                       style="@style/profile_info_type"
-                       android:text="Data" />
+                    <TextView
+                        android:id="@+id/location"
+                        style="@style/profile_information"
+                        android:layout_width="match_parent"
+                        android:gravity="right"
+                        android:text="local" />
 
 
-                   <TextView
-                       android:id="@+id/date"
-                       style="@style/profile_information"
-                       android:layout_width="match_parent"
-                       android:gravity="right"
-                       android:text="data"/>
+                </LinearLayout>
+
+                <View style="@style/divider_style" />
+
+                <LinearLayout style="@style/card_layouts">
 
 
-               </LinearLayout>
-
-               <View style="@style/divider_style" />
-
-               <LinearLayout
-                   android:id="@+id/reward_field_container"
-                   style="@style/card_layouts">
+                    <TextView
+                        style="@style/profile_info_type"
+                        android:text="Data" />
 
 
-                   <TextView
-                       style="@style/profile_info_type"
-                       android:text="Recompensa" />
+                    <TextView
+                        android:id="@+id/date"
+                        style="@style/profile_information"
+                        android:layout_width="match_parent"
+                        android:gravity="right"
+                        android:text="data" />
 
 
-                   <TextView
-                       android:id="@+id/reward_field"
-                       style="@style/profile_information"
-                       android:layout_width="match_parent"
-                       android:gravity="right"
-                       android:text="recompensa"/>
+                </LinearLayout>
 
-               </LinearLayout>
+                <View style="@style/divider_style" />
 
-               <View style="@style/divider_style" />
+                <LinearLayout
+                    android:id="@+id/reward_field_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-               <LinearLayout
-                   style="@style/card_layouts"
-                   android:orientation="vertical">
+                    <LinearLayout style="@style/card_layouts">
 
 
-                   <TextView
-                       style="@style/profile_info_type"
-                       android:text="Descrição" />
+                        <TextView
+                            style="@style/profile_info_type"
+                            android:text="Recompensa" />
 
 
-                   <TextView
-                       android:id="@+id/description_field"
-                       style="@style/profile_information"
-                       android:layout_width="match_parent"
-                       android:paddingRight="@dimen/default_margin"
-                       android:paddingLeft="@dimen/default_margin"
-                       android:text="descrição"/>
+                        <TextView
+                            android:id="@+id/reward_field"
+                            style="@style/profile_information"
+                            android:layout_width="match_parent"
+                            android:gravity="right"
+                            android:text="recompensa" />
 
-               </LinearLayout>
+                    </LinearLayout>
 
-               <View style="@style/divider_style" />
-           </LinearLayout>
+                    <View style="@style/divider_style" />
+                </LinearLayout>
 
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:gravity="center">
-
-               <Button
-                   android:id="@+id/report_btn"
-                   style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_margin="@dimen/default_margin"
-                   android:textColor="@color/textAndIconsColor"
-                   android:textStyle="bold"
-                   android:background="@drawable/button_rounded_shape"
-                   android:paddingLeft="@dimen/default_margin"
-                   android:paddingRight="@dimen/default_margin"
-                   android:text="Achei/perdi o objeto" />//
-           </LinearLayout>
-
-       </LinearLayout>
+                <LinearLayout
+                    style="@style/card_layouts"
+                    android:orientation="vertical">
 
 
-   </ScrollView>
+                    <TextView
+                        style="@style/profile_info_type"
+                        android:text="Descrição" />
+
+
+                    <TextView
+                        android:id="@+id/description_field"
+                        style="@style/profile_information"
+                        android:layout_width="match_parent"
+                        android:paddingLeft="@dimen/default_margin"
+                        android:paddingRight="@dimen/default_margin"
+                        android:text="descrição" />
+
+                </LinearLayout>
+
+                <View style="@style/divider_style" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/report_btn"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/default_margin"
+                    android:background="@drawable/button_rounded_shape"
+                    android:paddingLeft="@dimen/default_margin"
+                    android:paddingRight="@dimen/default_margin"
+                    android:text="Achei/perdi o objeto"
+                    android:textColor="@color/textAndIconsColor"
+                    android:textStyle="bold" />//
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
 
 </FrameLayout>

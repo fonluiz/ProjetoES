@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.example.projetoes.projetoes.Activities.LostFound;
 import com.example.projetoes.projetoes.Models.Status;
@@ -22,6 +24,7 @@ public class CardExpanded extends Fragment {
     private Status mStatus;
     private View mView;
     private Button reportBtn;
+    private LinearLayout rewardContainer;
 
     public CardExpanded() {
         // Required empty public constructor
@@ -53,6 +56,7 @@ public class CardExpanded extends Fragment {
 
         setActionbarTitle();
         startReportButton();
+        startRewardField();
 
         return mView;
     }
@@ -84,6 +88,12 @@ public class CardExpanded extends Fragment {
             reportBtn.setText("Perdi este objeto");
         else
             reportBtn.setText("Achei seu objeto");
+    }
 
+    private void startRewardField() {
+        rewardContainer = (LinearLayout) mView.findViewById(R.id.reward_field_container);
+        if (this.mStatus.equals(Status.ENCONTRADO)) {
+            rewardContainer.setVisibility(View.GONE);
+        }
     }
 }
