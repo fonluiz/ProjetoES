@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by samirsmedeiros on 05/04/16.
  */
-public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> {
+public class LostFeedCardAdapter extends RecyclerView.Adapter<LostFeedCardAdapter.MyViewHolder> {
 
     private List<Card> mList;
     private LayoutInflater mLayoutInflater;
@@ -26,7 +26,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
 
 
 
-    public CardAdapter(Context c, List<Card> list){
+    public LostFeedCardAdapter(Context c, List<Card> list){
         mList = list;
         mLayoutInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }

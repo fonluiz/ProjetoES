@@ -208,7 +208,7 @@ public class LostFound extends AppCompatActivity
     }
 
     public List<Card> getCardList(int quantidade){
-        String[] titulos = {"Celular modelo Glaxy", "Caneta Stylus especial", "Chaveiro contendo 7 chaves", "Bolsa de couro", "Documento de fulando de tal", "Cachorro de raça"};
+        String[] titulos = {"Celular modelo Glaxy", "Caneta Stylus especial", "Chaveiro contendo 7 chaves", "Bolsa de couro", "Documento de fulando de tal", "cachorro de raça"};
         String[] bairros = {"Centro", "Catole","UFCG","Prata", "Bodocongo", "Prata"};
         int[] fotos = {R.drawable.celular, R.drawable.caneta,R.drawable.chaves,R.drawable.bolsa,R.drawable.documento,R.drawable.cachorro};
         List<Card> listAux = new ArrayList<>();

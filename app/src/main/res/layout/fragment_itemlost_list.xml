@@ -10,4 +10,14 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".Fragments.ItemFeed"
-    tools:listitem="@layout/fragment_itemlost" />
+    tools:listitem="@layout/fragment_itemlost">
+
+    <RelativeLayout
+        android:id="@+id/rl_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.RecyclerView>

@@ -10,6 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.projetoes.projetoes.Activities.LostFound;
+import com.example.projetoes.projetoes.Adapters.FoundFeedCardAdapter;
+import com.example.projetoes.projetoes.Adapters.LostFeedCardAdapter;
+import com.example.projetoes.projetoes.Interfaces.RecycleViewOnClickListener;
+import com.example.projetoes.projetoes.Models.Card;
 import com.example.projetoes.projetoes.R;
 
 import java.util.List;
@@ -17,9 +22,12 @@ import java.util.List;
 /**
  * Um Fragment para mostrar uma lista com todos os objetos perdidos.
  */
-public class LostItemFeed extends Fragment {
+public class LostItemFeed extends Fragment implements RecycleViewOnClickListener {
 
     public final static String TAG = "LOST_ITEM_FEED";
+    private RecyclerView mRecycleView;
+    private List<Card> mList;
+    private View mview;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -43,15 +51,11 @@ public class LostItemFeed extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_lostitem, container, false);
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+        mview = inflater.inflate(R.layout.fragment_lostitem, container, false);
+        startAdapter();
 
-        }
-        return view;
+        return mview;
     }
 
 
@@ -65,4 +69,43 @@ public class LostItemFeed extends Fragment {
         super.onDetach();
     }
 
+    private void startAdapter() {
+        mRecycleView = (RecyclerView) mview.findViewById(R.id.card_list);
+        mRecycleView.setHasFixedSize(true);
+        mRecycleView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                LinearLayoutManager llm = (LinearLayoutManager) mRecycleView.getLayoutManager();
+                LostFeedCardAdapter adapter = (LostFeedCardAdapter) mRecycleView.getAdapter();
+
+                if (mList.size() == llm.findLastCompletelyVisibleItemPosition() + 1) {
+                    List<Card> listAux = ((LostFound) getActivity()).getCardList(6);
+
+                    for (int i = 0; i < listAux.size(); i++) {
+                        adapter.addListItem(listAux.get(i), mList.size());
+                    }
+                }
+            }
+        });
+
+        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecycleView.setLayoutManager(llm);
+
+        mList = ((LostFound) getActivity()).getCardList(6);
+        LostFeedCardAdapter adapter = new LostFeedCardAdapter(getActivity(),mList);
+        adapter.setRecycleViewOnClickListener(this);
+        mRecycleView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onClickListener(View view, int position) {
+
+    }
 }
