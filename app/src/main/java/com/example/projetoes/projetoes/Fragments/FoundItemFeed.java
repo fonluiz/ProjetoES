@@ -76,7 +76,7 @@ public class FoundItemFeed extends Fragment implements RecycleViewOnClickListene
                 FoundFeedCardAdapter adapter = (FoundFeedCardAdapter) mRecycleView.getAdapter();
 
                 if (mList.size() == llm.findLastCompletelyVisibleItemPosition() + 1) {
-                    List<Card> listAux = ((LostFound) getActivity()).getCardList(6);
+                    List<Card> listAux = ((LostFound) getActivity()).getCardFoundList(6);
 
                     for (int i = 0; i < listAux.size(); i++) {
                         adapter.addListItem(listAux.get(i), mList.size());
@@ -89,7 +89,7 @@ public class FoundItemFeed extends Fragment implements RecycleViewOnClickListene
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         mRecycleView.setLayoutManager(llm);
 
-        mList = ((LostFound) getActivity()).getCardList(6);
+        mList = ((LostFound) getActivity()).getCardFoundList(6);
         FoundFeedCardAdapter adapter = new FoundFeedCardAdapter(getActivity(),mList);
         adapter.setRecycleViewOnClickListener(this);
         mRecycleView.setAdapter(adapter);

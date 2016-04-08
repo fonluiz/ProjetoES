@@ -38,6 +38,19 @@
         android:layout_marginBottom="5dp"
         android:paddingRight="16dp"
         android:textSize="12sp"/>
+    <TextView
+        android:textColor="@color/primaryColor"
+        android:id="@+id/tv_recompensa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="16dp"
+        android:textSize="12sp"
+        android:layout_alignBottom="@+id/iv_card"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="28dp"
+        android:layout_marginEnd="28dp" />
+
     <View
         android:id="@+id/vw_divider"
         android:layout_marginTop="5dp"

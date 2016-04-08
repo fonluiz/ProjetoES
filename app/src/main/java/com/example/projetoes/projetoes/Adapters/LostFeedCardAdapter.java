@@ -46,6 +46,8 @@ public class LostFeedCardAdapter extends RecyclerView.Adapter<LostFeedCardAdapte
         holder.ivCard.setImageResource(mList.get(position).getFoto());
         holder.tvTitulo.setText(mList.get(position).getTitulo());
         holder.tvBairro.setText(mList.get(position).getBairro());
+        holder.tvRecompensa.setText(mList.get(position).getRecompensa());
+
     }
 
     public void setRecycleViewOnClickListener(RecycleViewOnClickListener r){
@@ -74,6 +76,7 @@ public class LostFeedCardAdapter extends RecyclerView.Adapter<LostFeedCardAdapte
         public ImageView ivCard;
         public TextView tvTitulo;
         public TextView tvBairro;
+        public TextView tvRecompensa;
 
         public MyViewHolder(View itenView){
             super(itenView);
@@ -81,6 +84,8 @@ public class LostFeedCardAdapter extends RecyclerView.Adapter<LostFeedCardAdapte
             ivCard = (ImageView) itenView.findViewById(R.id.iv_card);
             tvTitulo = (TextView) itenView.findViewById(R.id.tv_titulo);
             tvBairro = (TextView) itenView.findViewById(R.id.tv_bairro);
+            tvRecompensa = (TextView) itenView.findViewById(R.id.tv_recompensa);
+
 
             itenView.setOnClickListener(this);
         }

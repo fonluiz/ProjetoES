@@ -3,7 +3,6 @@ package com.example.projetoes.projetoes.Fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.projetoes.projetoes.Activities.LostFound;
-import com.example.projetoes.projetoes.Adapters.FoundFeedCardAdapter;
 import com.example.projetoes.projetoes.Adapters.LostFeedCardAdapter;
 import com.example.projetoes.projetoes.Interfaces.RecycleViewOnClickListener;
 import com.example.projetoes.projetoes.Models.Card;
@@ -70,7 +68,7 @@ public class LostItemFeed extends Fragment implements RecycleViewOnClickListener
     }
 
     private void startAdapter() {
-        mRecycleView = (RecyclerView) mview.findViewById(R.id.card_list);
+        mRecycleView = (RecyclerView) mview.findViewById(R.id.card_list_lost);
         mRecycleView.setHasFixedSize(true);
         mRecycleView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -85,7 +83,7 @@ public class LostItemFeed extends Fragment implements RecycleViewOnClickListener
                 LostFeedCardAdapter adapter = (LostFeedCardAdapter) mRecycleView.getAdapter();
 
                 if (mList.size() == llm.findLastCompletelyVisibleItemPosition() + 1) {
-                    List<Card> listAux = ((LostFound) getActivity()).getCardList(6);
+                    List<Card> listAux = ((LostFound) getActivity()).getCardLostList(6);
 
                     for (int i = 0; i < listAux.size(); i++) {
                         adapter.addListItem(listAux.get(i), mList.size());
@@ -98,7 +96,7 @@ public class LostItemFeed extends Fragment implements RecycleViewOnClickListener
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         mRecycleView.setLayoutManager(llm);
 
-        mList = ((LostFound) getActivity()).getCardList(6);
+        mList = ((LostFound) getActivity()).getCardLostList(6);
         LostFeedCardAdapter adapter = new LostFeedCardAdapter(getActivity(),mList);
         adapter.setRecycleViewOnClickListener(this);
         mRecycleView.setAdapter(adapter);
