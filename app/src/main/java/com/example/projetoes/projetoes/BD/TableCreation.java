@@ -1,8 +1,10 @@
 package com.example.projetoes.projetoes.BD;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Build;
 
 /**
  * Created by luiz on 09/04/16.
@@ -59,6 +61,15 @@ public class TableCreation extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-       // deve ser chamado quando for necessário adicionar tableas ou remover tabelas.
+        // This database is only a cache for online data, so its upgrade policy is
+        // to simply to discard the data and start over
+        onCreate(db);
+    }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    @Override
+    public void onConfigure(SQLiteDatabase db) {
+        super.onConfigure(db);
+        db.setForeignKeyConstraintsEnabled(true);
     }
 }
