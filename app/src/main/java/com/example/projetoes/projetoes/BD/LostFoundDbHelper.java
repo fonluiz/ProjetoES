@@ -9,7 +9,7 @@ import android.os.Build;
 /**
  * Created by luiz on 09/04/16.
  */
-public class TableCreation extends SQLiteOpenHelper {
+public class LostFoundDbHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "Lost_Found_DB";
     private static final int DB_VERSION = 1;
@@ -18,14 +18,14 @@ public class TableCreation extends SQLiteOpenHelper {
     private static Table itemTable = null;
 
 
-    public TableCreation(Context context) {
+    public LostFoundDbHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
     public Table getUserTable() {
         if (userTable == null) {
             userTable = new Table("Usuario")
-                    .addColumn(new Column("id_usuario", "LONG", true))
+                    .addColumn(new Column("id_usuario", "INT", true))
                     .addColumn(new Column("email", "STRING", true))
                     .addColumn(new Column("foto", "XML"))
                     .addColumn(new Column("nome", "STRING"))

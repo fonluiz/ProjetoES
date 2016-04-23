@@ -1,132 +1,100 @@
 package com.example.projetoes.projetoes.Models;
 
+import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
 
-/**
- * Created by Tuca on 07/03/2016.
- * Classe de persistência, objeto que pode ser perdido ou achado pelo usuário
- */
 public class Objeto {
+
     private UUID id;
-    private String titulo;
-    private String descricao;
+    private URI foto;
     private Categoria categoria;
-    private Date dataPublicacao;
-    private float recompensa;
-    private String lugar;
-    private String foto;
+    private String descricao;
+    private String local;
+    private Date data;
+    private double recompensa;
     private Status status;
 
-    /**
-     * getters e setters
-     */
-    public void setId(UUID id){
-        this.id = id;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
-    public void setDataPublicacao(Date dataPublicacao) {
-        this.dataPublicacao = dataPublicacao;
-    }
-
-    public void setRecompensa(float recompensa) {
-        this.recompensa = recompensa;
-    }
-
-    public void setLugar(String lugar) {
-        this.lugar = lugar;
-    }
-
-    public void setFoto(String foto) {
+    public Objeto(URI foto, Categoria categoria, String descricao, String local, Date data, double recompensa, Status status) {
         this.foto = foto;
+        this.categoria = categoria;
+        this.descricao = descricao;
+        this.local = local;
+        this.data = data;
+        this.recompensa = recompensa;
+        this.status = status;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
     public void setStatus(Status status) {
         this.status = status;
     }
 
-    public UUID getId(){
-        return id;
+    public int getId() {
+        return hashCode();
     }
-    public String getTitulo() {
 
-        return titulo;
+    public URI getFoto() {
+        return foto;
     }
-    public String getDescricao() {
-        return descricao;
+
+    public void setFoto(URI foto) {
+        this.foto = foto;
     }
 
     public Categoria getCategoria() {
         return categoria;
     }
 
-    public Date getDataPublicacao() {
-        return dataPublicacao;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
-    public float getRecompensa() {
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getLocal() {
+        return local;
+    }
+
+    public void setLocal(String local) {
+        this.local = local;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public double getRecompensa() {
         return recompensa;
     }
 
-    public String getLugar() {
-        return lugar;
-    }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-    /*
-    Construtor vazio do Objeto
-     */
-    public Objeto(){
-
-    }
-    /*
-    Construtor do objeto com os parâmetros que não podem ser nulos
-     */
-    public Objeto( String titulo, String descricao,
-            Categoria categoria,String lugar, String foto,Status status){
-        setTitulo(titulo);
-        setDescricao(descricao);
-        setCategoria(categoria);
-        setLugar(lugar);
-        setFoto(foto);
-        setStatus(status);
-        this.id = (UUID) generateId();
-        this.dataPublicacao = new Date();
-    }
-
-    /*
-    Função que gera um id qualquer
-     */
-    UUID generateId(){ //gerar o Id único
-        return UUID.randomUUID();
+    public void setRecompensa(double recompensa) {
+        this.recompensa = recompensa;
     }
 
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Objeto))
             return false;
-
-        Objeto outro = (Objeto) obj;
-
-        return this.getId() == outro.getId();
+        else
+            return this.getId() == ((Objeto) obj).getId();
     }
 
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 }

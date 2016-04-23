@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1088739217474",
+    "project_id": "perdidos-achados"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1088739217474:android:229658a81655dccf",
+        "android_client_info": {
+          "package_name": "com.example.projetoes.projetoes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1088739217474-59p9fmem9180hmiu8t3b3tffefgc89n7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "projetoes.example.com",
+            "certificate_hash": "CCEC298645207381B19616E086461B83AA01660A"
+          }
+        },
+        {
+          "client_id": "1088739217474-5plf450okeaneg76dp79gqmq71cqev94.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCk-jutV7enUxuK7fXIAu4GykjBta7ulNQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

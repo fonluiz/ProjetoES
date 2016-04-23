@@ -32,7 +32,7 @@ import com.example.projetoes.projetoes.R;
 public class EditProfileFragment extends Fragment {
 
     public final static String TAG = "EDIT_PROFILE_FRAGMENT";
-    static final int REQUEST_IMAGE_GET = 1;
+    public static final int REQUEST_IMAGE_GET = 1;
 
     private View mView;
     private ImageView photoSelector;

@@ -1,5 +1,6 @@
 package com.example.projetoes.projetoes.Activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,9 +12,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.projetoes.projetoes.Fragments.CardExpanded;
 import com.example.projetoes.projetoes.Fragments.EditProfileFragment;
@@ -26,13 +31,23 @@ import com.example.projetoes.projetoes.Interfaces.OnCardClickedListener;
 import com.example.projetoes.projetoes.Models.Card;
 import com.example.projetoes.projetoes.Models.Status;
 import com.example.projetoes.projetoes.R;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LostFound extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ProfileFragment.OnEditProfileFabClickedListener, OnCardClickedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ProfileFragment.OnEditProfileFabClickedListener,
+        OnCardClickedListener, GoogleApiClient.OnConnectionFailedListener {
 
+
+    private static final int RC_SIGN_IN = 2;
+    private static final String TAG = "LOST_FOUND_ACTIVITY";
     private FeedFragment feedFragment;
     private ReportObjectFragment lostThingFragment;
     private ReportObjectFragment foundThingFragment;
@@ -43,10 +58,24 @@ public class LostFound extends AppCompatActivity
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
+    private GoogleSignInOptions gso;
+    private GoogleApiClient mGoogleApiClient;
+
+    /* Should we automatically resolve ConnectionResults when possible? */
+    private boolean mShouldResolve = false;
+
+    /* Is there a ConnectionResult resolution in progress? */
+    private boolean mIsResolving = false;
+    private boolean mSignedIn = false;
+
+    private ProgressDialog mDialog;
+    private  NavigationView mNavigationView;
+    private ImageView userImage;
+    private TextView userName;
+    private TextView userEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
 
         feedFragment = new FeedFragment();
         lostThingFragment = ReportObjectFragment.newInstance(Status.PERDIDO);
@@ -56,6 +85,18 @@ public class LostFound extends AppCompatActivity
         expFoundItem = new CardExpanded().newInstance(Status.ENCONTRADO);
         expLostItem = new CardExpanded().newInstance(Status.PERDIDO);
 
+        // Configure sign-in to request the user's ID, email address, and basic
+        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        // Build a GoogleApiClient with access to the Google Sign-In API and the
+        // options specified by gso.
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_menu);
@@ -68,13 +109,15 @@ public class LostFound extends AppCompatActivity
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        mNavigationView = (NavigationView) findViewById(R.id.nav_view);
+        mNavigationView.setNavigationItemSelectedListener(this);
+
+        userImage = (ImageView) mNavigationView.findViewById(R.id.user_acc_image);
+        userName = (TextView) mNavigationView.findViewById(R.id.user_name);
+        userEmail = (TextView) mNavigationView.findViewById(R.id.user_email);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container_layout,
                 feedFragment, FeedFragment.TAG).commit();
-
-
 
     }
 
@@ -148,6 +191,8 @@ public class LostFound extends AppCompatActivity
             nextFrag = profileFragment;
             nextFragTag = ProfileFragment.TAG;
 
+        } else if (id == R.id.nav_login) {
+            signIn();
         }
 
         if (nextFrag != null) {
@@ -188,11 +233,18 @@ public class LostFound extends AppCompatActivity
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(
-                getSupportFragmentManager().getBackStackEntryCount() - 1);
-        String prevFragTag = backEntry.getName();
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag(prevFragTag);
-        fragment.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleSignInResult(result);
+        } else if (requestCode == ReportObjectFragment.REQUEST_IMAGE_GET) {
+            FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(
+                    getSupportFragmentManager().getBackStackEntryCount() - 1);
+            String prevFragTag = backEntry.getName();
+            Fragment fragment = getSupportFragmentManager().findFragmentByTag(prevFragTag);
+            fragment.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override
@@ -270,4 +322,41 @@ public class LostFound extends AppCompatActivity
         }
         return listAux;
     }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+        Toast.makeText(this, "Conexão falhou",Toast.LENGTH_LONG);
+    }
+
+    private void signIn() {
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    private void handleSignInResult(GoogleSignInResult result) {
+        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
+        if (result.isSuccess()) {
+            // Signed in successfully, show authenticated UI.
+            GoogleSignInAccount acct = result.getSignInAccount();
+            isSignedIn = true;
+            //updateUI(acct, isSignedIn);
+        } else {
+            // Signed out, show unauthenticated UI.
+            //updateUI(false);
+        }
+    }
+
+    private void updateUI(GoogleSignInAccount acct, boolean isSignedIn) {
+        if (isSignedIn == true) {
+            userImage.setImageURI(acct.getPhotoUrl());
+            userName.setText(acct.getDisplayName());
+            userEmail.setText(acct.getEmail());
+        }
+    }
+
+//    You can also get the user's email address with getEmail, the user's Google ID
+//            (for client-side use) with getId, and an ID token for the user with with
+//    getIdToken. If you need to pass the currently
+//    signed-in user to a backend server, send the ID token to your backend server and validate the token on the server.
 }

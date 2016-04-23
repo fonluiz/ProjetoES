@@ -36,7 +36,7 @@ import java.util.GregorianCalendar;
 public class ReportObjectFragment extends Fragment {
 
     public final static String TAG = "LOST_THING_FRAGMENT";
-    static final int REQUEST_IMAGE_GET = 1;
+    public static final int REQUEST_IMAGE_GET = 1;
 
     private View mView;
     private Status mStatus;
