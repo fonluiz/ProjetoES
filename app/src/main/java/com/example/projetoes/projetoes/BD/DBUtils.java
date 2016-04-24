@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.projetoes.projetoes.Models.Objeto;
+import com.example.projetoes.projetoes.Models.Usuario;
+
 import java.util.ArrayList;
 
 /**
@@ -21,36 +24,47 @@ public class DBUtils {
         return openHelper.getWritableDatabase();
     }
 
-//    public static boolean registerUser(Context context, ArrayList<LocationData> locations, long timestamp) {
+    public static void addUserInformation(Context context, Usuario user) {
+        SQLiteDatabase db = getWritableDatabase(context);
+        Table locationsTable = LostFoundDbHelper.getUserTable();
+
+        db.beginTransaction();
+
+        try {
+            ContentValues dadosUsuario = new ContentValues();
+            dadosUsuario.put("id_usuario", user.getId());
+            dadosUsuario.put("foto", String.valueOf(user.getPhoto()));
+            dadosUsuario.put("nome", user.getUsername());
+            dadosUsuario.put("cidade", user.getCIDADE());
+            dadosUsuario.put("bairro", user.getBairro());
+            dadosUsuario.put("rua", user.getRua());
+            dadosUsuario.put("telefone", user.getTelefone1());
+            dadosUsuario.put("email", user.getEmail());
+
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+        db.close();
+    }
+//    public static void addItemToLostFound(Context context, Objeto obj) {
 //        SQLiteDatabase db = getWritableDatabase(context);
-//        Table locationsTable = MeliorDBOpenHelper.getLocationsTable();
-//        boolean result = false;
+//        Table itemTable = LostFoundDbHelper.getItemTable();
 //
-//        // inicia a transação no banco
 //        db.beginTransaction();
+//
 //        try {
-//            for (LocationData location : locations) {
-//
-//                ContentValues valoresAvaliacao = new ContentValues();
-//                valoresAvaliacao.put("lat", location.getLatitude());
-//                valoresAvaliacao.put("lon", location.getLongitude());
-//                valoresAvaliacao.put("acc", location.getAccuracy());
-//                valoresAvaliacao.put("speed", location.getSpeed());
-//                valoresAvaliacao.put("bear", location.getBearing());
-//                valoresAvaliacao.put("et", location.getTime());
-//                valoresAvaliacao.put("timestamp", timestamp);
-//
-//                db.insert(locationsTable.getName(), null, valoresAvaliacao);
-//            }
-//
-//            db.setTransactionSuccessful();
-//            result = true;
-//        } finally {
-//            db.endTransaction();
+//            ContentValues dadosItemLf = new ContentValues();
+//            dadosItemLf.put();
+//            dadosItemLf.put();
+//            dadosItemLf.put();
+//            dadosItemLf.put();
+//            dadosItemLf.put();
+//            dadosItemLf.put();
+//            dadosItemLf.put();
+//            dadosItemLf.put();
+//            dadosItemLf.put();
+//            dadosItemLf.put();
 //        }
-//
-//        db.close();
-//
-//        return result;
 //    }
 }

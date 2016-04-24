@@ -6,7 +6,6 @@ import java.util.UUID;
 
 public class Objeto {
 
-    private UUID id;
     private URI foto;
     private Categoria categoria;
     private String descricao;
@@ -95,6 +94,16 @@ public class Objeto {
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        int result;
+        long temp;
+        result = getFoto().hashCode();
+        result = 31 * result + getCategoria().hashCode();
+        result = 31 * result + getDescricao().hashCode();
+        result = 31 * result + getLocal().hashCode();
+        result = 31 * result + getData().hashCode();
+        temp = Double.doubleToLongBits(getRecompensa());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + getStatus().hashCode();
+        return result;
     }
 }

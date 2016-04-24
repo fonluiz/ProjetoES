@@ -316,7 +316,7 @@ public class LostFound extends AppCompatActivity
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
 
-        Toast.makeText(this, "Conexão falhou",Toast.LENGTH_LONG);
+        Toast.makeText(this, "Conexão falhou",Toast.LENGTH_LONG).show();
     }
 
     private void signIn() {

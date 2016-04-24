@@ -22,23 +22,26 @@ public class LostFoundDbHelper extends SQLiteOpenHelper {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
-    public Table getUserTable() {
+    public static Table getUserTable() {
         if (userTable == null) {
             userTable = new Table("Usuario")
-                    .addColumn(new Column("id_usuario", "INT", true))
-                    .addColumn(new Column("email", "STRING", true))
-                    .addColumn(new Column("foto", "XML"))
+                    .addColumn(new Column("id_usuario", "INTEGER", true))
+                    .addColumn(new Column("foto", "STRING"))
                     .addColumn(new Column("nome", "STRING"))
-                    .addColumn(new Column("endereco", "STRING"))
-                    .addColumn(new Column("contato", "STRING"));
+                    .addColumn(new Column("cidade", "STRING"))
+                    .addColumn(new Column("bairro", "STRING"))
+                    .addColumn(new Column("rua", "STRING"))
+                    .addColumn(new Column("telefone", "STRING"))
+                    .addColumn(new Column("email", "STRING"));
         }
         return userTable;
     }
 
-    public Table getItemTable() {
+    public static Table getItemTable() {
         if (itemTable == null) {
             itemTable = new Table("Objeto")
                     .addColumn(new Column("id_objeto", "LONG", true))
+                    .addColumn(new Column("usuario", "INTEGER"))
                     .addColumn(new Column("foto", "XML"))
                     .addColumn(new Column("categoria", "STRING"))
                     .addColumn(new Column("tipo", "STRING"))

@@ -1,18 +1,11 @@
 package com.example.projetoes.projetoes.Fragments;
 
 
-import android.app.ActionBar;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.NavUtils;
-import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -25,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.projetoes.projetoes.Activities.LostFound;
+import com.example.projetoes.projetoes.BD.DBUtils;
+import com.example.projetoes.projetoes.Models.Usuario;
 import com.example.projetoes.projetoes.R;
 
 /**
@@ -37,13 +32,18 @@ public class EditProfileFragment extends Fragment {
 
     private View mView;
     private ImageView photoSelector;
-    private Uri objImage;
     private EditText username_field;
     private EditText bairro_field;
     private EditText street_field;
     private EditText phone1_field;
-    private EditText phone2_field;
     private EditText email_field;
+
+    private Uri userImage;
+    private String username;
+    private String bairro;
+    private String street;
+    private String phone1;
+    private String email;
 
     public EditProfileFragment() {
         // Required empty public constructor
@@ -93,7 +93,7 @@ public class EditProfileFragment extends Fragment {
         int id = item.getItemId();
 
         if (id == R.id.save_profile_info) {
-            persistInformations();
+            saveInformations();
             return true;
         }
 
@@ -138,8 +138,8 @@ public class EditProfileFragment extends Fragment {
         if (requestCode == REQUEST_IMAGE_GET && resultCode == getActivity().RESULT_OK) {
             Uri fullPhotoUri = data.getData();
             // Do work with photo saved at fullPhotoUri
-            objImage = fullPhotoUri;
-            photoSelector.setImageURI(objImage);
+            userImage = fullPhotoUri;
+            photoSelector.setImageURI(userImage);
         }
     }
 
@@ -158,11 +158,31 @@ public class EditProfileFragment extends Fragment {
         bairro_field = (EditText) mView.findViewById(R.id.bairro_field);
         street_field = (EditText) mView.findViewById(R.id.street_field);
         phone1_field = (EditText) mView.findViewById(R.id.phone1_field);
-        phone2_field = (EditText) mView.findViewById(R.id.phone2_field);
         email_field = (EditText) mView.findViewById(R.id.email_field);
     }
 
-    private void persistInformations() {
-        //TODO: salva as informações no banco de dados
+    private void saveInformations() {
+        username = String.valueOf(username_field.getText());
+        bairro = String.valueOf(bairro_field.getText());
+        street = String.valueOf(street_field.getText());
+        phone1 = String.valueOf(phone1_field.getText());
+        email = String.valueOf(email_field.getText());
+
+        if (!isAllFieldsFilledOut()) {
+            Toast.makeText(getContext(), "Por favor, preencha todos os campos.", Toast.LENGTH_LONG).show();
+        } else {
+            Usuario user = new Usuario(userImage,username,bairro,street,phone1,email);
+            DBUtils.addUserInformation(getContext(), user);
+            getActivity().onBackPressed();
+            Toast.makeText(getContext(), "Informações publicadas", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private boolean isAllFieldsFilledOut() {
+        if (username == null || userImage == null || bairro == null || street == null ||
+                phone1 == null || email == null)
+            return false;
+        else
+            return true;
     }
 }
