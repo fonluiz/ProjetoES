@@ -24,7 +24,7 @@ public class LostFoundDbHelper extends SQLiteOpenHelper {
 
     public static Table getUserTable() {
         if (userTable == null) {
-            userTable = new Table("Usuario")
+            userTable = new Table("usuario")
                     .addColumn(new Column("id_usuario", "INTEGER", true))
                     .addColumn(new Column("foto", "STRING"))
                     .addColumn(new Column("nome", "STRING"))
@@ -39,7 +39,7 @@ public class LostFoundDbHelper extends SQLiteOpenHelper {
 
     public static Table getItemTable() {
         if (itemTable == null) {
-            itemTable = new Table("Objeto")
+            itemTable = new Table("objeto")
                     .addColumn(new Column("id_objeto", "LONG", true))
                     .addColumn(new Column("usuario", "INTEGER"))
                     .addColumn(new Column("foto", "XML"))

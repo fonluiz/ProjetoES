@@ -40,7 +40,7 @@ public class RoundedImageView extends ImageView {
         }
 
         if (getWidth() == 0 || getHeight() == 0) {
-            return; 
+            return;
         }
 
         Bitmap b = null;
@@ -51,7 +51,7 @@ public class RoundedImageView extends ImageView {
             Canvas c = new Canvas();
             c.setBitmap(b);
             drawable.draw(c);
-        } 
+        }
         else {
             b = ((BitmapDrawable) drawable).getBitmap();
         }

@@ -2,6 +2,7 @@ package com.example.projetoes.projetoes.BD;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.projetoes.projetoes.Models.Objeto;
@@ -67,4 +68,27 @@ public class DBUtils {
 //            dadosItemLf.put();
 //        }
 //    }
+
+    public static Usuario getUserInformation(Context context, String email) {
+        SQLiteDatabase db = getReadableDatabase(context);
+
+        String query = "SELECT * FROM usuario usr WHERE usr.email = '" + email + "'";
+
+        Cursor c = db.rawQuery(query, null);
+
+        c.moveToFirst();
+
+        String foto = c.getString(c.getColumnIndex("foto"));
+        String nome = c.getString(c.getColumnIndex("nome"));
+        String cidade = c.getString(c.getColumnIndex("cidade"));
+        String bairro = c.getString(c.getColumnIndex("bairro"));
+        String telefone = c.getString(c.getColumnIndex("telefone"));
+
+        Usuario user = new Usuario(foto, nome, cidade, bairro, telefone, email);
+
+        c.close();
+        db.close();
+
+        return user;
+    }
 }

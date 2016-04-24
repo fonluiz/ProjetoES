@@ -8,7 +8,7 @@ import java.util.UUID;
 public class Usuario {
 
     private final String CIDADE = "Campina Grande";
-    private Uri photo;
+    private String photo;
     private String username;
     private String bairro;
     private String rua;
@@ -16,7 +16,7 @@ public class Usuario {
     private String email;
 
 
-    public Usuario(Uri photo, String username, String bairro, String rua, String telefone, String email) {
+    public Usuario(String photo, String username, String bairro, String rua, String telefone, String email) {
         this.photo = photo;
         this.username = username;
         this.bairro = bairro;
@@ -24,6 +24,7 @@ public class Usuario {
         this.telefone = telefone;
         this.email = email;
     }
+
 
     public String getCIDADE() {
         return CIDADE;
@@ -34,11 +35,11 @@ public class Usuario {
     }
 
 
-    public Uri getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(Uri photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 

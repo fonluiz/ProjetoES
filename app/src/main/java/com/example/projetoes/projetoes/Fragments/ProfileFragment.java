@@ -10,9 +10,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.projetoes.projetoes.Activities.LostFound;
+import com.example.projetoes.projetoes.BD.DBUtils;
+import com.example.projetoes.projetoes.Models.Usuario;
 import com.example.projetoes.projetoes.R;
 
 /**
@@ -26,6 +30,12 @@ public class ProfileFragment extends Fragment {
 
     private ImageView profileImage;
     private FloatingActionButton editProfileFab;
+    private TextView username_field;
+    private TextView bairro_field;
+    private TextView street_field;
+    private TextView phone_field;
+    private TextView email_field;
+
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -53,10 +63,18 @@ public class ProfileFragment extends Fragment {
         // Define o título na actionbar
         ((LostFound) this.getActivity()).getSupportActionBar().setTitle("Meu Perfil");
 
-        startImageprofile();
+        startFields();
         startEditProfileFab();
+        setFields();
+
 
         return mView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setFields();
     }
 
     @Override
@@ -82,8 +100,27 @@ public class ProfileFragment extends Fragment {
     /**
      * Define o campo da imagem do perfil. Caso seja necessário.
      */
-    private void startImageprofile() {
+    private void startFields() {
         profileImage = (ImageView) mView.findViewById(R.id.image_profile);
+        username_field = (TextView) mView.findViewById(R.id.username);
+        bairro_field = (TextView) mView.findViewById(R.id.user_bairro);
+        street_field = (TextView) mView.findViewById(R.id.user_street);
+        phone_field = (TextView) mView.findViewById(R.id.user_phone);
+        email_field = (TextView) mView.findViewById(R.id.user_email);
+    }
+
+    private void setFields() {
+        try {
+            Usuario user = DBUtils.getUserInformation(getContext(), ((LostFound) getActivity()).getUserEmail());
+
+            username_field.setText(user.getUsername());
+            bairro_field.setText(user.getBairro());
+            street_field.setText(user.getRua());
+            phone_field.setText(user.getTelefone1());
+            email_field.setText(user.getEmail());
+        } catch (Exception e) {
+            return;
+        }
     }
 
     /**

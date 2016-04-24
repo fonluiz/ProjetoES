@@ -12,7 +12,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <com.example.projetoes.projetoes.Utils.RoundedImageView
+    <ImageView
         android:id="@+id/user_acc_image"
         android:layout_width="70dp"
         android:layout_height="70dp"
@@ -29,6 +29,6 @@
         android:id="@+id/user_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="android.studio@android.com" />
+        android:text="Por favor,entre com sua conta Google." />
 
 </LinearLayout>

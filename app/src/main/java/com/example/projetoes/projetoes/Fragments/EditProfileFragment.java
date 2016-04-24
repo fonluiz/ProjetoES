@@ -166,12 +166,17 @@ public class EditProfileFragment extends Fragment {
         bairro = String.valueOf(bairro_field.getText());
         street = String.valueOf(street_field.getText());
         phone1 = String.valueOf(phone1_field.getText());
-        email = String.valueOf(email_field.getText());
+        email = ((LostFound) getActivity()).getUserEmail();
+
+        if (email == null) {
+            Toast.makeText(getContext(), "É necessário entrar com sua conta Google!", Toast.LENGTH_LONG);
+            return;
+        }
 
         if (!isAllFieldsFilledOut()) {
             Toast.makeText(getContext(), "Por favor, preencha todos os campos.", Toast.LENGTH_LONG).show();
         } else {
-            Usuario user = new Usuario(userImage,username,bairro,street,phone1,email);
+            Usuario user = new Usuario(String.valueOf(userImage),username,bairro,street,phone1,email);
             DBUtils.addUserInformation(getContext(), user);
             getActivity().onBackPressed();
             Toast.makeText(getContext(), "Informações publicadas", Toast.LENGTH_LONG).show();

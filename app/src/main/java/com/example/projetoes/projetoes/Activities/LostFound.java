@@ -1,6 +1,7 @@
 package com.example.projetoes.projetoes.Activities;
 
 import android.content.Intent;
+import android.content.IntentSender;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +38,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,13 +63,18 @@ public class LostFound extends AppCompatActivity
     private GoogleSignInOptions gso;
     private GoogleApiClient mGoogleApiClient;
 
+
     private  NavigationView mNavigationView;
 
     GoogleSignInAccount mAccount;
     private boolean isSignedIn;
-    private RoundedImageView userImage;
+    MenuItem signInBtn;
+    MenuItem signOutBtn;
+
+    private ImageView userImage;
     private TextView userName;
     private TextView userEmail;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,8 +119,6 @@ public class LostFound extends AppCompatActivity
 
     }
 
-
-
     @Override
     public void onBackPressed() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -128,6 +134,9 @@ public class LostFound extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.navigation_menu, menu);
+
+        signInBtn = (MenuItem) mNavigationView.getMenu().findItem(R.id.nav_login);
+        signOutBtn = (MenuItem) mNavigationView.getMenu().findItem(R.id.nav_logout);
         return true;
     }
 
@@ -182,7 +191,12 @@ public class LostFound extends AppCompatActivity
             nextFragTag = ProfileFragment.TAG;
 
         } else if (id == R.id.nav_login) {
+
             signIn();
+
+        } else if (id == R.id.nav_logout) {
+
+            signOut();
         }
 
         if (nextFrag != null) {
@@ -315,8 +329,7 @@ public class LostFound extends AppCompatActivity
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-
-        Toast.makeText(this, "Conexão falhou",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Conexão falhou", Toast.LENGTH_LONG).show();
     }
 
     private void signIn() {
@@ -324,34 +337,71 @@ public class LostFound extends AppCompatActivity
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
+    private void signOut() {
+        // Clear the default account so that GoogleApiClient will not automatically
+        // connect in the future.
+        if (isSignedIn) {
+            Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+            updateUI(false);
+            updateSignInOutBtns();
+        }
+    }
+
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             mAccount = result.getSignInAccount();
-            isSignedIn = true;
-            updateUI(isSignedIn);
+            updateUI(true);
+            updateSignInOutBtns();
         } else {
             // Signed out, show unauthenticated UI.
             updateUI(false);
+            updateSignInOutBtns();
         }
     }
 
     private void updateUI(boolean isSignedIn) {
+        this.isSignedIn = isSignedIn;
 
-        userImage = (RoundedImageView) mNavigationView.findViewById(R.id.user_acc_image);
+        userImage = (ImageView) mNavigationView.findViewById(R.id.user_acc_image);
         userName = (TextView) mNavigationView.findViewById(R.id.user_name);
         userEmail = (TextView) mNavigationView.findViewById(R.id.user_email);
+
         if (isSignedIn) {
             ProfileImageLoader loader = new ProfileImageLoader(userImage);
-            loader.execute(mAccount.getPhotoUrl().toString());
+            loader.execute(String.valueOf(mAccount.getPhotoUrl()));
             userName.setText(mAccount.getDisplayName());
             userEmail.setText(mAccount.getEmail());
+            userId = mAccount.getId();
+        } else {
+            userImage.setImageDrawable(null);
+            userName.setText("");
+            userEmail.setText("Por favor,entre com sua conta Google.");
         }
     }
 
-//    You can also get the user's email address with getEmail, the user's Google ID
-//            (for client-side use) with getId, and an ID token for the user with with
-//    getIdToken. If you need to pass the currently
-//    signed-in user to a backend server, send the ID token to your backend server and validate the token on the server.
+    private void updateSignInOutBtns() {
+        if (isSignedIn) {
+            signInBtn.setVisible(false);
+            signOutBtn.setVisible(true);
+        } else {
+            signInBtn.setVisible(true);
+            signOutBtn.setVisible(false);
+        }
+    }
+
+    public String getUserEmail() {
+        if (mAccount != null)
+            return mAccount.getEmail();
+        else
+            return null;
+    }
+
+    public String getUserID() {
+        if (mAccount != null)
+            return mAccount.getId();
+        else
+            return null;
+    }
 }

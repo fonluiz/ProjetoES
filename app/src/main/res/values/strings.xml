@@ -10,6 +10,7 @@
     <string name="navigation_found_object">Achei algo</string>
     <string name="navigation_profile">Meu perfil</string>
     <string name="navigation_login">Login com Google</string>
+    <string name="navigation_logout">Desvincular conta Google</string>
     <string name="nav_user_email">Por favor, entre com sua conta Google.</string>
     <string name="found_feed_tab">Itens achados</string>
     <string name="lost_feed_tab">Itens perdidos</string>
