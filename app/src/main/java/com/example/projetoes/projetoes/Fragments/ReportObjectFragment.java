@@ -27,6 +27,7 @@ import android.widget.Spinner;
 import com.example.projetoes.projetoes.Activities.LostFound;
 import com.example.projetoes.projetoes.Models.Status;
 import com.example.projetoes.projetoes.R;
+import com.example.projetoes.projetoes.Utils.ProfileImageLoader;
 
 import java.util.GregorianCalendar;
 
@@ -233,7 +234,7 @@ public class ReportObjectFragment extends Fragment {
         extras.putBoolean("EXTRA_ALLOW_MULTIPLE", false);
         extras.putBoolean("EXTRA_LOCAL_ONLY", true);
         if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-            startActivityForResult(intent, REQUEST_IMAGE_GET, extras);
+            getActivity().startActivityForResult(intent, REQUEST_IMAGE_GET, extras);
         }
     }
 
@@ -242,9 +243,7 @@ public class ReportObjectFragment extends Fragment {
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Não está entrando nesse if pq o request code que vem da activity vem diferente
         if (requestCode == REQUEST_IMAGE_GET && resultCode == getActivity().RESULT_OK) {
-            Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
             Uri fullPhotoUri = data.getData();
             // Do work with photo saved at fullPhotoUri
             objImage = fullPhotoUri;

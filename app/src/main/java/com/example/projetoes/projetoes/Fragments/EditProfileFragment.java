@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -123,7 +124,9 @@ public class EditProfileFragment extends Fragment {
         extras.putBoolean("EXTRA_ALLOW_MULTIPLE", false);
         extras.putBoolean("EXTRA_LOCAL_ONLY", true);
         if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-            startActivityForResult(intent, REQUEST_IMAGE_GET, extras);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                getActivity().startActivityForResult(intent, REQUEST_IMAGE_GET, extras);
+            }
         }
     }
 
@@ -133,11 +136,10 @@ public class EditProfileFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_GET && resultCode == getActivity().RESULT_OK) {
-            Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
             Uri fullPhotoUri = data.getData();
             // Do work with photo saved at fullPhotoUri
             objImage = fullPhotoUri;
-            photoSelector.setImageBitmap(thumbnail);
+            photoSelector.setImageURI(objImage);
         }
     }
 

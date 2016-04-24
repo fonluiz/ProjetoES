@@ -1,6 +1,5 @@
 package com.example.projetoes.projetoes.Activities;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,14 +15,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.projetoes.projetoes.Utils.ProfileImageLoader;
 import com.example.projetoes.projetoes.Fragments.CardExpanded;
 import com.example.projetoes.projetoes.Fragments.EditProfileFragment;
 import com.example.projetoes.projetoes.Fragments.FeedFragment;
-import com.example.projetoes.projetoes.Fragments.FoundItemFeed;
 import com.example.projetoes.projetoes.Fragments.ReportObjectFragment;
 import com.example.projetoes.projetoes.Fragments.ProfileFragment;
 
@@ -31,6 +29,7 @@ import com.example.projetoes.projetoes.Interfaces.OnCardClickedListener;
 import com.example.projetoes.projetoes.Models.Card;
 import com.example.projetoes.projetoes.Models.Status;
 import com.example.projetoes.projetoes.R;
+import com.example.projetoes.projetoes.Utils.RoundedImageView;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -61,16 +60,11 @@ public class LostFound extends AppCompatActivity
     private GoogleSignInOptions gso;
     private GoogleApiClient mGoogleApiClient;
 
-    /* Should we automatically resolve ConnectionResults when possible? */
-    private boolean mShouldResolve = false;
-
-    /* Is there a ConnectionResult resolution in progress? */
-    private boolean mIsResolving = false;
-    private boolean mSignedIn = false;
-
-    private ProgressDialog mDialog;
     private  NavigationView mNavigationView;
-    private ImageView userImage;
+
+    GoogleSignInAccount mAccount;
+    private boolean isSignedIn;
+    private RoundedImageView userImage;
     private TextView userName;
     private TextView userEmail;
 
@@ -111,10 +105,6 @@ public class LostFound extends AppCompatActivity
 
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
         mNavigationView.setNavigationItemSelectedListener(this);
-
-        userImage = (ImageView) mNavigationView.findViewById(R.id.user_acc_image);
-        userName = (TextView) mNavigationView.findViewById(R.id.user_name);
-        userEmail = (TextView) mNavigationView.findViewById(R.id.user_email);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container_layout,
                 feedFragment, FeedFragment.TAG).commit();
@@ -233,9 +223,9 @@ public class LostFound extends AppCompatActivity
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
+            super.onActivityResult(requestCode, resultCode, data);
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
         } else if (requestCode == ReportObjectFragment.REQUEST_IMAGE_GET) {
@@ -338,20 +328,25 @@ public class LostFound extends AppCompatActivity
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
-            GoogleSignInAccount acct = result.getSignInAccount();
+            mAccount = result.getSignInAccount();
             isSignedIn = true;
-            //updateUI(acct, isSignedIn);
+            updateUI(isSignedIn);
         } else {
             // Signed out, show unauthenticated UI.
-            //updateUI(false);
+            updateUI(false);
         }
     }
 
-    private void updateUI(GoogleSignInAccount acct, boolean isSignedIn) {
-        if (isSignedIn == true) {
-            userImage.setImageURI(acct.getPhotoUrl());
-            userName.setText(acct.getDisplayName());
-            userEmail.setText(acct.getEmail());
+    private void updateUI(boolean isSignedIn) {
+
+        userImage = (RoundedImageView) mNavigationView.findViewById(R.id.user_acc_image);
+        userName = (TextView) mNavigationView.findViewById(R.id.user_name);
+        userEmail = (TextView) mNavigationView.findViewById(R.id.user_email);
+        if (isSignedIn) {
+            ProfileImageLoader loader = new ProfileImageLoader(userImage);
+            loader.execute(mAccount.getPhotoUrl().toString());
+            userName.setText(mAccount.getDisplayName());
+            userEmail.setText(mAccount.getEmail());
         }
     }
 
