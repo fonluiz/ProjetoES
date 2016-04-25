@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.projetoes.projetoes.Models.Objeto;
 import com.example.projetoes.projetoes.Models.Usuario;
+import com.parse.ParseObject;
 
 import java.util.ArrayList;
 
@@ -68,6 +69,16 @@ public class DBUtils {
 //            dadosItemLf.put();
 //        }
 //    }
+    public static void addItemToLostFound(Context context, Objeto obj) {
+        ParseObject objetoAsersalvo = new ParseObject("Objeto");
+        objetoAsersalvo.put("score", 1337);
+        objetoAsersalvo.put("descricao", obj.getDescricao());
+        objetoAsersalvo.put("local", obj.getLocal());
+        objetoAsersalvo.put("data", obj.getData().toString());
+        URI foto, Categoria categoria, String descricao, String local, Date data, double recompensa
+        objetoAsersalvo.saveInBackground();
+    }
+
 
     public static Usuario getUserInformation(Context context, String email) {
         SQLiteDatabase db = getReadableDatabase(context);

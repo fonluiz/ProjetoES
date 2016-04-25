@@ -39,7 +39,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
+import com.parse.Parse;
 
+import java.security.AccessController;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,6 +88,14 @@ public class LostFound extends AppCompatActivity
         editProfileFragment = new EditProfileFragment();
         expFoundItem = new CardExpanded().newInstance(Status.ENCONTRADO);
         expLostItem = new CardExpanded().newInstance(Status.PERDIDO);
+
+
+        // Connecta o app ao um server 'Parse' responsável pelo bd.
+        Parse.initialize(new Parse.Configuration.Builder(getApplicationContext())
+                .applicationId("achadoseperdidos")            //este id deve ser o mesmo que foi definido ao criar o parse server.
+                .server("http://192.168.25.205:1337/parse")
+                .build()
+        );
 
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
