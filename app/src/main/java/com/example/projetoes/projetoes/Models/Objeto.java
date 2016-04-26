@@ -1,5 +1,7 @@
 package com.example.projetoes.projetoes.Models;
 
+import com.parse.ParseObject;
+
 import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
@@ -22,6 +24,10 @@ public class Objeto {
         this.data = data;
         this.recompensa = recompensa;
         this.status = status;
+    }
+
+    public Objeto(ParseObject){
+        /* TODO */
     }
 
     public Status getStatus() {

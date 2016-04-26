@@ -7,7 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.projetoes.projetoes.Models.Objeto;
 import com.example.projetoes.projetoes.Models.Usuario;
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 import java.util.ArrayList;
 
@@ -24,6 +27,30 @@ public class DBUtils {
     public static SQLiteDatabase getWritableDatabase(Context context) {
         LostFoundDbHelper openHelper = new LostFoundDbHelper(context);
         return openHelper.getWritableDatabase();
+    }
+
+    public static void signUpUser(Usuario user, String senha){
+
+        // Campos obrigatórios
+        ParseUser userAserSalvo = new ParseUser();
+        userAserSalvo.setUsername(user.getUsername());
+        userAserSalvo.setPassword(senha);
+        userAserSalvo.setEmail(user.getEmail());
+
+        // other fields can be set just like with ParseObject
+        // userAserSalvo.put("telefone", user.getTelefone1());
+
+        userAserSalvo.signUpInBackground(new SignUpCallback() {
+            public void done(ParseException e) {
+                if (e == null) {
+                    // Hooray! Let them use the app now.
+                } else {
+                    // Sign up didn't succeed. Look at the ParseException
+                    // to figure out what went wrong
+                }
+            }
+        });
+
     }
 
     public static void addUserInformation(Context context, Usuario user) {
@@ -71,11 +98,13 @@ public class DBUtils {
 //    }
     public static void addItemToLostFound(Context context, Objeto obj) {
         ParseObject objetoAsersalvo = new ParseObject("Objeto");
-        objetoAsersalvo.put("score", 1337);
         objetoAsersalvo.put("descricao", obj.getDescricao());
         objetoAsersalvo.put("local", obj.getLocal());
-        objetoAsersalvo.put("data", obj.getData().toString());
-        URI foto, Categoria categoria, String descricao, String local, Date data, double recompensa
+        objetoAsersalvo.put("data", obj.getData());
+        objetoAsersalvo.put("categoria", obj.getCategoria().name());
+        objetoAsersalvo.put("status", obj.getStatus().name());
+        objetoAsersalvo.put("recompensa", obj.getRecompensa());
+
         objetoAsersalvo.saveInBackground();
     }
 
