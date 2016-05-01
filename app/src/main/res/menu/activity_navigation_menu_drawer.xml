@@ -18,22 +18,26 @@
             android:title="@string/navigation_found_object" />
     </group>
 
-    <group
-        android:id="@+id/settings_menu"
-        android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_menu_profile"
-            android:title="@string/navigation_profile" />
-        <item
-            android:id="@+id/nav_login"
-            android:icon="@mipmap/ic_google_plus"
-            android:title="@string/navigation_login" />
-        <item
-            android:id="@+id/nav_logout"
-            android:icon="@mipmap/ic_google_plus"
-            android:title="@string/navigation_logout"
-            android:visible="false"/>
-    </group>
+    <item
+        android:id="@+id/user_settings"
+        android:title="Dados do usúario">
+        <menu
+            android:id="@+id/settings_menu"
+            android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_profile"
+                android:icon="@drawable/ic_menu_profile"
+                android:title="@string/navigation_profile" />
+            <item
+                android:id="@+id/nav_login"
+                android:icon="@mipmap/ic_google_plus"
+                android:title="@string/navigation_login" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@mipmap/ic_google_plus"
+                android:title="@string/navigation_logout"
+                android:visible="false" />
+        </menu>
+    </item>
 
 </menu>

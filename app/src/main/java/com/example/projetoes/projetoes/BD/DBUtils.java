@@ -56,16 +56,16 @@ public class DBUtils {
 //
 //        try {
 //            ContentValues dadosItemLf = new ContentValues();
-//            dadosItemLf.put();
-//            dadosItemLf.put();
-//            dadosItemLf.put();
-//            dadosItemLf.put();
-//            dadosItemLf.put();
-//            dadosItemLf.put();
-//            dadosItemLf.put();
-//            dadosItemLf.put();
-//            dadosItemLf.put();
-//            dadosItemLf.put();
+//            dadosItemLf.put("id_objeto", obj.getId());
+//            dadosItemLf.put("usuario", );
+//            dadosItemLf.put("foto", String.valueOf(obj.getFoto()));
+//            dadosItemLf.put("categoria", obj.getCategoria().toString());
+//            dadosItemLf.put("tipo", obj.get);
+//            dadosItemLf.put("descricao");
+//            dadosItemLf.put("local");
+//            dadosItemLf.put("data");
+//            dadosItemLf.put("recompensa");
+//            dadosItemLf.put("status");
 //        }
 //    }
 

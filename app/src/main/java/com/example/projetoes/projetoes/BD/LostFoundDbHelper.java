@@ -42,7 +42,7 @@ public class LostFoundDbHelper extends SQLiteOpenHelper {
             itemTable = new Table("objeto")
                     .addColumn(new Column("id_objeto", "LONG", true))
                     .addColumn(new Column("usuario", "INTEGER"))
-                    .addColumn(new Column("foto", "XML"))
+                    .addColumn(new Column("foto", "STRING"))
                     .addColumn(new Column("categoria", "STRING"))
                     .addColumn(new Column("tipo", "STRING"))
                     .addColumn(new Column("descricao", "STRING"))

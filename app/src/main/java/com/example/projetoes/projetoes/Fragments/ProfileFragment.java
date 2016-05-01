@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -119,6 +120,7 @@ public class ProfileFragment extends Fragment {
             phone_field.setText(user.getTelefone1());
             email_field.setText(user.getEmail());
         } catch (Exception e) {
+            Log.d(TAG, "setFields: " + e.getMessage());
             return;
         }
     }
