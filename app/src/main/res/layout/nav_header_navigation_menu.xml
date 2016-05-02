@@ -16,13 +16,14 @@
         android:id="@+id/user_acc_image"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:src="@drawable/ic_default_user_img" />
+        android:src="@mipmap/ic_launcher2" />
 
     <TextView
         android:id="@+id/user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/body"
+        android:text="@string/app_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/textAndIconsColor"
         android:textStyle="bold" />

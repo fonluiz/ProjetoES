@@ -1,8 +1,12 @@
 package com.example.projetoes.projetoes.Activities;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -33,11 +37,18 @@ import com.example.projetoes.projetoes.Models.Status;
 import com.example.projetoes.projetoes.R;
 import com.example.projetoes.projetoes.Utils.RoundedImageView;
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.credentials.Credential;
+import com.google.android.gms.auth.api.credentials.CredentialRequest;
+import com.google.android.gms.auth.api.credentials.CredentialRequestResult;
+import com.google.android.gms.auth.api.credentials.IdentityProviders;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.OptionalPendingResult;
+import com.google.android.gms.common.api.Result;
 import com.google.android.gms.common.api.ResultCallback;
 
 import java.util.ArrayList;
@@ -47,9 +58,11 @@ public class LostFound extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ProfileFragment.OnEditProfileFabClickedListener,
         OnCardClickedListener, GoogleApiClient.OnConnectionFailedListener {
 
-
-    private static final int RC_SIGN_IN = 2;
     private static final String TAG = "LOST_FOUND_ACTIVITY";
+    private static final int RC_SIGN_IN = 2;
+    private static final int RC_SAVE = 3;
+    private static final int RC_READ = 4;
+
     private FeedFragment feedFragment;
     private ReportObjectFragment lostThingFragment;
     private ReportObjectFragment foundThingFragment;
@@ -63,7 +76,6 @@ public class LostFound extends AppCompatActivity
     private GoogleSignInOptions gso;
     private GoogleApiClient mGoogleApiClient;
 
-
     private  NavigationView mNavigationView;
 
     GoogleSignInAccount mAccount;
@@ -75,6 +87,12 @@ public class LostFound extends AppCompatActivity
     private TextView userName;
     private TextView userEmail;
     private String userId;
+
+    private SharedPreferences userDataPref;
+    private CredentialRequest mCredentialRequest;
+    //SharedPreferences.Editor editor = sharedPref.edit();
+    //editor.putInt(getString(R.string.saved_high_score), newHighScore);
+   // editor.commit();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +116,14 @@ public class LostFound extends AppCompatActivity
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .addApi(Auth.CREDENTIALS_API)
                 .build();
+
+        mCredentialRequest = new CredentialRequest.Builder()
+                .setAccountTypes(IdentityProviders.GOOGLE)
+                .build();
+
+        requestStoredCredentials();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_menu);
@@ -171,31 +196,20 @@ public class LostFound extends AppCompatActivity
         }
 
         if (id == R.id.nav_feed) {
-
             nextFrag = feedFragment;
             nextFragTag = FeedFragment.TAG;
-
         } else if (id == R.id.nav_lost) {
-
             nextFrag = lostThingFragment;
             nextFragTag = ReportObjectFragment.TAG;
-
         } else if (id == R.id.nav_found) {
-
             nextFrag = foundThingFragment;
             nextFragTag = ReportObjectFragment.TAG;
-
         } else if (id == R.id.nav_profile) {
-
             nextFrag = profileFragment;
             nextFragTag = ProfileFragment.TAG;
-
         } else if (id == R.id.nav_login) {
-
             signIn();
-
         } else if (id == R.id.nav_logout) {
-
             signOut();
         }
 
@@ -242,6 +256,14 @@ public class LostFound extends AppCompatActivity
             super.onActivityResult(requestCode, resultCode, data);
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
+        } else if (requestCode == RC_READ) {
+            if (resultCode == RESULT_OK) {
+                Credential credential = data.getParcelableExtra(Credential.EXTRA_KEY);
+                onCredentialRetrieved(credential);
+            } else {
+                Log.e(TAG, "Credential Read: NOT OK");
+                Toast.makeText(this, "Credential Read Failed", Toast.LENGTH_SHORT).show();
+            }
         } else if (requestCode == ReportObjectFragment.REQUEST_IMAGE_GET) {
             FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(
                     getSupportFragmentManager().getBackStackEntryCount() - 1);
@@ -335,6 +357,17 @@ public class LostFound extends AppCompatActivity
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
+        saveUserCredentials();
+    }
+
+    private void saveUserCredentials() {
+        Credential credential = new Credential.Builder(mAccount.getEmail())
+                .setAccountType(IdentityProviders.GOOGLE)
+                .setName(mAccount.getDisplayName())
+                .setProfilePictureUri(mAccount.getPhotoUrl())
+                .build();
+        Auth.CredentialsApi.save(mGoogleApiClient, credential);
+        Toast.makeText(this, "Login realizado com sucesso. Seus dados serão salvos para a próxima sessão.", Toast.LENGTH_LONG).show();
     }
 
     private void signOut() {
@@ -361,6 +394,9 @@ public class LostFound extends AppCompatActivity
         }
     }
 
+    /**
+     * Atualiza a UI se o usuário estiver logado ou não
+     */
     private void updateUI(boolean isSignedIn) {
         this.isSignedIn = isSignedIn;
 
@@ -370,14 +406,17 @@ public class LostFound extends AppCompatActivity
 
         if (isSignedIn) {
             ProfileImageLoader loader = new ProfileImageLoader(userImage);
-            loader.execute(String.valueOf(mAccount.getPhotoUrl()));
+            if (mAccount.getPhotoUrl() != null)
+                loader.execute(String.valueOf(mAccount.getPhotoUrl()));
+            else
+                userImage.setImageResource(R.drawable.ic_default_user_img);
             userName.setText(mAccount.getDisplayName());
             userEmail.setText(mAccount.getEmail());
             userId = mAccount.getId();
         } else {
-            userImage.setImageDrawable(null);
-            userName.setText("");
-            userEmail.setText("Por favor,entre com sua conta Google.");
+            userImage.setImageResource(R.mipmap.ic_launcher2);
+            userName.setText(getResources().getString(R.string.app_name));
+            userEmail.setText(getResources().getString(R.string.nav_user_email_off));
         }
     }
 
@@ -403,5 +442,88 @@ public class LostFound extends AppCompatActivity
             return mAccount.getId();
         else
             return null;
+    }
+
+    private void requestStoredCredentials() {
+        Auth.CredentialsApi.request(mGoogleApiClient, mCredentialRequest).setResultCallback(
+                new ResultCallback<CredentialRequestResult>() {
+                    @Override
+                    public void onResult(CredentialRequestResult credentialRequestResult) {
+                        if (credentialRequestResult.getStatus().isSuccess()) {
+                            // See "Handle successful credential requests"
+                            onCredentialRetrieved(credentialRequestResult.getCredential());
+                        } else {
+                            // See "Handle unsuccessful and incomplete credential requests"
+                            resolveResult(credentialRequestResult.getStatus());
+                        }
+                    }
+                });
+    }
+    
+
+    private void onCredentialRetrieved(Credential credential) {
+        String accountType = credential.getAccountType();
+        if (accountType.equals(IdentityProviders.GOOGLE)) {
+            // The user has previously signed in with Google Sign-In. Silently
+            // sign in the user with the same ID.
+            mGoogleApiClient.stopAutoManage(this);
+            GoogleSignInOptions gso =
+                    new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                            .requestEmail()
+                            .setAccountName(credential.getId())
+                            .build();
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .enableAutoManage(this, this)
+                    .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                    .addApi(Auth.CREDENTIALS_API)
+                    .build();
+            OptionalPendingResult<GoogleSignInResult> pendingResult =
+                    Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
+            mGoogleApiClient.connect();
+
+            if (pendingResult.isDone()) {
+                // There's immediate result available.
+                handleSignInResult(pendingResult.get());
+            } else {
+                // There's no immediate result ready, displays some progress indicator and waits for the
+                // async callback.
+                pendingResult.setResultCallback(new ResultCallback<GoogleSignInResult>() {
+                    @Override
+                    public void onResult(@NonNull GoogleSignInResult result) {
+                        handleSignInResult(result);
+                    }
+                });
+            }
+        }
+    }
+
+    private void resolveResult(com.google.android.gms.common.api.Status status) {
+        if (status.getStatusCode() == CommonStatusCodes.RESOLUTION_REQUIRED) {
+            // Prompt the user to choose a saved credential; do not show the hint
+            // selector.
+            try {
+                status.startResolutionForResult(this, RC_READ);
+            } catch (IntentSender.SendIntentException e) {
+                Log.e(TAG, "STATUS: Failed to send resolution.", e);
+            }
+        } else {
+            // The user must create an account or sign in manually.
+            Log.e(TAG, "STATUS: Unsuccessful credential request.");
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (mGoogleApiClient != null)
+            mGoogleApiClient.connect();
+    }
+
+    @Override
+    protected void onStop() {
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+        super.onStop();
     }
 }
