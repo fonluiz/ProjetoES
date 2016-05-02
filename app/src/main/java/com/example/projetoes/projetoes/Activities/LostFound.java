@@ -368,12 +368,14 @@ public class LostFound extends AppCompatActivity
     }
 
     private void saveUserCredentials() {
-        Credential credential = new Credential.Builder(mAccount.getEmail())
-                .setAccountType(IdentityProviders.GOOGLE)
-                .setName(mAccount.getDisplayName())
-                .setProfilePictureUri(mAccount.getPhotoUrl())
-                .build();
-        Auth.CredentialsApi.save(mGoogleApiClient, credential);
+        if (mAccount != null) {
+            Credential credential = new Credential.Builder(mAccount.getEmail())
+                    .setAccountType(IdentityProviders.GOOGLE)
+                    .setName(mAccount.getDisplayName())
+                    .setProfilePictureUri(mAccount.getPhotoUrl())
+                    .build();
+            Auth.CredentialsApi.save(mGoogleApiClient, credential);
+        }
     }
 
     private void signOut() {
