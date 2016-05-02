@@ -356,11 +356,7 @@ public class LostFound extends AppCompatActivity
         buildGoogleApiClient();
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
-        try {
-            saveUserCredentials();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        saveUserCredentials();
     }
 
     private void buildGoogleApiClient() {

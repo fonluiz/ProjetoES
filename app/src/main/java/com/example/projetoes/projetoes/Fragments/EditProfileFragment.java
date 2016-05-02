@@ -1,12 +1,13 @@
 package com.example.projetoes.projetoes.Fragments;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.projetoes.projetoes.Activities.LostFound;
-import com.example.projetoes.projetoes.BD.DBUtils;
 import com.example.projetoes.projetoes.Models.Usuario;
 import com.example.projetoes.projetoes.R;
 
@@ -42,8 +42,10 @@ public class EditProfileFragment extends Fragment {
     private String username;
     private String bairro;
     private String street;
-    private String phone1;
+    private String phone;
     private String email;
+
+    public SharedPreferences userData;
 
     public EditProfileFragment() {
         // Required empty public constructor
@@ -165,27 +167,38 @@ public class EditProfileFragment extends Fragment {
         username = String.valueOf(username_field.getText());
         bairro = String.valueOf(bairro_field.getText());
         street = String.valueOf(street_field.getText());
-        phone1 = String.valueOf(phone1_field.getText());
+        phone = String.valueOf(phone1_field.getText());
         email = ((LostFound) getActivity()).getUserEmail();
 
         if (email == null) {
-            Toast.makeText(getContext(), "É necessário entrar com sua conta Google!", Toast.LENGTH_LONG);
+            Toast.makeText(getContext(), "É necessário entrar com sua conta Google!", Toast.LENGTH_LONG).show();
             return;
         }
 
         if (!isAllFieldsFilledOut()) {
             Toast.makeText(getContext(), "Por favor, preencha todos os campos.", Toast.LENGTH_LONG).show();
         } else {
-            Usuario user = new Usuario(String.valueOf(userImage),username,bairro,street,phone1,email);
-            DBUtils.addUserInformation(getContext(), user);
+            Usuario user = new Usuario(String.valueOf(userImage),username,bairro,street, phone,email);
+            persistInformations();
             getActivity().onBackPressed();
-            Toast.makeText(getContext(), "Informações publicadas", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Informações salvas", Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void persistInformations() {
+        userData = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = userData.edit();
+        editor.putString("username", username);
+        editor.putString("bairro", bairro);
+        editor.putString("rua", street);
+        editor.putString("telefone", phone);
+        editor.putString("foto", String.valueOf(userImage));
+        editor.commit();
     }
 
     private boolean isAllFieldsFilledOut() {
         if (username == null || userImage == null || bairro == null || street == null ||
-                phone1 == null || email == null)
+                phone == null || email == null)
             return false;
         else
             return true;

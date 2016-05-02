@@ -8,42 +8,52 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
             android:paddingBottom="@dimen/default_margin">
 
-            <ImageView
-                android:id="@+id/image_profile"
-                style="@style/imageHeader"
-                android:src="@mipmap/ic_image_profile" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/card"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/head2"
+                    android:gravity="center">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/image_profile"
+                        style="@style/imageHeader"
+                        android:src="@drawable/ic_no_picture" />
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_inside"
+                    android:text="Username"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/display1" />
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/image_profile"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:id="@+id/personal_info_layout"
-                    style="@style/profile_layouts">
 
-
-                    <TextView
-                        style="@style/profile_info_type"
-                        android:text="Usuário" />
-
-
-                    <TextView
-                        android:id="@+id/username"
-                        style="@style/profile_information"
-                        android:text="Username" />
-
-
-                </LinearLayout>
-
-                <View style="@style/divider_style" />
 
                 <LinearLayout
                     android:id="@+id/address_info_layout"
@@ -131,7 +141,7 @@
             </LinearLayout>
 
 
-        </RelativeLayout>
+        </LinearLayout>
 
 
     </ScrollView>

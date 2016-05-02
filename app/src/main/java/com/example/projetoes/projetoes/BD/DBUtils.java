@@ -2,6 +2,7 @@ package com.example.projetoes.projetoes.BD;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -26,6 +27,8 @@ public class DBUtils {
     }
 
     public static void addUserInformation(Context context, Usuario user) {
+
+
         SQLiteDatabase db = getWritableDatabase(context);
         Table locationsTable = LostFoundDbHelper.getUserTable();
 
