@@ -499,8 +499,6 @@ public class LostFound extends AppCompatActivity
 
     private void resolveResult(com.google.android.gms.common.api.Status status) {
         if (status.getStatusCode() == CommonStatusCodes.RESOLUTION_REQUIRED) {
-            // Prompt the user to choose a saved credential; do not show the hint
-            // selector.
             try {
                 status.startResolutionForResult(this, RC_READ);
             } catch (IntentSender.SendIntentException e) {
