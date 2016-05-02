@@ -38,6 +38,13 @@ public class ProfileFragment extends Fragment {
     private TextView phone_field;
     private TextView email_field;
 
+    private Uri userImage;
+    private String username;
+    private String bairro;
+    private String street;
+    private String phone;
+    private String email;
+
     public SharedPreferences userData;
 
 
@@ -101,9 +108,6 @@ public class ProfileFragment extends Fragment {
         editProfileCallback = null;
     }
 
-    /**
-     * Define o campo da imagem do perfil. Caso seja necessário.
-     */
     private void startFields() {
         profileImage = (ImageView) mView.findViewById(R.id.image_profile);
         username_field = (TextView) mView.findViewById(R.id.username);
@@ -114,18 +118,26 @@ public class ProfileFragment extends Fragment {
     }
 
     private void setFields() {
-        try {
-            Usuario user = DBUtils.getUserInformation(getContext(), ((LostFound) getActivity()).getUserEmail());
+        userData = getActivity().getPreferences(Context.MODE_PRIVATE);
 
-            username_field.setText(user.getUsername());
-            bairro_field.setText(user.getBairro());
-            street_field.setText(user.getRua());
-            phone_field.setText(user.getTelefone1());
-            email_field.setText(user.getEmail());
-        } catch (Exception e) {
-            Log.d(TAG, "setFields: " + e.getMessage());
-            return;
-        }
+        String defaultImage = String.valueOf(getResources().getDrawable(R.drawable.ic_default_user_img));
+        userImage = Uri.parse(userData.getString("foto", defaultImage));
+
+        username = userData.getString("username", "Nome do usuário");
+        username_field.setText(username);
+
+        bairro = userData.getString("bairro", "");
+        bairro_field.setText(bairro);
+
+        street = userData.getString("rua", "");
+        street_field.setText(street);
+
+        phone = userData.getString("telefone", "");
+        phone_field.setText(phone);
+
+        email = ((LostFound) getActivity()).getUserEmail();
+        email_field.setText(email);
+
     }
 
     /**

@@ -16,6 +16,7 @@
             android:paddingBottom="@dimen/default_margin">
 
             <LinearLayout
+                android:id="@+id/main_info_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/card"
@@ -31,7 +32,7 @@
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/image_profile"
                         style="@style/imageHeader"
-                        android:src="@drawable/ic_no_picture" />
+                        android:src="@color/lightPrimaryColor" />
                 </LinearLayout>
 
 
@@ -48,98 +49,70 @@
 
 
             <LinearLayout
-                android:id="@+id/linearLayout"
+                android:id="@+id/address_info_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/card"
                 android:orientation="vertical">
 
 
+                <TextView
+                    style="@style/profile_info_type"
+                    android:layout_margin="@dimen/margin_inside"
+                    android:text="Endereço" />
 
-                <LinearLayout
-                    android:id="@+id/address_info_layout"
-                    style="@style/profile_layouts">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/profile_info_type"
-                            android:text="Cidade" />
-
-                        <TextView
-                            android:id="@+id/user_city"
-                            style="@style/profile_information"
-                            android:text="Campina Grande" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/profile_info_type"
-                            android:layout_marginTop="@dimen/margin_inside"
-                            android:text="Bairro" />
-
-                        <TextView
-                            android:id="@+id/user_bairro"
-                            style="@style/profile_information"
-                            android:text="Meu bairro" />
-                    </LinearLayout>
+                <TextView
+                    android:id="@+id/user_city"
+                    style="@style/profile_information"
+                    android:layout_marginLeft="@dimen/margin_inside"
+                    android:text="Campina Grande" />
 
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/profile_info_type"
-                            android:layout_marginTop="@dimen/margin_inside"
-                            android:text="Rua" />
-
-                        <TextView
-                            android:id="@+id/user_street"
-                            style="@style/profile_information"
-                            android:text="Meu endereço" />
-                    </LinearLayout>
+                <TextView
+                    android:id="@+id/user_bairro"
+                    style="@style/profile_information"
+                    android:layout_marginLeft="@dimen/margin_inside"
+                    android:text="Meu bairro" />
 
 
-                </LinearLayout>
-
-                <View style="@style/divider_style" />
-
-                <LinearLayout
-                    android:id="@+id/contact_info_layout"
-                    style="@style/profile_layouts">
-
-                    <TextView
-                        style="@style/profile_info_type"
-                        android:text="Telefone" />
-
-                    <TextView
-                        android:id="@+id/user_phone"
-                        style="@style/profile_information"
-                        android:text="Telefone" />
+                <TextView
+                    android:id="@+id/user_street"
+                    style="@style/profile_information"
+                    android:layout_marginBottom="@dimen/margin_inside"
+                    android:layout_marginLeft="@dimen/margin_inside"
+                    android:text="Minha rua" />
 
 
-                    <TextView
-                        style="@style/profile_info_type"
-                        android:layout_marginTop="@dimen/margin_inside"
-                        android:text="Email" />
-
-                    <TextView
-                        android:id="@+id/user_email"
-                        style="@style/profile_information"
-                        android:text="email@example.com" />
-
-
-                </LinearLayout>
             </LinearLayout>
 
+
+            <LinearLayout
+                android:id="@+id/contact_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/card"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/profile_info_type"
+                    android:layout_margin="@dimen/margin_inside"
+                    android:text="Contato" />
+
+                <TextView
+                    android:id="@+id/user_phone"
+                    style="@style/profile_information"
+                    android:layout_marginLeft="@dimen/margin_inside"
+                    android:text="Telefone" />
+
+                <TextView
+                    android:id="@+id/user_email"
+                    style="@style/profile_information"
+                    android:layout_marginLeft="@dimen/margin_inside"
+                    android:layout_marginBottom="@dimen/margin_inside"
+                    android:text="email@example.com" />
+
+
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -22,6 +22,8 @@ import com.example.projetoes.projetoes.Activities.LostFound;
 import com.example.projetoes.projetoes.Models.Usuario;
 import com.example.projetoes.projetoes.R;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -31,7 +33,7 @@ public class EditProfileFragment extends Fragment {
     public static final int REQUEST_IMAGE_GET = 1;
 
     private View mView;
-    private ImageView photoSelector;
+    private CircleImageView photoSelector;
     private EditText username_field;
     private EditText bairro_field;
     private EditText street_field;
@@ -106,7 +108,7 @@ public class EditProfileFragment extends Fragment {
      * Inicia o botão de selecionar imagem e define o listener para ele
      */
     private void startPhotoSelector() {
-        photoSelector = (ImageView) mView.findViewById(R.id.edit_profile_image);
+        photoSelector = (CircleImageView) mView.findViewById(R.id.image_profile);
         photoSelector.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -170,10 +172,10 @@ public class EditProfileFragment extends Fragment {
         phone = String.valueOf(phone1_field.getText());
         email = ((LostFound) getActivity()).getUserEmail();
 
-        if (email == null) {
-            Toast.makeText(getContext(), "É necessário entrar com sua conta Google!", Toast.LENGTH_LONG).show();
-            return;
-        }
+//        if (email == null) {
+//            Toast.makeText(getContext(), "É necessário entrar com sua conta Google!", Toast.LENGTH_LONG).show();
+//            return;
+//        }
 
         if (!isAllFieldsFilledOut()) {
             Toast.makeText(getContext(), "Por favor, preencha todos os campos.", Toast.LENGTH_LONG).show();
