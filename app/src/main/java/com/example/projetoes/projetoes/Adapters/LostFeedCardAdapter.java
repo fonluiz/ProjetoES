@@ -35,7 +35,7 @@ public class LostFeedCardAdapter extends RecyclerView.Adapter<LostFeedCardAdapte
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Log.i("LOG", "onCreateViewHolder()");
-        View v = mLayoutInflater.inflate(R.layout.item_card, parent, false);
+        View v = mLayoutInflater.inflate(R.layout.item_obj_card, parent, false);
         MyViewHolder mvh = new MyViewHolder(v);
         return mvh;
     }
