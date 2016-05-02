@@ -1,6 +1,7 @@
 package com.example.projetoes.projetoes.Fragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -36,6 +37,8 @@ public class ProfileFragment extends Fragment {
     private TextView street_field;
     private TextView phone_field;
     private TextView email_field;
+
+    public SharedPreferences userData;
 
 
     public ProfileFragment() {

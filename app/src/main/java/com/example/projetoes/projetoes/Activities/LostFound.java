@@ -113,11 +113,7 @@ public class LostFound extends AppCompatActivity
 
         // Build a GoogleApiClient with access to the Google Sign-In API and the
         // options specified by gso.
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .addApi(Auth.CREDENTIALS_API)
-                .build();
+        buildGoogleApiClient();
 
         mCredentialRequest = new CredentialRequest.Builder()
                 .setAccountTypes(IdentityProviders.GOOGLE)
@@ -262,7 +258,7 @@ public class LostFound extends AppCompatActivity
                 onCredentialRetrieved(credential);
             } else {
                 Log.e(TAG, "Credential Read: NOT OK");
-                Toast.makeText(this, "Credential Read Failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Nenhuma conta vinculada", Toast.LENGTH_SHORT).show();
             }
         } else if (requestCode == ReportObjectFragment.REQUEST_IMAGE_GET) {
             FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(
@@ -355,9 +351,20 @@ public class LostFound extends AppCompatActivity
     }
 
     private void signIn() {
+        signOut();
+        mGoogleApiClient.stopAutoManage(this);
+        buildGoogleApiClient();
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
         saveUserCredentials();
+    }
+
+    private void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .addApi(Auth.CREDENTIALS_API)
+                .build();
     }
 
     private void saveUserCredentials() {
@@ -367,7 +374,6 @@ public class LostFound extends AppCompatActivity
                 .setProfilePictureUri(mAccount.getPhotoUrl())
                 .build();
         Auth.CredentialsApi.save(mGoogleApiClient, credential);
-        Toast.makeText(this, "Login realizado com sucesso. Seus dados serão salvos para a próxima sessão.", Toast.LENGTH_LONG).show();
     }
 
     private void signOut() {
@@ -414,7 +420,7 @@ public class LostFound extends AppCompatActivity
             userEmail.setText(mAccount.getEmail());
             userId = mAccount.getId();
         } else {
-            userImage.setImageResource(R.mipmap.ic_launcher2);
+            userImage.setImageResource(R.drawable.circular_app_icon);
             userName.setText(getResources().getString(R.string.app_name));
             userEmail.setText(getResources().getString(R.string.nav_user_email_off));
         }
@@ -499,8 +505,6 @@ public class LostFound extends AppCompatActivity
 
     private void resolveResult(com.google.android.gms.common.api.Status status) {
         if (status.getStatusCode() == CommonStatusCodes.RESOLUTION_REQUIRED) {
-            // Prompt the user to choose a saved credential; do not show the hint
-            // selector.
             try {
                 status.startResolutionForResult(this, RC_READ);
             } catch (IntentSender.SendIntentException e) {

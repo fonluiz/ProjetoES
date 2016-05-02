@@ -11,11 +11,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center">
 
             <ImageView
                 android:id="@+id/edit_profile_image"
-                style="@style/imageHeader" />
+                style="@style/imageHeader"
+                android:src="@drawable/ic_no_picture"/>
 
             <LinearLayout style="@style/profile_layouts">
 
