@@ -368,7 +368,7 @@ public class LostFound extends AppCompatActivity
     }
 
     private void saveUserCredentials() {
-        if (mAccount != null) {
+        if (mAccount != null && mGoogleApiClient.isConnected()) {
             Credential credential = new Credential.Builder(mAccount.getEmail())
                     .setAccountType(IdentityProviders.GOOGLE)
                     .setName(mAccount.getDisplayName())
