@@ -16,7 +16,7 @@
         android:id="@+id/user_acc_image"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:src="@mipmap/ic_launcher2" />
+        android:src="@drawable/circular_app_icon" />
 
     <TextView
         android:id="@+id/user_name"
