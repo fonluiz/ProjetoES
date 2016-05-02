@@ -438,16 +438,9 @@ public class LostFound extends AppCompatActivity
         }
     }
 
-    public String getUserEmail() {
+    public GoogleSignInAccount getUser() {
         if (mAccount != null)
-            return mAccount.getEmail();
-        else
-            return null;
-    }
-
-    public String getUserID() {
-        if (mAccount != null)
-            return mAccount.getId();
+            return mAccount;
         else
             return null;
     }

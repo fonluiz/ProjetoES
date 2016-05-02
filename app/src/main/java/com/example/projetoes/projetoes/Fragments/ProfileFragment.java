@@ -135,7 +135,7 @@ public class ProfileFragment extends Fragment {
         phone = userData.getString("telefone", "");
         phone_field.setText(phone);
 
-        email = ((LostFound) getActivity()).getUserEmail();
+        email = ((LostFound) getActivity()).getUser().getEmail();
         email_field.setText(email);
 
     }

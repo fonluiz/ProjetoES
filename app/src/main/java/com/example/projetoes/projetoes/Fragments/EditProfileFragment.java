@@ -21,6 +21,8 @@ import android.widget.Toast;
 import com.example.projetoes.projetoes.Activities.LostFound;
 import com.example.projetoes.projetoes.Models.Usuario;
 import com.example.projetoes.projetoes.R;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -47,7 +49,8 @@ public class EditProfileFragment extends Fragment {
     private String phone;
     private String email;
 
-    public SharedPreferences userData;
+    private SharedPreferences userData;
+    private GoogleSignInAccount mAccount;
 
     public EditProfileFragment() {
         // Required empty public constructor
@@ -74,6 +77,7 @@ public class EditProfileFragment extends Fragment {
         modifyActioonBar();
         startPhotoSelector();
         startFields();
+        fillWithUserInformation();
 
         return mView;
     }
@@ -170,17 +174,13 @@ public class EditProfileFragment extends Fragment {
         bairro = String.valueOf(bairro_field.getText());
         street = String.valueOf(street_field.getText());
         phone = String.valueOf(phone1_field.getText());
-        email = ((LostFound) getActivity()).getUserEmail();
+        email = ((LostFound) getActivity()).getUser().getEmail();
 
-//        if (email == null) {
-//            Toast.makeText(getContext(), "É necessário entrar com sua conta Google!", Toast.LENGTH_LONG).show();
-//            return;
-//        }
+        fillWithUserInformation();
 
         if (!isAllFieldsFilledOut()) {
             Toast.makeText(getContext(), "Por favor, preencha todos os campos.", Toast.LENGTH_LONG).show();
         } else {
-            Usuario user = new Usuario(String.valueOf(userImage),username,bairro,street, phone,email);
             persistInformations();
             getActivity().onBackPressed();
             Toast.makeText(getContext(), "Informações salvas", Toast.LENGTH_LONG).show();
@@ -205,4 +205,15 @@ public class EditProfileFragment extends Fragment {
         else
             return true;
     }
+
+    private void fillWithUserInformation() {
+        mAccount = ((LostFound) getActivity()).getUser();
+        if (mAccount != null) {
+            username = mAccount.getDisplayName();
+            email = mAccount.getEmail();
+            username_field.setText(username);
+            email_field.setText(email);
+        }
+    }
+
 }
