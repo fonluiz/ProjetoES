@@ -20,6 +20,7 @@ import com.example.projetoes.projetoes.Activities.LostFound;
 import com.example.projetoes.projetoes.BD.DBUtils;
 import com.example.projetoes.projetoes.Models.Usuario;
 import com.example.projetoes.projetoes.R;
+import com.example.projetoes.projetoes.Utils.ProfileImageLoader;
 
 /**
  * Fragment da tela de Mostrar informações do perfil
@@ -122,6 +123,7 @@ public class ProfileFragment extends Fragment {
 
         String defaultImage = String.valueOf(getResources().getDrawable(R.drawable.ic_default_user_img));
         userImage = Uri.parse(userData.getString("foto", defaultImage));
+        profileImage.setImageURI(userImage);
 
         username = userData.getString("username", "Nome do usuário");
         username_field.setText(username);
@@ -135,7 +137,7 @@ public class ProfileFragment extends Fragment {
         phone = userData.getString("telefone", "");
         phone_field.setText(phone);
 
-        email = ((LostFound) getActivity()).getUser().getEmail();
+        email = userData.getString("email", "");
         email_field.setText(email);
 
     }

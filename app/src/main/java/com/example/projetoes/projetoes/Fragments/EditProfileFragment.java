@@ -15,14 +15,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.projetoes.projetoes.Activities.LostFound;
-import com.example.projetoes.projetoes.Models.Usuario;
 import com.example.projetoes.projetoes.R;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -35,7 +32,7 @@ public class EditProfileFragment extends Fragment {
     public static final int REQUEST_IMAGE_GET = 1;
 
     private View mView;
-    private CircleImageView photoSelector;
+    private CircleImageView userImageField;
     private EditText username_field;
     private EditText bairro_field;
     private EditText street_field;
@@ -92,8 +89,8 @@ public class EditProfileFragment extends Fragment {
     @Override
     public void onResume() {
         modifyActioonBar();
+        fillWithUserInformation();
         super.onResume();
-
     }
 
     @Override
@@ -112,8 +109,8 @@ public class EditProfileFragment extends Fragment {
      * Inicia o botão de selecionar imagem e define o listener para ele
      */
     private void startPhotoSelector() {
-        photoSelector = (CircleImageView) mView.findViewById(R.id.image_profile);
-        photoSelector.setOnClickListener(new View.OnClickListener() {
+        userImageField = (CircleImageView) mView.findViewById(R.id.image_profile);
+        userImageField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectImage();
@@ -147,7 +144,7 @@ public class EditProfileFragment extends Fragment {
             Uri fullPhotoUri = data.getData();
             // Do work with photo saved at fullPhotoUri
             userImage = fullPhotoUri;
-            photoSelector.setImageURI(userImage);
+            userImageField.setImageURI(userImage);
         }
     }
 
@@ -174,9 +171,7 @@ public class EditProfileFragment extends Fragment {
         bairro = String.valueOf(bairro_field.getText());
         street = String.valueOf(street_field.getText());
         phone = String.valueOf(phone1_field.getText());
-        email = ((LostFound) getActivity()).getUser().getEmail();
-
-        fillWithUserInformation();
+        email = String.valueOf(email_field.getText());
 
         if (!isAllFieldsFilledOut()) {
             Toast.makeText(getContext(), "Por favor, preencha todos os campos.", Toast.LENGTH_LONG).show();
@@ -195,6 +190,7 @@ public class EditProfileFragment extends Fragment {
         editor.putString("rua", street);
         editor.putString("telefone", phone);
         editor.putString("foto", String.valueOf(userImage));
+        editor.putString("email", email);
         editor.commit();
     }
 
@@ -213,7 +209,23 @@ public class EditProfileFragment extends Fragment {
             email = mAccount.getEmail();
             username_field.setText(username);
             email_field.setText(email);
+        } else {
+            userData = getActivity().getPreferences(Context.MODE_PRIVATE);
+
+            username = userData.getString("username", "Nome do usuário");
+            username_field.setText(username);
+
+            bairro = userData.getString("bairro", "");
+            bairro_field.setText(bairro);
+
+            street = userData.getString("rua", "");
+            street_field.setText(street);
+
+            phone = userData.getString("telefone", "");
+            phone1_field.setText(phone);
+
+            email = userData.getString("email", "");
+            email_field.setText(email);
         }
     }
-
 }
