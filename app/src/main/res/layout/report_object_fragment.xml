@@ -19,8 +19,11 @@
                 android:layout_height="204dp"
                 android:orientation="vertical">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/image_field"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:src="@color/backgroundColor"
                     style="@style/imageHeader" />
 
                 <android.support.design.widget.FloatingActionButton

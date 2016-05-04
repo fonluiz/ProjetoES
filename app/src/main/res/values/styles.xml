@@ -58,7 +58,6 @@
     <style name="imageHeader">
         <item name="android:layout_width">@dimen/nav_header_height</item>
         <item name="android:layout_height">@dimen/nav_header_height</item>
-        <item name="android:layout_margin">@dimen/margin_inside</item>
     </style>
 
 
