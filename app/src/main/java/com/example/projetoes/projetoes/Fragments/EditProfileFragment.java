@@ -29,6 +29,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class EditProfileFragment extends Fragment {
 
     public final static String TAG = "EDIT_PROFILE_FRAGMENT";
+    public final static int USER_PREFERENCES = 15;
     public static final int REQUEST_IMAGE_GET = 1;
 
     private View mView;
@@ -183,15 +184,24 @@ public class EditProfileFragment extends Fragment {
     }
 
     private void persistInformations() {
-        userData = getActivity().getPreferences(Context.MODE_PRIVATE);
+        userData = getActivity().getPreferences(USER_PREFERENCES);
         SharedPreferences.Editor editor = userData.edit();
         editor.putString("username", username);
         editor.putString("bairro", bairro);
         editor.putString("rua", street);
         editor.putString("telefone", phone);
-        editor.putString("foto", String.valueOf(userImage));
         editor.putString("email", email);
+        editor.apply();
         editor.commit();
+    }
+
+    @Override
+    public void onPause() {
+        userData = getActivity().getPreferences(USER_PREFERENCES);
+        SharedPreferences.Editor editor = userData.edit();
+        editor.putString("foto", String.valueOf(userImage));
+        editor.commit();
+        super.onPause();
     }
 
     private boolean isAllFieldsFilledOut() {
@@ -204,28 +214,27 @@ public class EditProfileFragment extends Fragment {
 
     private void fillWithUserInformation() {
         mAccount = ((LostFound) getActivity()).getUser();
+        userData = getActivity().getPreferences(Context.MODE_PRIVATE);
         if (mAccount != null) {
             username = mAccount.getDisplayName();
             email = mAccount.getEmail();
             username_field.setText(username);
             email_field.setText(email);
         } else {
-            userData = getActivity().getPreferences(Context.MODE_PRIVATE);
-
             username = userData.getString("username", "Nome do usuário");
             username_field.setText(username);
-
-            bairro = userData.getString("bairro", "");
-            bairro_field.setText(bairro);
-
-            street = userData.getString("rua", "");
-            street_field.setText(street);
-
-            phone = userData.getString("telefone", "");
-            phone1_field.setText(phone);
 
             email = userData.getString("email", "");
             email_field.setText(email);
         }
+
+        bairro = userData.getString("bairro", "");
+        bairro_field.setText(bairro);
+
+        street = userData.getString("rua", "");
+        street_field.setText(street);
+
+        phone = userData.getString("telefone", "");
+        phone1_field.setText(phone);
     }
 }

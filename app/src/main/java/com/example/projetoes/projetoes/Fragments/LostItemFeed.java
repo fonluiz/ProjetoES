@@ -61,6 +61,11 @@ public class LostItemFeed extends Fragment implements RecycleViewOnClickListener
         return mview;
     }
 
+    @Override
+    public void onResume() {
+        startAdapter();
+        super.onResume();
+    }
 
     @Override
     public void onAttach(Context context) {

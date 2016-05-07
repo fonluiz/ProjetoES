@@ -1,6 +1,7 @@
 package com.example.projetoes.projetoes.Fragments;
 
 import android.annotation.TargetApi;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
@@ -23,8 +24,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.projetoes.projetoes.Activities.LostFound;
+import com.example.projetoes.projetoes.BD.DBUtils;
+import com.example.projetoes.projetoes.Models.Objeto;
 import com.example.projetoes.projetoes.Models.Status;
 import com.example.projetoes.projetoes.R;
 import com.example.projetoes.projetoes.Utils.ProfileImageLoader;
@@ -42,21 +46,29 @@ public class ReportObjectFragment extends Fragment {
     private View mView;
     private Status mStatus;
 
+    private ImageView photoSelector;
     private Spinner categorySpinner;
+    private EditText tipoField;
     private EditText locationField;
     private EditText dateField;
     private DialogFragment mDatePickerFragment;
     private EditText descriptionField;
-    private ImageView photoSelector;
     private EditText rewardField;
     private FloatingActionButton imageFAB;
     private Button publishButton;
 
-    private String category;
-    private String location;
-    private GregorianCalendar lossDate;
-    private String description;
-    private Uri objImage;
+    private int idObjeto;
+    private String usuario;
+    private Uri foto;
+    private String categoria;
+    private String tipo;
+    private String descricao;
+    private String local;
+    private String data;
+    private double recompensa;
+    private String status;
+
+    public SharedPreferences userData;
 
     public ReportObjectFragment() {
 
@@ -189,6 +201,7 @@ public class ReportObjectFragment extends Fragment {
      * Inicia as definições para o campo de descrição
      */
     private void startDescriptionField() {
+        tipoField = (EditText) mView.findViewById(R.id.tipo_field);
         descriptionField = (EditText) mView.findViewById(R.id.lost_description_field);
     }
 
@@ -246,8 +259,8 @@ public class ReportObjectFragment extends Fragment {
         if (requestCode == REQUEST_IMAGE_GET && resultCode == getActivity().RESULT_OK) {
             Uri fullPhotoUri = data.getData();
             // Do work with photo saved at fullPhotoUri
-            objImage = fullPhotoUri;
-            photoSelector.setImageURI(objImage);
+            foto = fullPhotoUri;
+            photoSelector.setImageURI(foto);
         }
     }
 
@@ -256,7 +269,7 @@ public class ReportObjectFragment extends Fragment {
         publishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: FAZ ALGUMA COISA QUANDO CLICAR NO BOTÃO
+                onFinishedFillingOut();
             }
         });
     }
@@ -265,11 +278,35 @@ public class ReportObjectFragment extends Fragment {
      * Define os dados a serem inseridos na base de dados
      */
     private void onFinishedFillingOut() {
+        userData = getActivity().getPreferences(EditProfileFragment.USER_PREFERENCES);
 
-        category = categorySpinner.getSelectedItem().toString();
-        location = locationField.getText().toString();
-        description = descriptionField.getText().toString();
+        idObjeto = 0;
+        usuario = userData.getString("username", "Nome do usuário");
+        categoria = categorySpinner.getSelectedItem().toString();
+        tipo = String.valueOf(tipoField.getText());
+        descricao = String.valueOf(descriptionField.getText());
+        local = String.valueOf(locationField.getText());
+        data = String.valueOf(dateField.getText());
+        if (!String.valueOf(rewardField.getText()).equals(""))
+            recompensa = Double.parseDouble(String.valueOf(rewardField.getText()));
+        else
+            recompensa = 0.0;
+        status = mStatus.name();
 
+        if(isTodosCamposPreenchidos()) {
+            Objeto obj = new Objeto(idObjeto, usuario, foto, categoria, tipo, descricao, local, data, recompensa, status);
+            DBUtils.addItemToLostFound(getContext(), obj);
+        } else {
+            Toast.makeText(getContext(), "Por favor, preencha todos os campos.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private boolean isTodosCamposPreenchidos() {
+        if (usuario == null || tipo.equals("") || descricao.equals("") || local.equals("") ||
+                data.equals("") || rewardField.getText().equals("") || foto == null)
+            return false;
+        else
+            return true;
     }
 
 }

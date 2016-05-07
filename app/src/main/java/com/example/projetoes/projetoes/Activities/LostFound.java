@@ -24,6 +24,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.projetoes.projetoes.BD.DBUtils;
+import com.example.projetoes.projetoes.Models.Objeto;
 import com.example.projetoes.projetoes.Utils.ProfileImageLoader;
 import com.example.projetoes.projetoes.Fragments.CardExpanded;
 import com.example.projetoes.projetoes.Fragments.EditProfileFragment;
@@ -303,15 +305,18 @@ public class LostFound extends AppCompatActivity
         }
     }
 
-    public List<Card> getCardFoundList(int quantidade){
-        String[] titulos = {"Celular modelo Glaxy", "Caneta Stylus especial", "Chaveiro contendo 7 chaves", "Bolsa de couro", "Documento de fulando de tal", "cachorro de raça"};
-        String[] bairros = {"Centro", "Catole","UFCG","Prata", "Bodocongo", "Prata"};
-        int[] fotos = {R.drawable.celular, R.drawable.caneta,R.drawable.chaves,R.drawable.bolsa,R.drawable.documento,R.drawable.cachorro};
-        List<Card> listAux = new ArrayList<>();
+    public List<Card> getCardFoundList(int quantidade) {
+//        String[] titulos = {"Celular modelo Glaxy", "Caneta Stylus especial", "Chaveiro contendo 7 chaves", "Bolsa de couro", "Documento de fulando de tal", "cachorro de raça"};
+//        String[] bairros = {"Centro", "Catole","UFCG","Prata", "Bodocongo", "Prata"};
+//        int[] fotos = {R.drawable.celular, R.drawable.caneta,R.drawable.chaves,R.drawable.bolsa,R.drawable.documento,R.drawable.cachorro};
+        List<Objeto> todosObjetos = DBUtils.getLostFoundObjects(this);
 
-        for (int i = 0; i<quantidade; i++){
-            Card c = new Card(titulos[i % titulos.length],bairros[i % bairros.length], fotos[i%fotos.length]);
-            listAux.add(c);
+        List<Card> listAux = new ArrayList<>();
+        if (todosObjetos.size() != 0) {
+            for (int i = 0; i < todosObjetos.size(); i++) {
+                Card c = new Card(todosObjetos.get(i).getTipo(), todosObjetos.get(i).getLocal(), todosObjetos.get(i).getFoto());
+                listAux.add(c);
+            }
         }
         return listAux;
     }
@@ -331,17 +336,21 @@ public class LostFound extends AppCompatActivity
         }
     }
 
-    public List<Card> getCardLostList(int quantidade){
-        String[] titulos = {"cachorro de raça", "Chaveiro contendo 7 chaves", "Caneta Stylus especial", "Documento de fulando de tal", "Bolsa de couro", "Celular modelo Glaxy"};
-        String[] bairros = {"Centro", "Catole","UFCG","Prata", "Bodocongo", "Prata"};
-        int[] fotos = {R.drawable.cachorro,R.drawable.chaves ,R.drawable.caneta,R.drawable.documento,R.drawable.bolsa,R.drawable.celular};
-        String[] recompensas = {"20R$", "40R$","10R$","30R$", "50R$", "15R$"};
+    public List<Card> getCardLostList(int quantidade) {
+//        String[] titulos = {"cachorro de raça", "Chaveiro contendo 7 chaves", "Caneta Stylus especial", "Documento de fulando de tal", "Bolsa de couro", "Celular modelo Glaxy"};
+//        String[] bairros = {"Centro", "Catole","UFCG","Prata", "Bodocongo", "Prata"};
+//        int[] fotos = {R.drawable.cachorro,R.drawable.chaves ,R.drawable.caneta,R.drawable.documento,R.drawable.bolsa,R.drawable.celular};
+//        String[] recompensas = {"20R$", "40R$","10R$","30R$", "50R$", "15R$"};
+        List<Objeto> todosObjetos = DBUtils.getLostFoundObjects(this);
         List<Card> listAux = new ArrayList<>();
 
-        for (int i = 0; i<quantidade; i++){
-            Card c = new Card(titulos[i % titulos.length],bairros[i % bairros.length], fotos[i%fotos.length], recompensas[i%recompensas.length]);
-            listAux.add(c);
-        }
+        if (todosObjetos.size() != 0) {
+            for (int i = 0; i < todosObjetos.size(); i++) {
+                Card c = new Card(todosObjetos.get(i).getTipo(), todosObjetos.get(i).getLocal(), todosObjetos.get(i).getFoto(),
+                        String.valueOf(todosObjetos.get(i).getRecompensa()));
+                listAux.add(c);
+            }
+    }
         return listAux;
     }
 

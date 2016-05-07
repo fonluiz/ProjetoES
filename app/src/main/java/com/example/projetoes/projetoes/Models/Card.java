@@ -1,5 +1,7 @@
 package com.example.projetoes.projetoes.Models;
 
+import android.net.Uri;
+
 /**
  * Created by samirsmedeiros on 05/04/16.
  */
@@ -7,16 +9,16 @@ public class Card {
 
     private String titulo;
     private String bairro;
-    private int foto;
+    private Uri foto;
     private String recompensa;
 
-    public Card(String titulo, String bairro, int foto){
+    public Card(String titulo, String bairro, Uri foto){
         this.titulo = titulo;
         this.bairro = bairro;
         this.foto = foto;
     }
 
-    public Card(String titulo, String bairro, int foto, String recompensa){
+    public Card(String titulo, String bairro, Uri foto, String recompensa){
         this.titulo = titulo;
         this.bairro = bairro;
         this.foto = foto;
@@ -34,7 +36,7 @@ public class Card {
         return recompensa;
     }
 
-    public int getFoto(){
+    public Uri getFoto(){
         return foto;
     }
 }

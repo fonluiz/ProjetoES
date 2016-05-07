@@ -85,8 +85,8 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public void onResume() {
-        super.onResume();
         setFields();
+        super.onResume();
     }
 
     @Override
@@ -119,7 +119,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void setFields() {
-        userData = getActivity().getPreferences(Context.MODE_PRIVATE);
+        userData = getActivity().getPreferences(EditProfileFragment.USER_PREFERENCES);
 
         String defaultImage = String.valueOf(getResources().getDrawable(R.drawable.ic_default_user_img));
         userImage = Uri.parse(userData.getString("foto", defaultImage));

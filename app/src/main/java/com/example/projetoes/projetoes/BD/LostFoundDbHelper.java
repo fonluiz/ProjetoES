@@ -22,43 +22,25 @@ public class LostFoundDbHelper extends SQLiteOpenHelper {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
-    public static Table getUserTable() {
-        if (userTable == null) {
-            userTable = new Table("usuario")
-                    .addColumn(new Column("id_usuario", "INTEGER", true))
-                    .addColumn(new Column("foto", "STRING"))
-                    .addColumn(new Column("nome", "STRING"))
-                    .addColumn(new Column("cidade", "STRING"))
-                    .addColumn(new Column("bairro", "STRING"))
-                    .addColumn(new Column("rua", "STRING"))
-                    .addColumn(new Column("telefone", "STRING"))
-                    .addColumn(new Column("email", "STRING"));
-        }
-        return userTable;
-    }
-
     public static Table getItemTable() {
         if (itemTable == null) {
             itemTable = new Table("objeto")
-                    .addColumn(new Column("id_objeto", "LONG", true))
-                    .addColumn(new Column("usuario", "INTEGER"))
+                    .addColumn(new Column("id_objeto", "INT"))
+                    .addColumn(new Column("usuario", "STRING"))
                     .addColumn(new Column("foto", "STRING"))
                     .addColumn(new Column("categoria", "STRING"))
                     .addColumn(new Column("tipo", "STRING"))
                     .addColumn(new Column("descricao", "STRING"))
                     .addColumn(new Column("local", "STRING"))
-                    .addColumn(new Column("data", "DATE"))
-                    .addColumn(new Column("recompensa", "FLOAT"))
-                    .addColumn(new Column("status", "INT"))
-                    .addForeignKey(new ForeignKey(getUserTable().getName())
-                            .addReference("usuario", "id_usuario"));
+                    .addColumn(new Column("data", "STRING"))
+                    .addColumn(new Column("recompensa", "DOUBLE"))
+                    .addColumn(new Column("status", "STRING"));
         }
         return itemTable;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(getUserTable().toSQL());
         db.execSQL(getItemTable().toSQL());
     }
 

@@ -43,7 +43,7 @@ public class FoundFeedCardAdapter extends RecyclerView.Adapter<FoundFeedCardAdap
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Log.i("LOG", "onBindViewHolder()");
-        holder.ivCard.setImageResource(mList.get(position).getFoto());
+        holder.ivCard.setImageURI(mList.get(position).getFoto());
         holder.tvTitulo.setText(mList.get(position).getTitulo());
         holder.tvBairro.setText(mList.get(position).getBairro());
     }
