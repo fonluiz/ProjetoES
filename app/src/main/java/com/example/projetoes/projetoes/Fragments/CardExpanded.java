@@ -18,6 +18,8 @@ import com.example.projetoes.projetoes.R;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -27,7 +29,7 @@ public class CardExpanded extends Fragment {
 
     private Status mStatus;
     private View mView;
-    private ImageView mImgView;
+    private CircleImageView mImgView;
     private TextView title;
     private TextView category;
     private TextView location;
@@ -110,7 +112,7 @@ public class CardExpanded extends Fragment {
 
     private void statrObjectInformation(){
 
-        mImgView = (ImageView) mView.findViewById(R.id.obj_image);
+        mImgView = (CircleImageView) mView.findViewById(R.id.obj_image);
         title = (TextView) mView.findViewById(R.id.title);
         category = (TextView) mView.findViewById(R.id.category);
         location = (TextView) mView.findViewById(R.id.location);
