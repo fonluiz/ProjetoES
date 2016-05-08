@@ -297,6 +297,8 @@ public class ReportObjectFragment extends Fragment {
             Objeto obj = new Objeto(idObjeto, usuario, foto, categoria, tipo, descricao, local, data, recompensa, status);
             ((LostFound) getActivity()).addListaObjachadosPerdidos(obj);
             //DBUtils.addItemToLostFound(getContext(), obj);
+            Toast.makeText(getContext(), "Informações publicadas.", Toast.LENGTH_LONG).show();
+            getActivity().onBackPressed();
         } else {
             Toast.makeText(getContext(), "Por favor, preencha todos os campos.", Toast.LENGTH_LONG).show();
         }
