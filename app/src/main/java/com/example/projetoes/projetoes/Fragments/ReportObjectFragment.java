@@ -280,7 +280,6 @@ public class ReportObjectFragment extends Fragment {
     private void onFinishedFillingOut() {
         userData = getActivity().getPreferences(EditProfileFragment.USER_PREFERENCES);
 
-        idObjeto = 0;
         usuario = userData.getString("username", "Nome do usuário");
         categoria = categorySpinner.getSelectedItem().toString();
         tipo = String.valueOf(tipoField.getText());
@@ -292,11 +291,13 @@ public class ReportObjectFragment extends Fragment {
         else
             recompensa = 0.0;
         status = mStatus.name();
+        idObjeto = descricao.hashCode() + tipo.hashCode() - data.hashCode() + usuario.hashCode();
 
         if(isTodosCamposPreenchidos()) {
             Objeto obj = new Objeto(idObjeto, usuario, foto, categoria, tipo, descricao, local, data, recompensa, status);
-            ((LostFound) getActivity()).addListaObjachadosPerdidos(obj);
-            //DBUtils.addItemToLostFound(getContext(), obj);
+            DBUtils.addItemToLostFound(getContext(), obj);
+            ((LostFound) getActivity()).addListaObjachadosPerdidos();
+
         } else {
             Toast.makeText(getContext(), "Por favor, preencha todos os campos.", Toast.LENGTH_LONG).show();
         }

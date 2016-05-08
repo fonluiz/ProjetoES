@@ -112,6 +112,8 @@ public class LostFound extends AppCompatActivity
         expFoundItem = new CardExpanded().newInstance(Status.ENCONTRADO);
         expLostItem = new CardExpanded().newInstance(Status.PERDIDO);
 
+        addListaObjachadosPerdidos();
+
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -357,14 +359,22 @@ public class LostFound extends AppCompatActivity
 
 
 
-    public void addListaObjachadosPerdidos(Objeto obj){
-            if (obj.getStatus().equals(Status.ENCONTRADO.name())) {
-                objAchados.add(obj);
-            }else{
-                objPerdidos.add(obj);
+    public void addListaObjachadosPerdidos(){
+        objAchados = new ArrayList<>();
+        objPerdidos = new ArrayList<>();
+        List<Objeto> todosObjetos = DBUtils.getLostFoundObjects(this);
+        for (Objeto obj: todosObjetos){
+            if (!objAchados.contains(obj) || !objPerdidos.contains(obj)) {
+                if (obj.getStatus().equals(Status.ENCONTRADO.name())) {
+                    objAchados.add(obj);
+                } else {
+                    objPerdidos.add(obj);
+                }
             }
-
+        }
     }
+
+
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {

@@ -60,7 +60,7 @@ public class FoundFeedCardAdapter extends RecyclerView.Adapter<FoundFeedCardAdap
 
     public void removeListItem(int position){
         mList.remove(position);
-        
+
     }
 
 
