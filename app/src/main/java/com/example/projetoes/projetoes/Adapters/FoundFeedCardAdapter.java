@@ -55,12 +55,12 @@ public class FoundFeedCardAdapter extends RecyclerView.Adapter<FoundFeedCardAdap
 
     public void addListItem(Card c, int position){
         mList.add(c);
-        notifyItemInserted(position);
+
     }
 
     public void removeListItem(int position){
         mList.remove(position);
-        notifyItemRemoved(position);
+        
     }
 
 

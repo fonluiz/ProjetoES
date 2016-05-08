@@ -57,12 +57,12 @@ public class LostFeedCardAdapter extends RecyclerView.Adapter<LostFeedCardAdapte
 
     public void addListItem(Card c, int position){
         mList.add(c);
-        notifyItemInserted(position);
+//        notifyItemInserted(position);
     }
 
     public void removeListItem(int position){
         mList.remove(position);
-        notifyItemRemoved(position);
+ //       notifyItemRemoved(position);
     }
 
 

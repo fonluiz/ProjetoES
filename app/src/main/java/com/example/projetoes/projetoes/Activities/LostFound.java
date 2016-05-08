@@ -310,19 +310,17 @@ public class LostFound extends AppCompatActivity
         }
     }
 
-    public List<Card> getCardFoundList(int quantidade) {
+    public List<Card> getCardFoundList() {
 //        String[] titulos = {"Celular modelo Glaxy", "Caneta Stylus especial", "Chaveiro contendo 7 chaves", "Bolsa de couro", "Documento de fulando de tal", "cachorro de raça"};
 //        String[] bairros = {"Centro", "Catole","UFCG","Prata", "Bodocongo", "Prata"};
 //        int[] fotos = {R.drawable.celular, R.drawable.caneta,R.drawable.chaves,R.drawable.bolsa,R.drawable.documento,R.drawable.cachorro};
-        addListaObjachadosPerdidos();
         List<Card> listAux = new ArrayList<>();
-        if (objAchados.size() >= quantidade) {
-            for (int i = 0; i < quantidade; i++) {
+            for (int i = 0; i < objAchados.size(); i++) {
                     Card c = new Card(objAchados.get(i).getTipo(), objAchados.get(i).getLocal(), objAchados.get(i).getFoto());
                     listAux.add(c);
 
             }
-        }
+
         return listAux;
     }
 
@@ -341,35 +339,30 @@ public class LostFound extends AppCompatActivity
         }
     }
 
-    public List<Card> getCardLostList(int quantidade) {
+    public List<Card> getCardLostList() {
 //        String[] titulos = {"cachorro de raça", "Chaveiro contendo 7 chaves", "Caneta Stylus especial", "Documento de fulando de tal", "Bolsa de couro", "Celular modelo Glaxy"};
 //        String[] bairros = {"Centro", "Catole","UFCG","Prata", "Bodocongo", "Prata"};
 //        int[] fotos = {R.drawable.cachorro,R.drawable.chaves ,R.drawable.caneta,R.drawable.documento,R.drawable.bolsa,R.drawable.celular};
 //        String[] recompensas = {"20R$", "40R$","10R$","30R$", "50R$", "15R$"};
         List<Card> listAux = new ArrayList<>();
-        addListaObjachadosPerdidos();
-        if (objPerdidos.size() >= quantidade) {
-            for (int i = 0; i < quantidade; i++) {
+            for (int i = 0; i < objPerdidos.size(); i++) {
                     Card c = new Card(objPerdidos.get(i).getTipo(), objPerdidos.get(i).getLocal(), objPerdidos.get(i).getFoto(),
                             String.valueOf(objPerdidos.get(i).getRecompensa()));
                     listAux.add(c);
 
-            }
+
     }
         return listAux;
     }
 
 
 
-    private void addListaObjachadosPerdidos(){
-        List<Objeto> todosObjetos = DBUtils.getLostFoundObjects(this);
-        for (Objeto obj: todosObjetos){
+    public void addListaObjachadosPerdidos(Objeto obj){
             if (obj.getStatus().equals(Status.ENCONTRADO.name())) {
                 objAchados.add(obj);
             }else{
                 objPerdidos.add(obj);
             }
-        }
 
     }
 

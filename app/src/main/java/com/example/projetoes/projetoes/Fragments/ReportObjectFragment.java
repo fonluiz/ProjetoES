@@ -295,7 +295,8 @@ public class ReportObjectFragment extends Fragment {
 
         if(isTodosCamposPreenchidos()) {
             Objeto obj = new Objeto(idObjeto, usuario, foto, categoria, tipo, descricao, local, data, recompensa, status);
-            DBUtils.addItemToLostFound(getContext(), obj);
+            ((LostFound) getActivity()).addListaObjachadosPerdidos(obj);
+            //DBUtils.addItemToLostFound(getContext(), obj);
         } else {
             Toast.makeText(getContext(), "Por favor, preencha todos os campos.", Toast.LENGTH_LONG).show();
         }
