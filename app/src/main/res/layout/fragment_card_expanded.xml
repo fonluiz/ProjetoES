@@ -19,7 +19,7 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/image_profile"
+                    android:id="@+id/obj_image"
                     style="@style/imageHeader" />
 
                 <LinearLayout style="@style/card_layouts">

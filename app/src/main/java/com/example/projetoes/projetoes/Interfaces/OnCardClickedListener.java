@@ -7,5 +7,5 @@ import com.example.projetoes.projetoes.Models.Status;
  */
 public interface OnCardClickedListener {
 
-    void onCardClicked(Status status);
+    void onCardClicked(Status status, int position);
 }

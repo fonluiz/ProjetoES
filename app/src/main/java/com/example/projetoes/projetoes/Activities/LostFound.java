@@ -92,6 +92,9 @@ public class LostFound extends AppCompatActivity
 
     private SharedPreferences userDataPref;
     private CredentialRequest mCredentialRequest;
+
+
+
     private List<Objeto> objPerdidos;
     private List<Objeto> objAchados;
     //SharedPreferences.Editor editor = sharedPref.edit();
@@ -111,8 +114,6 @@ public class LostFound extends AppCompatActivity
         foundThingFragment = ReportObjectFragment.newInstance(Status.ENCONTRADO);
         profileFragment = new ProfileFragment();
         editProfileFragment = new EditProfileFragment();
-        expFoundItem = new CardExpanded().newInstance(Status.ENCONTRADO);
-        expLostItem = new CardExpanded().newInstance(Status.PERDIDO);
 
 
         // Configure sign-in to request the user's ID, email address, and basic
@@ -328,7 +329,11 @@ public class LostFound extends AppCompatActivity
     }
 
     @Override
-    public void onCardClicked(Status status) {
+    public void onCardClicked(Status status, int position) {
+
+        expFoundItem = new CardExpanded().newInstance(Status.ENCONTRADO, position);
+        expLostItem = new CardExpanded().newInstance(Status.PERDIDO, position);
+
         FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         transaction.setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
@@ -530,6 +535,7 @@ public class LostFound extends AppCompatActivity
 
 
 
+
     private void resolveResult(com.google.android.gms.common.api.Status status) {
         if (status.getStatusCode() == CommonStatusCodes.RESOLUTION_REQUIRED) {
             try {
@@ -541,6 +547,14 @@ public class LostFound extends AppCompatActivity
             // The user must create an account or sign in manually.
             Log.e(TAG, "STATUS: Unsuccessful credential request.");
         }
+    }
+
+    public List<Objeto> getObjPerdidos() {
+        return objPerdidos;
+    }
+
+    public List<Objeto> getObjAchados() {
+        return objAchados;
     }
 
     @Override

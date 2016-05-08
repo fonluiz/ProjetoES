@@ -102,11 +102,11 @@ public class FoundItemFeed extends Fragment implements RecycleViewOnClickListene
 
     @Override
     public void onClickListener(View view, int position) {
-        onCardClicked(status);
+        onCardClicked(status, position);
     }
 
     @Override
-    public void onCardClicked(Status status) {
-        expandCardCallBack.onCardClicked(status);
+    public void onCardClicked(Status status, int position) {
+        expandCardCallBack.onCardClicked(status, position);
     }
 }
