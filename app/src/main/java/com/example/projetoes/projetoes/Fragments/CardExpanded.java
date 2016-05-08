@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.projetoes.projetoes.Activities.LostFound;
 import com.example.projetoes.projetoes.Models.Objeto;
@@ -29,7 +30,7 @@ public class CardExpanded extends Fragment {
 
     private Status mStatus;
     private View mView;
-    private CircleImageView mImgView;
+    private ImageView mImgView;
     private TextView title;
     private TextView category;
     private TextView location;
@@ -74,10 +75,9 @@ public class CardExpanded extends Fragment {
 
         this.position = getArguments().getInt("position");
         setActionbarTitle();
-        startReportButton();
         startRewardField();
         statrObjectInformation();
-
+        startReportButton();
         return mView;
     }
 
@@ -104,15 +104,29 @@ public class CardExpanded extends Fragment {
 
     private void startReportButton() {
         reportBtn = (Button) mView.findViewById(R.id.report_btn);
-        if (mStatus.equals(Status.ENCONTRADO))
+        if (mStatus.equals(Status.ENCONTRADO)) {
             reportBtn.setText("Perdi este objeto");
-        else
+            reportBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getContext(), "Suas informações foram enviadas para " + mList.get(position).getIdUsuario(), Toast.LENGTH_LONG).show();
+                    getActivity().onBackPressed();
+                }
+            });
+        }else
             reportBtn.setText("Achei seu objeto");
+            reportBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Suas informações foram enviadas para " + mList.get(position).getIdUsuario(), Toast.LENGTH_LONG).show();
+                getActivity().onBackPressed();
+            }
+        });
     }
 
     private void statrObjectInformation(){
 
-        mImgView = (CircleImageView) mView.findViewById(R.id.obj_image);
+        mImgView = (ImageView) mView.findViewById(R.id.obj_image);
         title = (TextView) mView.findViewById(R.id.title);
         category = (TextView) mView.findViewById(R.id.category);
         location = (TextView) mView.findViewById(R.id.location);
@@ -140,6 +154,8 @@ public class CardExpanded extends Fragment {
 
 
     }
+
+
 
     private void startRewardField() {
         rewardContainer = (LinearLayout) mView.findViewById(R.id.reward_field_container);

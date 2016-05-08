@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -20,11 +21,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.projetoes.projetoes.BD.DBUtils;
+import com.example.projetoes.projetoes.Models.Categoria;
 import com.example.projetoes.projetoes.Models.Objeto;
 import com.example.projetoes.projetoes.Utils.ProfileImageLoader;
 import com.example.projetoes.projetoes.Fragments.CardExpanded;
@@ -55,6 +58,7 @@ import com.google.android.gms.common.api.ResultCallback;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class LostFound extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ProfileFragment.OnEditProfileFabClickedListener,
@@ -107,6 +111,9 @@ public class LostFound extends AppCompatActivity
         objPerdidos = new ArrayList<>();
         objAchados = new ArrayList<>();
 
+
+
+
         addListaObjachadosPerdidos();
 
         feedFragment = new FeedFragment();
@@ -148,6 +155,8 @@ public class LostFound extends AppCompatActivity
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container_layout,
                 feedFragment, FeedFragment.TAG).commit();
+        carregaObjetosPreCadasdrados(Status.ENCONTRADO);
+        carregaObjetosPreCadasdrados(Status.PERDIDO);
 
     }
 
@@ -315,9 +324,6 @@ public class LostFound extends AppCompatActivity
     }
 
     public List<Card> getCardFoundList() {
-//        String[] titulos = {"Celular modelo Glaxy", "Caneta Stylus especial", "Chaveiro contendo 7 chaves", "Bolsa de couro", "Documento de fulando de tal", "cachorro de raça"};
-//        String[] bairros = {"Centro", "Catole","UFCG","Prata", "Bodocongo", "Prata"};
-//        int[] fotos = {R.drawable.celular, R.drawable.caneta,R.drawable.chaves,R.drawable.bolsa,R.drawable.documento,R.drawable.cachorro};
         List<Card> listAux = new ArrayList<>();
             for (int i = 0; i < objAchados.size(); i++) {
                     Card c = new Card(objAchados.get(i).getTipo(), objAchados.get(i).getLocal(), objAchados.get(i).getFoto());
@@ -348,11 +354,7 @@ public class LostFound extends AppCompatActivity
     }
 
     public List<Card> getCardLostList() {
-//        String[] titulos = {"cachorro de raça", "Chaveiro contendo 7 chaves", "Caneta Stylus especial", "Documento de fulando de tal", "Bolsa de couro", "Celular modelo Glaxy"};
-//        String[] bairros = {"Centro", "Catole","UFCG","Prata", "Bodocongo", "Prata"};
-//        int[] fotos = {R.drawable.cachorro,R.drawable.chaves ,R.drawable.caneta,R.drawable.documento,R.drawable.bolsa,R.drawable.celular};
-//        String[] recompensas = {"20R$", "40R$","10R$","30R$", "50R$", "15R$"};
-        List<Card> listAux = new ArrayList<>();
+       List<Card> listAux = new ArrayList<>();
             for (int i = 0; i < objPerdidos.size(); i++) {
                     Card c = new Card(objPerdidos.get(i).getTipo(), objPerdidos.get(i).getLocal(), objPerdidos.get(i).getFoto(),
                             String.valueOf(objPerdidos.get(i).getRecompensa()));
@@ -363,11 +365,44 @@ public class LostFound extends AppCompatActivity
         return listAux;
     }
 
+    private void carregaObjetosPreCadasdrados(Status status) {
+        String[] titulos = {"cachorro", "Chaveiro", "Caneta", "Documento", "Bolsa", "Celular"};
+        String[] bairros = {"Centro", "Catole", "UFCG", "Prata", "Bodocongo", "Prata"};
+        String[] fotos = {"cachorro", "chaves", "caneta", "documento", "bolsa", "celular"};
+        Uri[] urisImg = new Uri[6];
+        for (int i = 0; i < urisImg.length; i++) {
+            urisImg[i] = Uri.parse("android.resource://com.example.projetoes.projetoes/drawable/" + fotos[i]);
+        }
+        Double[] recompensas = {20.0, 40.0, 10.0, 30.0, 50.0, 15.0};
+        Categoria[] categorias = {Categoria.ANIMAL, Categoria.CHAVE, Categoria.OUTRO, Categoria.DOCUMENTO, Categoria.BOLSA, Categoria.APARELHOELETRONICO};
+        String[] descricao = {"cachorro fugiu da minha casa no centro", "Chaveiro contendo 7 chaves", "Caneta Stylus especial", "Documento de fulando de tal", "Bolsa de couro", "Celular modelo Glaxy"};
+        String[] datas = {"06/04/2016", "23/04/2016", "28/03/2016", "19/04/2016", "30/04/2016", "10/03/2016"};
+
+        List<Objeto> objetos = new ArrayList<>();
+        for (int i = 0; i < titulos.length; i++) {
+            int id = descricao[i].hashCode() + titulos[i].hashCode() - datas[i].hashCode();
+            String idUsuario = "usermail_" + (i + 1) + "@gmail.com";
+            Objeto obj = new Objeto(id, idUsuario, urisImg[i % urisImg.length], categorias[i % categorias.length].toString(), titulos[i % titulos.length], descricao[i % descricao.length], bairros[i % bairros.length], datas[i % datas.length], recompensas[i % recompensas.length], status.toString());
+            objetos.add(obj);
+        }
+
+        if (status.equals(Status.PERDIDO)){
+            for (int i = 0; i < objetos.size(); i++) {
+                objPerdidos.add(objetos.get(i));
+
+            }
+        }else{
+            for (int i = objetos.size()-1; i >= 0; i--) {
+                objAchados.add(objetos.get(i));
+
+            }
+        }
+    }
+
+
 
 
     public void addListaObjachadosPerdidos(){
-        objAchados = new ArrayList<>();
-        objPerdidos = new ArrayList<>();
         List<Objeto> todosObjetos = DBUtils.getLostFoundObjects(this);
         for (Objeto obj: todosObjetos){
                 if (obj.getStatus().equals(Status.ENCONTRADO.name())) {

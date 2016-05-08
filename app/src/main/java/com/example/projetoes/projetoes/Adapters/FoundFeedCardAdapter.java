@@ -53,15 +53,6 @@ public class FoundFeedCardAdapter extends RecyclerView.Adapter<FoundFeedCardAdap
     }
 
 
-    public void addListItem(Card c, int position){
-        mList.add(c);
-
-    }
-
-    public void removeListItem(int position){
-        mList.remove(position);
-
-    }
 
 
     @Override

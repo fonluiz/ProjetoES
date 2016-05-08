@@ -24,10 +24,15 @@
                     android:background="@drawable/head2"
                     android:gravity="center">
 
-                    <de.hdodenhof.circleimageview.CircleImageView
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:maxHeight="300dp"
+                        android:scaleType="fitXY"
+                        android:adjustViewBounds="true"
+                        android:layout_gravity="center"
                         android:id="@+id/obj_image"
-                        style="@style/imageHeader"
-                        android:src="@color/lightPrimaryColor" />
+                        style="@style/imageHeader" />
                 </LinearLayout>
 
                 <LinearLayout style="@style/card_layouts">
