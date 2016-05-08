@@ -92,12 +92,17 @@ public class LostFound extends AppCompatActivity
 
     private SharedPreferences userDataPref;
     private CredentialRequest mCredentialRequest;
+    private List<Objeto> objPerdidos;
+    private List<Objeto> objAchados;
     //SharedPreferences.Editor editor = sharedPref.edit();
     //editor.putInt(getString(R.string.saved_high_score), newHighScore);
    // editor.commit();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        objPerdidos = new ArrayList<>();
+        objAchados = new ArrayList<>();
 
         feedFragment = new FeedFragment();
         lostThingFragment = ReportObjectFragment.newInstance(Status.PERDIDO);
@@ -309,13 +314,13 @@ public class LostFound extends AppCompatActivity
 //        String[] titulos = {"Celular modelo Glaxy", "Caneta Stylus especial", "Chaveiro contendo 7 chaves", "Bolsa de couro", "Documento de fulando de tal", "cachorro de raça"};
 //        String[] bairros = {"Centro", "Catole","UFCG","Prata", "Bodocongo", "Prata"};
 //        int[] fotos = {R.drawable.celular, R.drawable.caneta,R.drawable.chaves,R.drawable.bolsa,R.drawable.documento,R.drawable.cachorro};
-        List<Objeto> todosObjetos = DBUtils.getLostFoundObjects(this);
-
+        addListaObjachadosPerdidos();
         List<Card> listAux = new ArrayList<>();
-        if (todosObjetos.size() != 0) {
-            for (int i = 0; i < todosObjetos.size(); i++) {
-                Card c = new Card(todosObjetos.get(i).getTipo(), todosObjetos.get(i).getLocal(), todosObjetos.get(i).getFoto());
-                listAux.add(c);
+        if (objAchados.size() >= quantidade) {
+            for (int i = 0; i < quantidade; i++) {
+                    Card c = new Card(objAchados.get(i).getTipo(), objAchados.get(i).getLocal(), objAchados.get(i).getFoto());
+                    listAux.add(c);
+
             }
         }
         return listAux;
@@ -341,17 +346,31 @@ public class LostFound extends AppCompatActivity
 //        String[] bairros = {"Centro", "Catole","UFCG","Prata", "Bodocongo", "Prata"};
 //        int[] fotos = {R.drawable.cachorro,R.drawable.chaves ,R.drawable.caneta,R.drawable.documento,R.drawable.bolsa,R.drawable.celular};
 //        String[] recompensas = {"20R$", "40R$","10R$","30R$", "50R$", "15R$"};
-        List<Objeto> todosObjetos = DBUtils.getLostFoundObjects(this);
         List<Card> listAux = new ArrayList<>();
+        addListaObjachadosPerdidos();
+        if (objPerdidos.size() >= quantidade) {
+            for (int i = 0; i < quantidade; i++) {
+                    Card c = new Card(objPerdidos.get(i).getTipo(), objPerdidos.get(i).getLocal(), objPerdidos.get(i).getFoto(),
+                            String.valueOf(objPerdidos.get(i).getRecompensa()));
+                    listAux.add(c);
 
-        if (todosObjetos.size() != 0) {
-            for (int i = 0; i < todosObjetos.size(); i++) {
-                Card c = new Card(todosObjetos.get(i).getTipo(), todosObjetos.get(i).getLocal(), todosObjetos.get(i).getFoto(),
-                        String.valueOf(todosObjetos.get(i).getRecompensa()));
-                listAux.add(c);
             }
     }
         return listAux;
+    }
+
+
+
+    private void addListaObjachadosPerdidos(){
+        List<Objeto> todosObjetos = DBUtils.getLostFoundObjects(this);
+        for (Objeto obj: todosObjetos){
+            if (obj.getStatus().equals(Status.ENCONTRADO.name())) {
+                objAchados.add(obj);
+            }else{
+                objPerdidos.add(obj);
+            }
+        }
+
     }
 
     @Override
@@ -469,7 +488,7 @@ public class LostFound extends AppCompatActivity
                     }
                 });
     }
-    
+
 
     private void onCredentialRetrieved(Credential credential) {
         String accountType = credential.getAccountType();
@@ -506,6 +525,8 @@ public class LostFound extends AppCompatActivity
             }
         }
     }
+
+
 
     private void resolveResult(com.google.android.gms.common.api.Status status) {
         if (status.getStatusCode() == CommonStatusCodes.RESOLUTION_REQUIRED) {

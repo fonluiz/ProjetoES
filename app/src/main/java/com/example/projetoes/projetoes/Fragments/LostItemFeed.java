@@ -102,7 +102,7 @@ public class LostItemFeed extends Fragment implements RecycleViewOnClickListener
                 LostFeedCardAdapter adapter = (LostFeedCardAdapter) mRecycleView.getAdapter();
 
                 if (mList.size() == llm.findLastCompletelyVisibleItemPosition() + 1) {
-                    List<Card> listAux = ((LostFound) getActivity()).getCardLostList(6);
+                    List<Card> listAux = ((LostFound) getActivity()).getCardLostList(2);
 
                     for (int i = 0; i < listAux.size(); i++) {
                         adapter.addListItem(listAux.get(i), mList.size());
