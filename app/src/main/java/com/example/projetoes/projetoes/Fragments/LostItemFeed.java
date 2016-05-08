@@ -89,27 +89,6 @@ public class LostItemFeed extends Fragment implements RecycleViewOnClickListener
     private void startAdapter() {
         mRecycleView = (RecyclerView) mview.findViewById(R.id.card_list_lost);
         mRecycleView.setHasFixedSize(true);
-        mRecycleView.setOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                LinearLayoutManager llm = (LinearLayoutManager) mRecycleView.getLayoutManager();
-                LostFeedCardAdapter adapter = (LostFeedCardAdapter) mRecycleView.getAdapter();
-
-                if (mList.size() == llm.findLastCompletelyVisibleItemPosition() + 1) {
-                    List<Card> listAux = ((LostFound) getActivity()).getCardLostList();
-
-                    for (int i = 0; i < listAux.size(); i++) {
-                        adapter.addListItem(listAux.get(i), mList.size());
-                    }
-                }
-            }
-        });
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
